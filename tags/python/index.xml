@@ -5,15 +5,15 @@
       <generator uri="https://gohugo.io">Hugo</generator>
     <link>http://sun-friderick.github.io//tags/python/</link>
     <language>en-us</language>
-    <author>Nanshu Wang</author>
-    <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
+    <author>Frederick Sun</author>
+    <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
     <updated>Mon, 31 Aug 2015 00:00:00 UTC</updated>
     
     <item>
       <title>Python代码风格指南（三）命名约定(PEP8中文翻译)</title>
       <link>http://sun-friderick.github.io//post/2015-09-14</link>
       <pubDate>Mon, 31 Aug 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-09-14</guid>
       <description>
 
@@ -194,7 +194,7 @@
       <title>Python代码风格指南（二）字符串引用、空格、注释和版本注记(PEP8中文翻译)</title>
       <link>http://sun-friderick.github.io//post/2015-08-30</link>
       <pubDate>Sun, 30 Aug 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-08-30</guid>
       <description>
 
@@ -454,7 +454,7 @@ etc.)，比较运算符(&lt;code&gt;==&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/co
       <title>Python代码风格指南（一）代码设计(PEP8中文翻译)</title>
       <link>http://sun-friderick.github.io//post/2015-07-04</link>
       <pubDate>Sat, 04 Jul 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-07-04</guid>
       <description>
 
@@ -758,7 +758,7 @@ import foo.bar.yourclass
       <title>python numpy 计算自相关系数</title>
       <link>http://sun-friderick.github.io//post/2015-03-15</link>
       <pubDate>Sun, 15 Mar 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-03-15</guid>
       <description>&lt;p&gt;在分析时间序列时，通常需要计算一个序列的自相关系数。自相关(&lt;a href=&#34;http://en.wikipedia.org/wiki/Autocorrelation&#34;&gt;Autocorrelation&lt;/a&gt;)又叫做序列相关，通常采用自相关系数来发现序列的重复规律，周期等信息。&lt;/p&gt;
 
@@ -817,7 +817,7 @@ $$R(k) = \frac{E(X_{k+1,n}-\mu)(X_{1,n-k}-\mu)}{\sigma^2}$$
       <title>Scikit-Learn机器学习介绍（中文翻译）</title>
       <link>http://sun-friderick.github.io//post/2014-12-02</link>
       <pubDate>Tue, 02 Dec 2014 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2014-12-02</guid>
       <description>
 

@@ -5,15 +5,15 @@
       <generator uri="https://gohugo.io">Hugo</generator>
     <link>http://sun-friderick.github.io//tags/%E8%87%AA%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/</link>
     <language>en-us</language>
-    <author>Nanshu Wang</author>
-    <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
+    <author>Frederick Sun</author>
+    <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
     <updated>Sun, 15 Mar 2015 00:00:00 UTC</updated>
     
     <item>
       <title>python numpy 计算自相关系数</title>
       <link>http://sun-friderick.github.io//post/2015-03-15</link>
       <pubDate>Sun, 15 Mar 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-03-15</guid>
       <description>&lt;p&gt;在分析时间序列时，通常需要计算一个序列的自相关系数。自相关(&lt;a href=&#34;http://en.wikipedia.org/wiki/Autocorrelation&#34;&gt;Autocorrelation&lt;/a&gt;)又叫做序列相关，通常采用自相关系数来发现序列的重复规律，周期等信息。&lt;/p&gt;
 

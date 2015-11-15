@@ -5,15 +5,15 @@
       <generator uri="https://gohugo.io">Hugo</generator>
     <link>http://sun-friderick.github.io//tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
     <language>en-us</language>
-    <author>Nanshu Wang</author>
-    <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
+    <author>Frederick Sun</author>
+    <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
     <updated>Wed, 01 Jul 2015 00:00:00 UTC</updated>
     
     <item>
       <title>机器学习第一战——阿里天池移动推荐算法比赛经验总结攻略</title>
       <link>http://sun-friderick.github.io//post/2015-07-01</link>
       <pubDate>Wed, 01 Jul 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-07-01</guid>
       <description>
 
@@ -250,7 +250,7 @@ GBDT训练速度慢，预测速度一般，单模型的效果最优。唯一的�
       <title>机器学习笔记7 高偏差/低偏差，学习曲线，模型选择</title>
       <link>http://sun-friderick.github.io//post/2015-05-17</link>
       <pubDate>Sun, 17 May 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-05-17</guid>
       <description>
 
@@ -593,7 +593,7 @@ $$\large
       <title>机器学习笔记5 神经网络2 参数学习</title>
       <link>http://sun-friderick.github.io//post/2015-03-26</link>
       <pubDate>Thu, 26 Mar 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-03-26</guid>
       <description>
 
@@ -809,7 +809,7 @@ $$cost(t) =y^{(t)} \ \log (h_\theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\the
       <title>机器学习笔记5 神经网络1 模型表达</title>
       <link>http://sun-friderick.github.io//post/2015-03-03-2</link>
       <pubDate>Tue, 03 Mar 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-03-03-2</guid>
       <description>
 
@@ -1126,7 +1126,7 @@ $$h_\Theta(x) =
       <title>机器学习笔记4 正则化</title>
       <link>http://sun-friderick.github.io//post/2015-02-17</link>
       <pubDate>Tue, 17 Feb 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-02-17</guid>
       <description>
 
@@ -1251,7 +1251,7 @@ $$J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ log (h_\theta (x^{(i)}
       <title>机器学习笔记3 有监督学习 分类 logistic回归</title>
       <link>http://sun-friderick.github.io//post/2015-02-12</link>
       <pubDate>Thu, 12 Feb 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-02-12</guid>
       <description>
 
@@ -1376,7 +1376,7 @@ $$H_{ij}=\frac{\delta^2 l(\theta)}{\delta \theta_i \delta \theta_j}$$
       <title>机器学习笔记2 有监督学习 线性回归 局部加权回归 概率解释</title>
       <link>http://sun-friderick.github.io//post/2015-02-11</link>
       <pubDate>Wed, 11 Feb 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-02-11</guid>
       <description>
 
@@ -1483,7 +1483,7 @@ $$\frac12\sum_{i=1}^m(y^{(i)}-\theta^Tx^{(i)})^2$$
       <title>机器学习笔记1 有监督学习 线性回归 LMS算法 正规方程</title>
       <link>http://sun-friderick.github.io//post/2015-02-10</link>
       <pubDate>Tue, 10 Feb 2015 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2015-02-10</guid>
       <description>
 
@@ -1665,7 +1665,7 @@ $$\theta=(X^TX)^{-1}X^T\overrightarrow y$$
       <title>Scikit-Learn机器学习介绍（中文翻译）</title>
       <link>http://sun-friderick.github.io//post/2014-12-02</link>
       <pubDate>Tue, 02 Dec 2014 00:00:00 UTC</pubDate>
-      <author>Nanshu Wang</author>
+      <author>Frederick Sun</author>
       <guid>http://sun-friderick.github.io//post/2014-12-02</guid>
       <description>
 
