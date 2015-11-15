@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>效率 on Nanshu&#39;s blog </title>
+      <title>效率 on Friderick&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
     <link>http://sun-friderick.github.io//tags/%E6%95%88%E7%8E%87/</link>
     <language>en-us</language>
@@ -21,7 +21,7 @@
 英文写作纠错工具，语法检查还行，比较好的是能够根据上下文给出用词的建议。&lt;/p&gt;
 
 &lt;p&gt;2.ManicTime
-可以统计电脑使用的时间及应用分类，比如这个月花了多少时间写paper，花了多少时间上网，花了多少时间打游戏。除了对application的统计，还会根据不同的file统计，也就是说不同文件以及不同域名的网站也会区别，可以看到多少时间刷豆瓣，多少时间逛淘宝，某篇论文写了多少时间。&lt;/p&gt;
+可以统计电脑使用的时间及应用分类，比如这个月花了多少时间写paper，花了多少时间上网，花了多少时间打游戏。除了对application的统计，还会根据不同的file统计，也就是说不同文件以及不同域名的网站也会区别，可以看到多少时间刷道客巴巴，多少时间逛淘宝，某篇论文写了多少时间。&lt;/p&gt;
 
 &lt;p&gt;3.Bing词典
 简单好用，单词本、例句搜索和近义词的功能都做得很好，缺点是例句不能直接链接到原文。（update：最新版2.1已经有这个功能了）&lt;/p&gt;
