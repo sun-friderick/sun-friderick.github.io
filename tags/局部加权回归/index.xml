@@ -3,7 +3,7 @@
   <channel>
       <title>局部加权回归 on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E5%9B%9E%E5%BD%92/</link>
+    <link>http://sun-friderick.github.io//tags/%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E5%9B%9E%E5%BD%92/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>机器学习笔记2 有监督学习 线性回归 局部加权回归 概率解释</title>
-      <link>http://nanshu.wang/post/2015-02-11</link>
+      <link>http://sun-friderick.github.io//post/2015-02-11</link>
       <pubDate>Wed, 11 Feb 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-02-11</guid>
+      <guid>http://sun-friderick.github.io//post/2015-02-11</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;

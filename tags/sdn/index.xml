@@ -3,7 +3,7 @@
   <channel>
       <title>Sdn on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/sdn/</link>
+    <link>http://sun-friderick.github.io//tags/sdn/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>软件自定义网络Software-Definded Networking</title>
-      <link>http://nanshu.wang/post/2013-10-22</link>
+      <link>http://sun-friderick.github.io//post/2013-10-22</link>
       <pubDate>Tue, 22 Oct 2013 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2013-10-22</guid>
+      <guid>http://sun-friderick.github.io//post/2013-10-22</guid>
       <description>
 
 &lt;p&gt;译自：&lt;a href=&#34;https://en.wikipedia.org/wiki/Software-defined_networking&#34;&gt;https://en.wikipedia.org/wiki/Software-defined_networking&lt;/a&gt;&lt;/p&gt;

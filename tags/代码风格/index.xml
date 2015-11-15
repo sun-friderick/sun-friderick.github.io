@@ -3,7 +3,7 @@
   <channel>
       <title>代码风格 on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/</link>
+    <link>http://sun-friderick.github.io//tags/%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>Python代码风格指南（三）命名约定(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-09-14</link>
+      <link>http://sun-friderick.github.io//post/2015-09-14</link>
       <pubDate>Mon, 31 Aug 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-09-14</guid>
+      <guid>http://sun-friderick.github.io//post/2015-09-14</guid>
       <description>
 
 &lt;h1 id=&#34;命名约定-naming-conventions:26bc06cdd4e62ee943404b26c97620ec&#34;&gt;命名约定（Naming Conventions）&lt;/h1&gt;
@@ -192,10 +192,10 @@
     
     <item>
       <title>Python代码风格指南（二）字符串引用、空格、注释和版本注记(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-08-30</link>
+      <link>http://sun-friderick.github.io//post/2015-08-30</link>
       <pubDate>Sun, 30 Aug 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-08-30</guid>
+      <guid>http://sun-friderick.github.io//post/2015-08-30</guid>
       <description>
 
 &lt;h1 id=&#34;字符串引用-string-quotes:4f740b0dc79b8c0d748c37b6117fb209&#34;&gt;字符串引用(String Quotes)&lt;/h1&gt;
@@ -452,10 +452,10 @@ etc.)，比较运算符(&lt;code&gt;==&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/co
     
     <item>
       <title>Python代码风格指南（一）代码设计(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-07-04</link>
+      <link>http://sun-friderick.github.io//post/2015-07-04</link>
       <pubDate>Sat, 04 Jul 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-07-04</guid>
+      <guid>http://sun-friderick.github.io//post/2015-07-04</guid>
       <description>
 
 &lt;p&gt;翻译自：&lt;a href=&#34;https://www.python.org/dev/peps/pep-0008/&#34;&gt;PEP 8 - Style Guide for Python Code&lt;/a&gt;&lt;/p&gt;

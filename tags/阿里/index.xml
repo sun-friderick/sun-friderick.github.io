@@ -3,7 +3,7 @@
   <channel>
       <title>阿里 on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/%E9%98%BF%E9%87%8C/</link>
+    <link>http://sun-friderick.github.io//tags/%E9%98%BF%E9%87%8C/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>机器学习第一战——阿里天池移动推荐算法比赛经验总结攻略</title>
-      <link>http://nanshu.wang/post/2015-07-01</link>
+      <link>http://sun-friderick.github.io//post/2015-07-01</link>
       <pubDate>Wed, 01 Jul 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-07-01</guid>
+      <guid>http://sun-friderick.github.io//post/2015-07-01</guid>
       <description>
 
 &lt;p&gt;历时98天的&lt;a href=&#34;http://tianchi.aliyun.com/competition/introduction.htm?spm=5176.100066.333.5.0n5wpl&amp;amp;raceId=1&#34;&gt;阿里移动推荐算法&lt;/a&gt;终于结束了，有种终于下了贼船的感觉。总的来说，整个比赛的体验并不好：时间太长，资源不够，运气成分大，学到的干货少。虽然学到的干货不多，但这毕竟是在Data Science道路上进军的第一场实战，还是有必要好好总结一下。&lt;/p&gt;

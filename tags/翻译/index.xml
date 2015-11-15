@@ -3,7 +3,7 @@
   <channel>
       <title>翻译 on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/%E7%BF%BB%E8%AF%91/</link>
+    <link>http://sun-friderick.github.io//tags/%E7%BF%BB%E8%AF%91/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>Python代码风格指南（三）命名约定(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-09-14</link>
+      <link>http://sun-friderick.github.io//post/2015-09-14</link>
       <pubDate>Mon, 31 Aug 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-09-14</guid>
+      <guid>http://sun-friderick.github.io//post/2015-09-14</guid>
       <description>
 
 &lt;h1 id=&#34;命名约定-naming-conventions:26bc06cdd4e62ee943404b26c97620ec&#34;&gt;命名约定（Naming Conventions）&lt;/h1&gt;
@@ -192,10 +192,10 @@
     
     <item>
       <title>Python代码风格指南（二）字符串引用、空格、注释和版本注记(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-08-30</link>
+      <link>http://sun-friderick.github.io//post/2015-08-30</link>
       <pubDate>Sun, 30 Aug 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-08-30</guid>
+      <guid>http://sun-friderick.github.io//post/2015-08-30</guid>
       <description>
 
 &lt;h1 id=&#34;字符串引用-string-quotes:4f740b0dc79b8c0d748c37b6117fb209&#34;&gt;字符串引用(String Quotes)&lt;/h1&gt;
@@ -452,10 +452,10 @@ etc.)，比较运算符(&lt;code&gt;==&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/co
     
     <item>
       <title>Python代码风格指南（一）代码设计(PEP8中文翻译)</title>
-      <link>http://nanshu.wang/post/2015-07-04</link>
+      <link>http://sun-friderick.github.io//post/2015-07-04</link>
       <pubDate>Sat, 04 Jul 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-07-04</guid>
+      <guid>http://sun-friderick.github.io//post/2015-07-04</guid>
       <description>
 
 &lt;p&gt;翻译自：&lt;a href=&#34;https://www.python.org/dev/peps/pep-0008/&#34;&gt;PEP 8 - Style Guide for Python Code&lt;/a&gt;&lt;/p&gt;
@@ -756,10 +756,10 @@ import foo.bar.yourclass
     
     <item>
       <title>经过省察的人生The examined life</title>
-      <link>http://nanshu.wang/post/2015-03-03-1</link>
+      <link>http://sun-friderick.github.io//post/2015-03-03-1</link>
       <pubDate>Tue, 03 Mar 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-03-03-1</guid>
+      <guid>http://sun-friderick.github.io//post/2015-03-03-1</guid>
       <description>
 
 &lt;p&gt;译自&lt;a href=&#34;http://books.google.lt/books?id=WwpZVuylPgYC&amp;amp;pg=PA228&amp;amp;hl=zh-CN&amp;amp;source=gbs_toc_r&amp;amp;cad=3#v=onepage&amp;amp;q&amp;amp;f=false&#34;&gt;《A companion to Socrates》第14章&lt;/a&gt;，作者Richard Kraut&lt;/p&gt;
@@ -876,10 +876,10 @@ import foo.bar.yourclass
     
     <item>
       <title>Scikit-Learn机器学习介绍（中文翻译）</title>
-      <link>http://nanshu.wang/post/2014-12-02</link>
+      <link>http://sun-friderick.github.io//post/2014-12-02</link>
       <pubDate>Tue, 02 Dec 2014 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2014-12-02</guid>
+      <guid>http://sun-friderick.github.io//post/2014-12-02</guid>
       <description>
 
 &lt;p&gt;翻译自：&lt;a href=&#34;http://scikit-learn.org/stable/tutorial/basic/tutorial.html&#34;&gt;http://scikit-learn.org/stable/tutorial/basic/tutorial.html&lt;/a&gt;&lt;/p&gt;
@@ -1053,10 +1053,10 @@ joblib.dump返回一个文件名列表。每个包含在&lt;code&gt;clf&lt;/code
     
     <item>
       <title>软件自定义网络Software-Definded Networking</title>
-      <link>http://nanshu.wang/post/2013-10-22</link>
+      <link>http://sun-friderick.github.io//post/2013-10-22</link>
       <pubDate>Tue, 22 Oct 2013 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2013-10-22</guid>
+      <guid>http://sun-friderick.github.io//post/2013-10-22</guid>
       <description>
 
 &lt;p&gt;译自：&lt;a href=&#34;https://en.wikipedia.org/wiki/Software-defined_networking&#34;&gt;https://en.wikipedia.org/wiki/Software-defined_networking&lt;/a&gt;&lt;/p&gt;

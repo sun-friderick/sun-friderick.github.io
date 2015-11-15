@@ -3,7 +3,7 @@
   <channel>
       <title>有监督学习 on Nanshu&#39;s blog </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://nanshu.wang/tags/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+    <link>http://sun-friderick.github.io//tags/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
     <language>en-us</language>
     <author>Nanshu Wang</author>
     <copyright>Copyright (c) 2015, Nanshu Wang; all rights reserved.</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>机器学习笔记7 高偏差/低偏差，学习曲线，模型选择</title>
-      <link>http://nanshu.wang/post/2015-05-17</link>
+      <link>http://sun-friderick.github.io//post/2015-05-17</link>
       <pubDate>Sun, 17 May 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-05-17</guid>
+      <guid>http://sun-friderick.github.io//post/2015-05-17</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -133,7 +133,7 @@ $$\large
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/300px-Features-and-polynom-degree.png&#34; alt=&#34;Features-and-polynom-degree&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/300px-Features-and-polynom-degree.png&#34; alt=&#34;Features-and-polynom-degree&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -165,7 +165,7 @@ $$\large
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/300px-Features-and-lambda.png&#34; alt=&#34;Features-and-lambda&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/300px-Features-and-lambda.png&#34; alt=&#34;Features-and-lambda&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -222,7 +222,7 @@ $$\large
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/500px-High-variance-high-bias.png&#34; alt=&#34;High-variance-high-bias&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/500px-High-variance-high-bias.png&#34; alt=&#34;High-variance-high-bias&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -354,10 +354,10 @@ $$\large
     
     <item>
       <title>机器学习笔记5 神经网络2 参数学习</title>
-      <link>http://nanshu.wang/post/2015-03-26</link>
+      <link>http://sun-friderick.github.io//post/2015-03-26</link>
       <pubDate>Thu, 26 Mar 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-03-26</guid>
+      <guid>http://sun-friderick.github.io//post/2015-03-26</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -570,10 +570,10 @@ $$cost(t) =y^{(t)} \ \log (h_\theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\the
     
     <item>
       <title>机器学习笔记5 神经网络1 模型表达</title>
-      <link>http://nanshu.wang/post/2015-03-03-2</link>
+      <link>http://sun-friderick.github.io//post/2015-03-03-2</link>
       <pubDate>Tue, 03 Mar 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-03-03-2</guid>
+      <guid>http://sun-friderick.github.io//post/2015-03-03-2</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -609,7 +609,7 @@ $$g(\theta_0 + \theta_1x_1^2 + \theta_2x_1x_2 + \theta_3x_1x_3  + \theta_4x_2^2 
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/neuron_model.jpg&#34; alt=&#34;hugo-server-1&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/neuron_model.jpg&#34; alt=&#34;hugo-server-1&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -623,7 +623,7 @@ $$g(\theta_0 + \theta_1x_1^2 + \theta_2x_1x_2 + \theta_3x_1x_3  + \theta_4x_2^2 
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/neuron_network_3layers.jpg&#34; alt=&#34;hugo-server-1&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/neuron_network_3layers.jpg&#34; alt=&#34;hugo-server-1&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -887,10 +887,10 @@ $$h_\Theta(x) =
     
     <item>
       <title>机器学习笔记4 正则化</title>
-      <link>http://nanshu.wang/post/2015-02-17</link>
+      <link>http://sun-friderick.github.io//post/2015-02-17</link>
       <pubDate>Tue, 17 Feb 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-02-17</guid>
+      <guid>http://sun-friderick.github.io//post/2015-02-17</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -1012,10 +1012,10 @@ $$J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ log (h_\theta (x^{(i)}
     
     <item>
       <title>机器学习笔记3 有监督学习 分类 logistic回归</title>
-      <link>http://nanshu.wang/post/2015-02-12</link>
+      <link>http://sun-friderick.github.io//post/2015-02-12</link>
       <pubDate>Thu, 12 Feb 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-02-12</guid>
+      <guid>http://sun-friderick.github.io//post/2015-02-12</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -1038,7 +1038,7 @@ $$g(z)=\frac1{1+e^{-z}}$$
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/logistic-function.png&#34; alt=&#34;logistic-function&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/logistic-function.png&#34; alt=&#34;logistic-function&#34; /&gt;
     
     
 &lt;/figure&gt;
@@ -1137,10 +1137,10 @@ $$H_{ij}=\frac{\delta^2 l(\theta)}{\delta \theta_i \delta \theta_j}$$
     
     <item>
       <title>机器学习笔记2 有监督学习 线性回归 局部加权回归 概率解释</title>
-      <link>http://nanshu.wang/post/2015-02-11</link>
+      <link>http://sun-friderick.github.io//post/2015-02-11</link>
       <pubDate>Wed, 11 Feb 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-02-11</guid>
+      <guid>http://sun-friderick.github.io//post/2015-02-11</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -1244,10 +1244,10 @@ $$\frac12\sum_{i=1}^m(y^{(i)}-\theta^Tx^{(i)})^2$$
     
     <item>
       <title>机器学习笔记1 有监督学习 线性回归 LMS算法 正规方程</title>
-      <link>http://nanshu.wang/post/2015-02-10</link>
+      <link>http://sun-friderick.github.io//post/2015-02-10</link>
       <pubDate>Tue, 10 Feb 2015 00:00:00 UTC</pubDate>
       <author>Nanshu Wang</author>
-      <guid>http://nanshu.wang/post/2015-02-10</guid>
+      <guid>http://sun-friderick.github.io//post/2015-02-10</guid>
       <description>
 
 &lt;p&gt;Andrew Ng cs229 Machine Learning 笔记&lt;/p&gt;
@@ -1267,7 +1267,7 @@ $$\frac12\sum_{i=1}^m(y^{(i)}-\theta^Tx^{(i)})^2$$
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://nanshu.wang/media/supervised-learning.png&#34; alt=&#34;supervised-learning&#34; /&gt;
+        &lt;img src=&#34;http://sun-friderick.github.io//media/supervised-learning.png&#34; alt=&#34;supervised-learning&#34; /&gt;
     
     
 &lt;/figure&gt;
