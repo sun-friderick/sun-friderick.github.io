@@ -1,2 +1,2 @@
-# gardenia22.github.io
+# frederick.github.io
 Nanshu's Blog
