@@ -122,7 +122,7 @@
                       <li> <a href="http://libaier.net" target="_blank" title="Libaier" class="rss">Libaier</a> </li>
                       <li> <a href="http://read.douban.com/column/195295/" target="_blank" title="100个故事" class="douban">一百个故事</a></li>
                       <li> <a href="http://zhangwenli.com/blog/" target="_blank" title="羡辙杂俎" class="yangzhe">羡辙杂俎</a></li>
-					  <li> <a href="http://nanshu.wang/" target="_blank" title="Hugo博客" class="hugo">Hugo博客</a></li>
+	      <li> <a href="http://nanshu.wang/" target="_blank" title="Hugo博客" class="hugo">Hugo博客</a></li>
                     </ul>
                 <span class="icon icon-bubbles"> </span> <span class="subcount"></span> </div>
             </li>
@@ -305,7 +305,7 @@ title = &quot;about&quot;
 <p><code>-t</code>参数的意思是使用hyde主题渲染我们的页面，注意到<code>about.md</code>目前是作为草稿，即<code>draft</code>参数设置为<code>true</code>，运行Hugo时要加上<code>--buildDrafts</code>参数才会生成被标记为草稿的页面。
 在浏览器输入localhost:1313，就可以看到我们刚刚创建的页面。</p>
 
-<p>
+
 <figure >
     
         <img src="/media/hugo-server-1.png" alt="hugo-server-1" />
@@ -313,7 +313,7 @@ title = &quot;about&quot;
     
 </figure>
 
-</p>
+
 
 <p>注意观察当前目录下多了一个文件夹<code>public/</code>，这里面是Hugo生成的整个静态网站，如果使用Github pages来作为博客的Host，你只需要将<code>public/</code>里的文件上传就可以，这相当于是Hugo的输出。</p>
 
@@ -333,7 +333,7 @@ title = &quot;about&quot;
 
 <p>这次没有选择主题，如果选择了主题会将当前的主题覆盖掉。参数<code>-w</code>意味监视watch，此时如果修改了网站内的信息，会直接显示在浏览器的页面上，不需要重新运行\$hugo server，方便我们进行修改。这是采用了spf13主题的页面：</p>
 
-<p>
+
 <figure >
     
         <img src="/media/hugo-server-2.png" alt="hugo-server-2" />
@@ -341,7 +341,7 @@ title = &quot;about&quot;
     
 </figure>
 
-</p>
+
 
 <p>我们尝试在他的主题基础上修改，找到<code>/layouts/partials/subheader.html</code>文件:</p>
 
@@ -359,7 +359,7 @@ title = &quot;about&quot;
 
 <p>将by Steve Francia换成by myname，再次回到浏览器，可以看到左边侧栏已经发生变化了，你可以根据自己的需要修改对应的文件，当然得懂一点css, html。</p>
 
-<p>
+
 <figure >
     
         <img src="/media/hugo-server-change.png" alt="hugo-server-change" />
@@ -367,7 +367,7 @@ title = &quot;about&quot;
     
 </figure>
 
-</p>
+
 
 <h1 id="评论功能:d605f9890f3528aea462ac7515ece633">评论功能</h1>
 
@@ -385,7 +385,7 @@ title = &quot;about&quot;
 
 <p>注意<code>-w</code>参数是不能监测<code>config.toml</code>里参数变化的，因此需要重新运行Hugo，进入localhost:1313/about，可以看到评论功能。</p>
 
-<p>
+
 <figure >
     
         <img src="/media/comments.png" alt="comments" />
@@ -393,7 +393,7 @@ title = &quot;about&quot;
     
 </figure>
 
-</p>
+
 
 <h1 id="代码高亮:d605f9890f3528aea462ac7515ece633">代码高亮</h1>
 
@@ -477,34 +477,22 @@ your code here.
 <ol>
 <li>在Github上创建repo <code>&lt;your-project&gt;-hugo</code>，托管Hugo的输入文件。</li>
 <li>创建repo <code>&lt;username&gt;.github.io</code>，用于托管<code>public/</code>文件夹，注意这里的repo名字一定要用自己的用户名，才会被当作是个人主页。</li>
-<li>clone your-project</li>
-</ol>
-
-<pre><code>$ git clone &lt;&lt;your-project&gt;-hugo-url&gt;
-</code></pre>
-
-<ol>
-<li>进入your-project 目录</li>
-</ol>
-
-<pre><code>$ cd &lt;your-project&gt;-hugo
-</code></pre>
-
-<ol>
-<li>删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）</li>
-</ol>
-
-<pre><code>$ rm -rf public
-</code></pre>
-
-<ol>
-<li>把public/目录添加为submodule 与<username>.github.io同步</li>
-</ol>
-
-<pre><code>$ git submodule add git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
-</code></pre>
-
-<ol>
+<li>clone your-project
+<code>
+$ git clone &lt;&lt;your-project&gt;-hugo-url&gt;
+</code></li>
+<li>进入your-project 目录
+<code>
+$ cd &lt;your-project&gt;-hugo
+</code></li>
+<li>删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）
+<code>
+$ rm -rf public
+</code></li>
+<li>把public/目录添加为submodule 与<username>.github.io同步
+<code>
+$ git submodule add git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
+</code></li>
 <li>添加.gitignore文件，文件中写<code>public/</code>，在同步<code>&lt;your-project&gt;-hugo</code>时会忽略public文件夹</li>
 <li>下面是写好的一个script <code>deploy.sh</code>，拷贝过去直接就能用，记得chmod +x deploy.sh加上运行权限。</li>
 </ol>
@@ -549,13 +537,10 @@ cd ..
 
 <ol>
 <li>在<code>&lt;username&gt;.github.io</code> repo的跟目录下添加<code>CNAME</code>文件，文件里写上你的域名，不用加http://的开头。</li>
-<li>记下<a href="http://username.github.io/">http://username.github.io/</a> 的ip地址。</li>
-</ol>
-
-<pre><code>$ ping username.github.io
-</code></pre>
-
-<ol>
+<li>记下<a href="http://username.github.io/">http://username.github.io/</a> 的ip地址。
+<code>
+$ ping username.github.io
+</code></li>
 <li>在你的域名管理中加上两条A记录，分别是www和@，记录指向<a href="http://username.github.io/">http://username.github.io/</a> 的ip地址，也需要等一小会儿生效。</li>
 </ol>
 
@@ -593,9 +578,9 @@ cd ..
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'frederick-sun';
-    var disqus_identifier = 'http:\/\/localhost:1313\/post\/2015-01-31';
+    var disqus_identifier = 'http:\/\/sun-friderick.github.io\/post\/2015-01-31';
     var disqus_title = 'Hugo静态网站生成器中文教程';
-    var disqus_url = 'http:\/\/localhost:1313\/post\/2015-01-31';
+    var disqus_url = 'http:\/\/sun-friderick.github.io\/post\/2015-01-31';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -680,10 +665,7 @@ fitText(document.getElementById('title'), 1)
 <script type="text/javascript">goTopEx();</script>
 
 
-<script data-no-instant>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 </html>
 
 
@@ -704,7 +686,4 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script data-no-instant>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>

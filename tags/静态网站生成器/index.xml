@@ -133,7 +133,7 @@ title = &amp;quot;about&amp;quot;
 &lt;p&gt;&lt;code&gt;-t&lt;/code&gt;参数的意思是使用hyde主题渲染我们的页面，注意到&lt;code&gt;about.md&lt;/code&gt;目前是作为草稿，即&lt;code&gt;draft&lt;/code&gt;参数设置为&lt;code&gt;true&lt;/code&gt;，运行Hugo时要加上&lt;code&gt;--buildDrafts&lt;/code&gt;参数才会生成被标记为草稿的页面。
 在浏览器输入localhost:1313，就可以看到我们刚刚创建的页面。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-1.png&#34; alt=&#34;hugo-server-1&#34; /&gt;
@@ -141,7 +141,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;注意观察当前目录下多了一个文件夹&lt;code&gt;public/&lt;/code&gt;，这里面是Hugo生成的整个静态网站，如果使用Github pages来作为博客的Host，你只需要将&lt;code&gt;public/&lt;/code&gt;里的文件上传就可以，这相当于是Hugo的输出。&lt;/p&gt;
 
@@ -161,7 +161,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;这次没有选择主题，如果选择了主题会将当前的主题覆盖掉。参数&lt;code&gt;-w&lt;/code&gt;意味监视watch，此时如果修改了网站内的信息，会直接显示在浏览器的页面上，不需要重新运行\$hugo server，方便我们进行修改。这是采用了spf13主题的页面：&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-2.png&#34; alt=&#34;hugo-server-2&#34; /&gt;
@@ -169,7 +169,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;我们尝试在他的主题基础上修改，找到&lt;code&gt;/layouts/partials/subheader.html&lt;/code&gt;文件:&lt;/p&gt;
 
@@ -187,7 +187,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;将by Steve Francia换成by myname，再次回到浏览器，可以看到左边侧栏已经发生变化了，你可以根据自己的需要修改对应的文件，当然得懂一点css, html。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-change.png&#34; alt=&#34;hugo-server-change&#34; /&gt;
@@ -195,7 +195,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;h1 id=&#34;评论功能:d605f9890f3528aea462ac7515ece633&#34;&gt;评论功能&lt;/h1&gt;
 
@@ -213,7 +213,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;注意&lt;code&gt;-w&lt;/code&gt;参数是不能监测&lt;code&gt;config.toml&lt;/code&gt;里参数变化的，因此需要重新运行Hugo，进入localhost:1313/about，可以看到评论功能。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/comments.png&#34; alt=&#34;comments&#34; /&gt;
@@ -221,7 +221,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;h1 id=&#34;代码高亮:d605f9890f3528aea462ac7515ece633&#34;&gt;代码高亮&lt;/h1&gt;
 
@@ -305,34 +305,22 @@ your code here.
 &lt;ol&gt;
 &lt;li&gt;在Github上创建repo &lt;code&gt;&amp;lt;your-project&amp;gt;-hugo&lt;/code&gt;，托管Hugo的输入文件。&lt;/li&gt;
 &lt;li&gt;创建repo &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;，用于托管&lt;code&gt;public/&lt;/code&gt;文件夹，注意这里的repo名字一定要用自己的用户名，才会被当作是个人主页。&lt;/li&gt;
-&lt;li&gt;clone your-project&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;进入your-project 目录&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;your-project&amp;gt;-hugo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rm -rf public
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;把public/目录添加为submodule 与&lt;username&gt;.github.io同步&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git submodule add git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+&lt;li&gt;clone your-project
+&lt;code&gt;
+$ git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt;
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;进入your-project 目录
+&lt;code&gt;
+$ cd &amp;lt;your-project&amp;gt;-hugo
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）
+&lt;code&gt;
+$ rm -rf public
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;把public/目录添加为submodule 与&lt;username&gt;.github.io同步
+&lt;code&gt;
+$ git submodule add git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
+&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;添加.gitignore文件，文件中写&lt;code&gt;public/&lt;/code&gt;，在同步&lt;code&gt;&amp;lt;your-project&amp;gt;-hugo&lt;/code&gt;时会忽略public文件夹&lt;/li&gt;
 &lt;li&gt;下面是写好的一个script &lt;code&gt;deploy.sh&lt;/code&gt;，拷贝过去直接就能用，记得chmod +x deploy.sh加上运行权限。&lt;/li&gt;
 &lt;/ol&gt;
@@ -377,13 +365,10 @@ cd ..
 
 &lt;ol&gt;
 &lt;li&gt;在&lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt; repo的跟目录下添加&lt;code&gt;CNAME&lt;/code&gt;文件，文件里写上你的域名，不用加http://的开头。&lt;/li&gt;
-&lt;li&gt;记下&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ping username.github.io
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+&lt;li&gt;记下&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址。
+&lt;code&gt;
+$ ping username.github.io
+&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;在你的域名管理中加上两条A记录，分别是www和@，记录指向&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址，也需要等一小会儿生效。&lt;/li&gt;
 &lt;/ol&gt;
 

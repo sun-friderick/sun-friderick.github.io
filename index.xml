@@ -7,7 +7,42 @@
     <language>en-us</language>
     <author>Frederick Sun</author>
     <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
-    <updated>Tue, 03 Mar 2015 00:00:00 UTC</updated>
+    <updated>Fri, 20 Nov 2015 15:33:51 CST</updated>
+    
+    <item>
+      <title>about</title>
+      <link>http://sun-friderick.github.io/about</link>
+      <pubDate>Fri, 20 Nov 2015 15:33:51 CST</pubDate>
+      <author>Frederick Sun</author>
+      <guid>http://sun-friderick.github.io/about</guid>
+      <description>
+
+&lt;h2 id=&#34;关于我:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;关于我&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2007  JC@QUST&lt;/li&gt;
+&lt;li&gt;2010  TE@Haier&lt;/li&gt;
+&lt;li&gt;2010  BSc@SDIBT&lt;/li&gt;
+&lt;li&gt;2012  PG, SE, PL@Hybroad, GD&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;蜗居北京，85后，a Man。&lt;/p&gt;
+
+&lt;p&gt;本科的时候开始写微博，只是记录一下自己的学习生活和关注爱好。慢慢发现，学习的内容有点太少，知识面也有点窄，就开始逛论坛、写博客。最近感觉还是折腾一个属于自己的地盘，记录一些学习笔记、自己的想法和生活感悟什么的，顺便督促自己。平时喜欢关注UI设计、流媒体、音视频编解码、搜索引擎，图像识别等，由于涉猎的技术较杂，会有“广而不精”之嫌，欢迎光顾我的技术博客（左下角的侧边栏）讨论技术性问题。&lt;/p&gt;
+
+&lt;p&gt;E-mail: mrsun.echo@gmail.com;  echo_eric@yeah.net&lt;/p&gt;
+
+&lt;p&gt;QQ: 707544953&lt;/p&gt;
+
+&lt;h2 id=&#34;喜欢:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;喜欢：&lt;/h2&gt;
+
+&lt;p&gt;运动（羽毛球、网球、骑行（虽然不专业，也算个爱好吧））；吃喝（老灶火锅、麻辣烫（深受女友影响）、天降披萨、桂花糯米藕、各种面点），跟女友一起做饭，另外超喜欢女友做的排骨汤和汤饭；漫画（老夫子、敖幼祥的乌龙院、宫崎骏系列漫画、朱德庸和蔡志忠经典漫画等）；小说（喜欢写实、游记、自传等等经典，像：《百年孤独》 、《老人与海》、《鲁滨逊漂流记》、《格列佛游记》、《了不起的盖茨比》、《麦田里的守望者》、《基督山伯爵》、《汤姆·索亚历险记》 等，再有能拓展人的思维的科幻、科普等，像：《海底两万里》、《从一到无穷大》、《数字化生存》、《万物简史》、还有最经典的《魔戒》三部曲）；影视（在imdb、豆瓣排名靠前的都喜欢看，最喜欢的类型还是：科幻片、战争片、动作片、动画片（宫崎骏系列）、偶尔喜剧片）；音乐（80-90年代的经典老歌，像写出陈奕迅《十年》的林夕、写出刘德华《一起走过的日子》和BEYOND《真的爱你》的梁小美、写出谭咏麟《朋友》的向雪怀，写出张学友《饿狼传说》的潘伟源、写出王菲《冷战》的黄伟文等等个人都比较喜欢，还有写出电影《笑傲江湖》主题曲《沧海一声笑》、电影《黄飞鸿》主题曲《男儿当自强》、电影《倩女幽魂》插曲《倩女幽魂》《人间道》、电影《英雄本色》主题曲《当年情》、电影《上海滩》主题曲《上海滩》、电影《射雕英雄传》的主题曲《一生有意义》、周星驰的喜剧片《苏乞儿》主题歌《长路漫漫伴我闯》、电视剧《狮子山下》主题歌《狮子山下》的一代香江性情大师————黄沾）；四季里最喜欢冬天，没有什么特别的原因，秋太过于伤感，夏太过于热情，而春天却太过于温和，冬再好不过了，介于四者之间，可以使人冷静，使人回味；小有收藏癖（集邮，集硬币，收藏各种搜集到的、有意义的、有古典气息的、精致的小东西）；闲来两人骑骑自行车、看看电影、逛逛街、偶尔到北京周边走走看看，再有就是陪练我们家小七&lt;/p&gt;
+
+&lt;h2 id=&#34;不喜欢:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;不喜欢：&lt;/h2&gt;
+
+&lt;p&gt;喜欢孤独的感觉但不喜欢孤单；不喜过分依赖肉食；不喜过分敏感&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>经过省察的人生The examined life</title>
@@ -253,7 +288,7 @@ title = &amp;quot;about&amp;quot;
 &lt;p&gt;&lt;code&gt;-t&lt;/code&gt;参数的意思是使用hyde主题渲染我们的页面，注意到&lt;code&gt;about.md&lt;/code&gt;目前是作为草稿，即&lt;code&gt;draft&lt;/code&gt;参数设置为&lt;code&gt;true&lt;/code&gt;，运行Hugo时要加上&lt;code&gt;--buildDrafts&lt;/code&gt;参数才会生成被标记为草稿的页面。
 在浏览器输入localhost:1313，就可以看到我们刚刚创建的页面。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-1.png&#34; alt=&#34;hugo-server-1&#34; /&gt;
@@ -261,7 +296,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;注意观察当前目录下多了一个文件夹&lt;code&gt;public/&lt;/code&gt;，这里面是Hugo生成的整个静态网站，如果使用Github pages来作为博客的Host，你只需要将&lt;code&gt;public/&lt;/code&gt;里的文件上传就可以，这相当于是Hugo的输出。&lt;/p&gt;
 
@@ -281,7 +316,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;这次没有选择主题，如果选择了主题会将当前的主题覆盖掉。参数&lt;code&gt;-w&lt;/code&gt;意味监视watch，此时如果修改了网站内的信息，会直接显示在浏览器的页面上，不需要重新运行\$hugo server，方便我们进行修改。这是采用了spf13主题的页面：&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-2.png&#34; alt=&#34;hugo-server-2&#34; /&gt;
@@ -289,7 +324,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;我们尝试在他的主题基础上修改，找到&lt;code&gt;/layouts/partials/subheader.html&lt;/code&gt;文件:&lt;/p&gt;
 
@@ -307,7 +342,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;将by Steve Francia换成by myname，再次回到浏览器，可以看到左边侧栏已经发生变化了，你可以根据自己的需要修改对应的文件，当然得懂一点css, html。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/hugo-server-change.png&#34; alt=&#34;hugo-server-change&#34; /&gt;
@@ -315,7 +350,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;h1 id=&#34;评论功能:d605f9890f3528aea462ac7515ece633&#34;&gt;评论功能&lt;/h1&gt;
 
@@ -333,7 +368,7 @@ title = &amp;quot;about&amp;quot;
 
 &lt;p&gt;注意&lt;code&gt;-w&lt;/code&gt;参数是不能监测&lt;code&gt;config.toml&lt;/code&gt;里参数变化的，因此需要重新运行Hugo，进入localhost:1313/about，可以看到评论功能。&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://sun-friderick.github.io/media/comments.png&#34; alt=&#34;comments&#34; /&gt;
@@ -341,7 +376,7 @@ title = &amp;quot;about&amp;quot;
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;h1 id=&#34;代码高亮:d605f9890f3528aea462ac7515ece633&#34;&gt;代码高亮&lt;/h1&gt;
 
@@ -425,34 +460,22 @@ your code here.
 &lt;ol&gt;
 &lt;li&gt;在Github上创建repo &lt;code&gt;&amp;lt;your-project&amp;gt;-hugo&lt;/code&gt;，托管Hugo的输入文件。&lt;/li&gt;
 &lt;li&gt;创建repo &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;，用于托管&lt;code&gt;public/&lt;/code&gt;文件夹，注意这里的repo名字一定要用自己的用户名，才会被当作是个人主页。&lt;/li&gt;
-&lt;li&gt;clone your-project&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;进入your-project 目录&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;your-project&amp;gt;-hugo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rm -rf public
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;把public/目录添加为submodule 与&lt;username&gt;.github.io同步&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git submodule add git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+&lt;li&gt;clone your-project
+&lt;code&gt;
+$ git clone &amp;lt;&amp;lt;your-project&amp;gt;-hugo-url&amp;gt;
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;进入your-project 目录
+&lt;code&gt;
+$ cd &amp;lt;your-project&amp;gt;-hugo
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）
+&lt;code&gt;
+$ rm -rf public
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;把public/目录添加为submodule 与&lt;username&gt;.github.io同步
+&lt;code&gt;
+$ git submodule add git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git public
+&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;添加.gitignore文件，文件中写&lt;code&gt;public/&lt;/code&gt;，在同步&lt;code&gt;&amp;lt;your-project&amp;gt;-hugo&lt;/code&gt;时会忽略public文件夹&lt;/li&gt;
 &lt;li&gt;下面是写好的一个script &lt;code&gt;deploy.sh&lt;/code&gt;，拷贝过去直接就能用，记得chmod +x deploy.sh加上运行权限。&lt;/li&gt;
 &lt;/ol&gt;
@@ -497,13 +520,10 @@ cd ..
 
 &lt;ol&gt;
 &lt;li&gt;在&lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt; repo的跟目录下添加&lt;code&gt;CNAME&lt;/code&gt;文件，文件里写上你的域名，不用加http://的开头。&lt;/li&gt;
-&lt;li&gt;记下&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ping username.github.io
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+&lt;li&gt;记下&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址。
+&lt;code&gt;
+$ ping username.github.io
+&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;在你的域名管理中加上两条A记录，分别是www和@，记录指向&lt;a href=&#34;http://username.github.io/&#34;&gt;http://username.github.io/&lt;/a&gt; 的ip地址，也需要等一小会儿生效。&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -531,37 +551,6 @@ cd ..
 &lt;li&gt;&lt;a href=&#34;https://www.udemy.com/build-static-sites-in-seconds-with-hugo/&#34;&gt;Build Static Sites in Seconds with Hugo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/&#34;&gt;Setting up a custom domain with GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>about</title>
-      <link>http://sun-friderick.github.io/about</link>
-      <pubDate>Fri, 30 Jan 2015 15:33:51 CST</pubDate>
-      <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/about</guid>
-      <description>
-
-&lt;h2 id=&#34;关于我:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;关于我&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;2010  HR@RUC&lt;/li&gt;
-&lt;li&gt;2014  CS@ICT, CAS&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;坐标北京，90后，女。&lt;/p&gt;
-
-&lt;p&gt;本科的时候开始写博客，缘由是下定决心转CS专业，记录一下自己的学习和生活。现在看来，学习的内容有点太少了，生活的吐槽倒是一大堆。所以为了当一个好的程序媛，干脆弃掉原来的点点博客，折腾一个属于自己的地盘，记录一些学习笔记和自己的想法，就当督促自己吧。&lt;/p&gt;
-
-&lt;p&gt;电邮: nanshu.wang@gmail.com&lt;/p&gt;
-
-&lt;h2 id=&#34;喜欢:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;喜欢：&lt;/h2&gt;
-
-&lt;p&gt;过山车 童话 Modern Family 刘慈欣 羽毛球 凉面 马尔克斯 Wes Anderson 恋爱的犀牛 安房直子 栀子花 22 42 GEEK笑点 三重镇 郑渊洁 Battlestar Galactica 抹茶味八喜冰淇淋 关东煮的蟹粉包 茄子 滑滑梯 Pixar 宫崎骏 智力游戏 Dixit 德州扑克 搜索引擎 豆瓣 油茶 粤菜 回锅肉 排骨香肠 番茄鸡蛋炒饭 小吊梨汤 咖啡厅 苏格拉底 Markdown Manictime 纪念碑谷 Popcap 红楼梦 Shameless Mac 东区全日早餐 早茶 三明治 滑雪 长跑 Sublime Text 鱼豆腐 油泼面 王小波 蒋勋 Python 卜东波老师 李钟硕 Running man 颜文字 韩语 Aaron Swartz Wunderlist 番茄土豆 Wikipedia 集邮&lt;/p&gt;
-
-&lt;h2 id=&#34;不喜欢:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;不喜欢：&lt;/h2&gt;
-
-&lt;p&gt;大部分肉类 过分亲密 用office工作 恐怖片 孤独感 话不投机&lt;/p&gt;
 </description>
     </item>
     
