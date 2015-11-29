@@ -177,7 +177,7 @@
 
 </aside>
 
-<meta itemprop="wordCount" content="1093">
+<meta itemprop="wordCount" content="1094">
 <meta itemprop="datePublished" content="2015-11-29">
 <meta itemprop="url" content="http://sun-friderick.github.io/post/2015-11-29-10">
 
@@ -279,7 +279,6 @@
 <p>socket函数对应于普通文件的打开操作。普通文件的打开操作返回一个文件描述字，而socket()用于创建一个socket描述符（socket descriptor），它唯一标识一个socket。这个socket描述字跟文件描述字一样，后续的操作都有用到它，把它作为参数，通过它来进行一些读写操作。</p>
 
 <pre><code>  正如可以给fopen的传入不同参数值，以打开不同的文件。创建socket的时候，也可以指定不同的参数创建不同的socket描述符，socket函数的三个参数分别为：
-
 protofamily：即协议域，又称为协议族（family）。常用的协议族有，AF_INET(IPV4)、AF_INET6(IPV6)、AF_LOCAL（或称AF_UNIX，Unix域socket）、AF_ROUTE等等。协议族决定了socket的地址类型，在通信中必须采用对应的地址，如AF_INET决定了要用ipv4地址（32位的）与端口号（16位的）的组合、AF_UNIX决定了要用一个绝对路径名作为地址。
 type：指定socket类型。常用的socket类型有，SOCK_STREAM、SOCK_DGRAM、SOCK_RAW、SOCK_PACKET、SOCK_SEQPACKET等等（socket的类型有哪些？）。
 protocol：故名思意，就是指定协议。常用的协议有，IPPROTO_TCP、IPPTOTO_UDP、IPPROTO_SCTP、IPPROTO_TIPC等，它们分别对应TCP传输协议、UDP传输协议、STCP传输协议、TIPC传输协议（这个协议我将会单独开篇讨论！）。
@@ -287,60 +286,61 @@ protocol：故名思意，就是指定协议。常用的协议有，IPPROTO_TCP�
 
 <p>注意：并不是上面的type和protocol可以随意组合的，如SOCK_STREAM不可以跟IPPROTO_UDP组合。当protocol为0时，会自动选择type类型对应的默认协议。</p>
 
-<p>当我们调用socket创建一个socket时，返回的socket描述字它存在于协议族（address family，AF_XXX）空间中，但没有一个具体的地址。如果想要给它赋值一个地址，就必须调用bind()函数，否则就当调用connect()、listen()时系统会自动随机分配一个端口。
-4.2、bind()函数</p>
+<p>当我们调用socket创建一个socket时，返回的socket描述字它存在于协议族（address family，AF_XXX）空间中，但没有一个具体的地址。如果想要给它赋值一个地址，就必须调用bind()函数，否则就当调用connect()、listen()时系统会自动随机分配一个端口。</p>
+
+<p>4.2、bind()函数</p>
 
 <p>正如上面所说bind()函数把一个地址族中的特定地址赋给socket。例如对应AF_INET、AF_INET6就是把一个ipv4或ipv6地址和端口号组合赋给socket。</p>
 
-<p>int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</p>
+<pre><code>int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+</code></pre>
 
 <p>函数的三个参数分别为：</p>
 
-<pre><code>sockfd：即socket描述字，它是通过socket()函数创建了，唯一标识一个socket。bind()函数就是将给这个描述字绑定一个名字。
-addr：一个const struct sockaddr *指针，指向要绑定给sockfd的协议地址。这个地址结构根据地址创建socket时的地址协议族的不同而不同，如ipv4对应的是： 
+<p>sockfd：即socket描述字，它是通过socket()函数创建了，唯一标识一个socket。bind()函数就是将给这个描述字绑定一个名字。
+addr：一个const struct sockaddr *指针，指向要绑定给sockfd的协议地址。这个地址结构根据地址创建socket时的地址协议族的不同而不同，如ipv4对应的是：</p>
 
-struct sockaddr_in {
+<pre><code>struct sockaddr_in {
     sa_family_t    sin_family; /* address family: AF_INET */
     in_port_t      sin_port;   /* port in network byte order */
     struct in_addr sin_addr;   /* internet address */
 };
-
 /* Internet address. */
 struct in_addr {
     uint32_t       s_addr;     /* address in network byte order */
 };
+</code></pre>
 
-ipv6对应的是： 
+<p>ipv6对应的是：</p>
 
-struct sockaddr_in6 { 
+<pre><code>struct sockaddr_in6 { 
     sa_family_t     sin6_family;   /* AF_INET6 */ 
     in_port_t       sin6_port;     /* port number */ 
     uint32_t        sin6_flowinfo; /* IPv6 flow information */ 
     struct in6_addr sin6_addr;     /* IPv6 address */ 
     uint32_t        sin6_scope_id; /* Scope ID (new in 2.4) */ 
 };
-
 struct in6_addr { 
     unsigned char   s6_addr[16];   /* IPv6 address */ 
 };
+</code></pre>
 
-Unix域对应的是： 
+<p>Unix域对应的是：</p>
 
-#define UNIX_PATH_MAX    108
-
+<pre><code>#define UNIX_PATH_MAX    108
 struct sockaddr_un { 
     sa_family_t sun_family;               /* AF_UNIX */ 
     char        sun_path[UNIX_PATH_MAX];  /* pathname */ 
 };
-
-addrlen：对应的是地址的长度。
 </code></pre>
+
+<p>addrlen：对应的是地址的长度。</p>
 
 <p>通常服务器在启动的时候都会绑定一个众所周知的地址（如ip地址+端口号），用于提供服务，客户就可以通过它来接连服务器；而客户端就不用指定，有系统自动分配一个端口号和自身的ip地址组合。这就是为什么通常服务器端在listen之前会调用bind()，而客户端就不会调用，而是在connect()时由系统随机生成一个。</p>
 
-<pre><code>网络字节序与主机字节序
+<p>网络字节序与主机字节序</p>
 
-主机字节序就是我们平常说的大端和小端模式：不同的CPU有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，这个叫做主机序。引用标准的Big-Endian和Little-Endian的定义如下：
+<pre><code>主机字节序就是我们平常说的大端和小端模式：不同的CPU有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，这个叫做主机序。引用标准的Big-Endian和Little-Endian的定义如下：
 
 　　a) Little-Endian就是低位字节排放在内存的低地址端，高位字节排放在内存的高地址端。
 
@@ -355,17 +355,20 @@ addrlen：对应的是地址的长度。
 
 <p>如果作为一个服务器，在调用socket()、bind()之后就会调用listen()来监听这个socket，如果客户端这时调用connect()发出连接请求，服务器端就会接收到这个请求。</p>
 
-<p>int listen(int sockfd, int backlog);
-int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</p>
+<pre><code>int listen(int sockfd, int backlog);
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+</code></pre>
 
 <p>listen函数的第一个参数即为要监听的socket描述字，第二个参数为相应socket可以排队的最大连接个数。socket()函数创建的socket默认是一个主动类型的，listen函数将socket变为被动类型的，等待客户的连接请求。</p>
 
-<p>connect函数的第一个参数即为客户端的socket描述字，第二参数为服务器的socket地址，第三个参数为socket地址的长度。客户端通过调用connect函数来建立与TCP服务器的连接。
-4.4、accept()函数</p>
+<p>connect函数的第一个参数即为客户端的socket描述字，第二参数为服务器的socket地址，第三个参数为socket地址的长度。客户端通过调用connect函数来建立与TCP服务器的连接。</p>
+
+<p>4.4、accept()函数</p>
 
 <p>TCP服务器端依次调用socket()、bind()、listen()之后，就会监听指定的socket地址了。TCP客户端依次调用socket()、connect()之后就向TCP服务器发送了一个连接请求。TCP服务器监听到这个请求之后，就会调用accept()函数取接收请求，这样连接就建立好了。之后就可以开始网络I/O操作了，即类同于普通文件的读写I/O操作。</p>
 
-<p>int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); //返回连接connect_fd</p>
+<pre><code>int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); //返回连接connect_fd
+</code></pre>
 
 <p>参数sockfd
     参数sockfd就是上面解释中的监听套接字，这个套接字用来监听一个端口，当有一个客户与服务器连接时，它使用这个一个端口号，而此时这个端口号正与这个套接字关联。当然客户不知道套接字这些细节，它只知道一个地址和一个端口号。
@@ -392,8 +395,9 @@ int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</p>
     自然要问的是：为什么要有两种套接字？原因很简单，如果使用一个描述字的话，那么它的功能太多，使得使用很不直观，同时在内核确实产生了一个这样的新的描述字。
 </code></pre>
 
-<p>连接套接字socketfd_new 并没有占用新的端口与客户端通信，依然使用的是与监听套接字socketfd一样的端口号
-4.5、read()、write()等函数</p>
+<p>连接套接字socketfd_new 并没有占用新的端口与客户端通信，依然使用的是与监听套接字socketfd一样的端口号;</p>
+
+<p>4.5、read()、write()等函数</p>
 
 <p>万事具备只欠东风，至此服务器与客户已经建立好连接了。可以调用网络I/O进行读写操作了，即实现了网咯中不同进程之间的通信！网络I/O操作有下面几组：</p>
 
@@ -407,21 +411,15 @@ recvfrom()/sendto()
 <p>我推荐使用recvmsg()/sendmsg()函数，这两个函数是最通用的I/O函数，实际上可以把上面的其它函数都替换成这两个函数。它们的声明如下：</p>
 
 <pre><code>   #include &lt;unistd.h&gt;
-
    ssize_t read(int fd, void *buf, size_t count);
    ssize_t write(int fd, const void *buf, size_t count);
 
    #include &lt;sys/types.h&gt;
    #include &lt;sys/socket.h&gt;
-
    ssize_t send(int sockfd, const void *buf, size_t len, int flags);
    ssize_t recv(int sockfd, void *buf, size_t len, int flags);
-
-   ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
-                  const struct sockaddr *dest_addr, socklen_t addrlen);
-   ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
-                    struct sockaddr *src_addr, socklen_t *addrlen);
-
+   ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,  const struct sockaddr *dest_addr, socklen_t addrlen);
+   ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,  struct sockaddr *src_addr, socklen_t *addrlen);
    ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
    ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
 </code></pre>
@@ -430,13 +428,15 @@ recvfrom()/sendto()
 
 <p>write函数将buf中的nbytes字节内容写入文件描述符fd.成功时返回写的字节数。失败时返回-1，并设置errno变量。 在网络程序中，当我们向套接字文件描述符写时有俩种可能。1)write的返回值大于0，表示写了部分或者是全部的数据。2)返回的值小于0，此时出现了错误。我们要根据错误类型来处理。如果错误为EINTR表示在写的时候出现了中断错误。如果为EPIPE表示网络连接出现了问题(对方已经关闭了连接)。</p>
 
-<p>其它的我就不一一介绍这几对I/O函数了，具体参见man文档或者baidu、Google，下面的例子中将使用到send/recv。
-4.6、close()函数</p>
+<p>其它的我就不一一介绍这几对I/O函数了，具体参见man文档或者baidu、Google，下面的例子中将使用到send/recv。</p>
+
+<p>4.6、close()函数</p>
 
 <p>在服务器与客户端建立连接之后，会进行一些读写操作，完成了读写操作就要关闭相应的socket描述字，好比操作完打开的文件要调用fclose关闭打开的文件。</p>
 
-<p>#include <unistd.h>
-int close(int fd);</p>
+<pre><code>#include &lt;unistd.h&gt;
+int close(int fd);
+</code></pre>
 
 <p>close一个TCP socket的缺省行为时把该socket标记为以关闭，然后立即返回到调用进程。该描述字不能再由调用进程使用，也就是说不能再作为read或write的第一个参数。</p>
 
@@ -447,11 +447,11 @@ int close(int fd);</p>
 TCP协议通过三个报文段完成连接的建立，这个过程称为三次握手(three-way handshake)，过程如下图所示。</li>
 </ol>
 
-<p>第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；SYN：同步序列编号(Synchronize Sequence Numbers)。</p>
+<p>第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；SYN：同步序列编号(Synchronize Sequence Numbers)。
+第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
+第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
 
-<p>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
-第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
-一个完整的三次握手也就是： 请求&mdash;应答&mdash;再次确认。
+<p>一个完整的三次握手也就是： 请求&mdash;应答&mdash;再次确认。
 对应的函数接口：</p>
 
 <p><img src="/media/socket_6.png" alt="alt text" title="Title6" /></p>
@@ -461,63 +461,75 @@ TCP协议通过三个报文段完成连接的建立，这个过程称为三次�
 <p>我们可以通过网络抓包的查看具体的流程：
 比如我们服务器开启9502的端口。使用tcpdump来抓包：</p>
 
-<p>tcpdump -iany tcp port 9502</p>
+<pre><code>tcpdump -iany tcp port 9502
+</code></pre>
 
 <p>然后我们使用telnet 127.0.0.1 9502开连接.:
-telnet 127.0.0.1 9502</p>
+    telnet 127.0.0.1 9502</p>
 
-<p>14:12:45.104687 IP localhost.39870 &gt; localhost.9502: Flags [S], seq 2927179378, win 32792, options [mss 16396,sackOK,TS val 255474104 ecr 0,nop,wscale 3], length 0（1）
+<pre><code>14:12:45.104687 IP localhost.39870 &gt; localhost.9502: Flags [S], seq 2927179378, win 32792, options [mss 16396,sackOK,TS val 255474104 ecr 0,nop,wscale 3], length 0（1）
 14:12:45.104701 IP localhost.9502 &gt; localhost.39870: Flags [S.], seq 1721825043, ack 2927179379, win 32768, options [mss 16396,sackOK,TS val 255474104 ecr 255474104,nop,wscale 3], length 0  （2）
-14:12:45.104711 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 1, win 4099, options [nop,nop,TS val 255474104 ecr 255474104], length 0  （3）</p>
+14:12:45.104711 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 1, win 4099, options [nop,nop,TS val 255474104 ecr 255474104], length 0  （3）
 
-<p>14:13:01.415407 IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, options [nop,nop,TS val 255478182 ecr 255474104], length 7
+14:13:01.415407 IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, options [nop,nop,TS val 255478182 ecr 255474104], length 7
 14:13:01.415432 IP localhost.9502 &gt; localhost.39870: Flags [.], ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 0
 14:13:01.415747 IP localhost.9502 &gt; localhost.39870: Flags [P.], seq 1:19, ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 18
-14:13:01.415757 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 19, win 4097, options [nop,nop,TS val 255478182 ecr 255478182], length 0</p>
+14:13:01.415757 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 19, win 4097, options [nop,nop,TS val 255478182 ecr 255478182], length 0
+</code></pre>
 
-<pre><code>114:12:45.104687 时间带有精确到微妙
+<p>114:12:45.104687 时间带有精确到微妙
 localhost.39870 &gt; localhost.9502 表示通信的流向，39870是客户端，9502是服务器端
 [S] 表示这是一个SYN请求
-[S.] 表示这是一个SYN+ACK确认包: 
+[S.] 表示这是一个SYN+ACK确认包:
 [.] 表示这是一个ACT确认包， (client)SYN-&gt;(server)SYN-&gt;(client)ACT 就是3次握手过程
 [P] 表示这个是一个数据推送，可以是从服务器端向客户端推送，也可以从客户端向服务器端推
 [F] 表示这是一个FIN包，是关闭连接操作，client/server都有可能发起
 [R] 表示这是一个RST包，与F包作用相同，但RST表示连接关闭时，仍然有数据未被处理。可以理解为是强制切断连接
 win 4099 是指滑动窗口大小
-length 18指数据包的大小
-</code></pre>
+length 18指数据包的大小</p>
 
 <p>我们看到 （1）（2）（3）三步是建立tcp：
-第一次握手：
-14:12:45.104687 IP localhost.39870 &gt; localhost.9502: Flags [S], seq 2927179378
-客户端IP localhost.39870 (客户端的端口一般是自动分配的) 向服务器localhost.9502 发送syn包(syn=j)到服务器》
+第一次握手：</p>
+
+<pre><code>14:12:45.104687 IP localhost.39870 &gt; localhost.9502: Flags [S], seq 2927179378
+</code></pre>
+
+<p>客户端IP localhost.39870 (客户端的端口一般是自动分配的) 向服务器localhost.9502 发送syn包(syn=j)到服务器》
 syn包(syn=j) ： syn的seq= 2927179378  （j=2927179378）</p>
 
-<p>第二次握手：
-14:12:45.104701 IP localhost.9502 &gt; localhost.39870: Flags [S.], seq 1721825043, ack 2927179379,
-收到请求并确认：服务器收到syn包，并必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包：
+<p>第二次握手：</p>
+
+<pre><code>14:12:45.104701 IP localhost.9502 &gt; localhost.39870: Flags [S.], seq 1721825043, ack 2927179379,
+</code></pre>
+
+<p>收到请求并确认：服务器收到syn包，并必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包：
 此时服务器主机自己的SYN：seq：y= syn seq 1721825043。
 ACK为j+1 =（ack=j+1）=ack 2927179379</p>
 
-<p>第三次握手：
-14:12:45.104711 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 1,
-客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)</p>
+<p>第三次握手：</p>
+
+<pre><code>14:12:45.104711 IP localhost.39870 &gt; localhost.9502: Flags [.], ack 1,
+</code></pre>
+
+<p>客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)</p>
 
 <p>客户端和服务器进入ESTABLISHED状态后，可以进行通信数据交互。此时和accept接口没有关系，即使没有accepte，也进行3次握手完成。
 连接出现连接不上的问题，一般是网路出现问题或者网卡超负荷或者是连接数已经满啦。</p>
 
-<p>紫色背景的部分：
-IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, options [nop,nop,TS val 255478182 ecr 255474104], length 7
-客户端向服务器发送长度为7个字节的数据，</p>
+<p>紫色背景的部分：</p>
 
-<p>IP localhost.9502 &gt; localhost.39870: Flags [.], ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 0
-服务器向客户确认已经收到数据</p>
+<pre><code>IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, options [nop,nop,TS val 255478182 ecr 255474104], length 7
+客户端向服务器发送长度为7个字节的数据，
 
-<p>IP localhost.9502 &gt; localhost.39870: Flags [P.], seq 1:19, ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 18
-然后服务器同时向客户端写入数据。</p>
+IP localhost.9502 &gt; localhost.39870: Flags [.], ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 0
+服务器向客户确认已经收到数据
 
-<p>IP localhost.39870 &gt; localhost.9502: Flags [.], ack 19, win 4097, options [nop,nop,TS val 255478182 ecr 255478182], length 0
-客户端向服务器确认已经收到数据</p>
+ IP localhost.9502 &gt; localhost.39870: Flags [P.], seq 1:19, ack 8, win 4096, options [nop,nop,TS val 255478182 ecr 255478182], length 18
+然后服务器同时向客户端写入数据。
+
+ IP localhost.39870 &gt; localhost.9502: Flags [.], ack 19, win 4097, options [nop,nop,TS val 255478182 ecr 255478182], length 0
+客户端向服务器确认已经收到数据
+</code></pre>
 
 <p>这个就是tcp可靠的连接，每次通信都需要对方来确认。</p>
 
@@ -699,34 +711,39 @@ int main(int argc, char** argv)
 <pre><code>int inet_pton(int af, const char *src, void *dst);//转换字符串到网络地址:  
 </code></pre>
 
-<p>第一个参数af是地址族，转换后存在dst中
+<p>第一个参数af是地址族，转换后存在dst中;
     af = AF_INET:src为指向字符型的地址，即ASCII的地址的首地址（ddd.ddd.ddd.ddd格式的），函数将该地址转换为in_addr的结构体，并复制在*dst中
-　　af =AF_INET6:src为指向IPV6的地址，函数将该地址转换为in6_addr的结构体，并复制在*dst中
+　　af =AF_INET6:src为指向IPV6的地址，函数将该地址转换为in6_addr的结构体，并复制在*dst中;
 如果函数出错将返回一个负值，并将errno设置为EAFNOSUPPORT，如果参数af指定的地址族和src格式不对，函数将返回0。</p>
 
 <p>测试：</p>
 
 <p>编译server.c</p>
 
-<p>gcc -o server server.c</p>
+<pre><code>gcc -o server server.c
+</code></pre>
 
 <p>启动进程：</p>
 
-<p>./server</p>
+<pre><code>./server
+</code></pre>
 
 <p>显示结果：</p>
 
-<p>======waiting for client&rsquo;s request======</p>
+<pre><code>======waiting for client's request======
+</code></pre>
 
 <p>并等待客户端连接。</p>
 
 <p>编译 client.c</p>
 
-<p>gcc -o client server.c</p>
+<pre><code>gcc -o client server.c
+</code></pre>
 
 <p>客户端去连接server：</p>
 
-<p>./client 127.0.0.1</p>
+<pre><code>./client 127.0.0.1 
+</code></pre>
 
 <p>等待输入消息</p>
 
@@ -746,7 +763,8 @@ int main(int argc, char** argv)
 
 <p>其实可以不用client,可以使用telnet来测试：</p>
 
-<p>telnet 127.0.0.1 8000</p>
+<pre><code>telnet 127.0.0.1 8000
+</code></pre>
 
 <p><img src="/media/socket_13.jpg" alt="alt text" title="Title13" /></p>
 
