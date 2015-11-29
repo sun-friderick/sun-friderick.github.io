@@ -212,19 +212,11 @@
 <p>UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是属于TCP/IP协议族中的一种。如图：</p></li>
 </ol>
 
-<p><img src="/media/socket_1.jpg" alt="alt text" title="Title" /></p>
+<p><img src="/media/socket_1.jpg" alt="alt text" title="Title1" /></p>
 
 <p>TCP/IP协议族包括运输层、网络层、链路层，而socket所在位置如图，Socket是应用层与TCP/IP协议族通信的中间软件抽象层。</p>
 
-
-<figure >
-    
-        <img src="/media/socket_2.jpg" alt="socket" />
-    
-    
-</figure>
-
-
+<p><img src="/media/socket_2.jpg" alt="alt text" title="Title2" /></p>
 
 <ol>
 <li><p>Socket是什么
@@ -246,12 +238,16 @@
 
 <p>当应用程序要创建一个套接字时，操作系统就返回一个小整数作为描述符，应用程序则使用这个描述符来引用该套接字需要I/O请求的应用程序请求操作系统打开一个文件。操作系统就创建一个文件描述符提供给应用程序访问文件。从应用程序的角度看，文件描述符是一个整数，应用程序可以用它来读写文件。下图显示，操作系统如何把文件描述符实现为一个指针数组，这些指针指向内部数据结构。</p>
 
+<p><img src="/media/socket_3.jpg" alt="alt text" title="Title3" /></p>
+
 <p>对于每个程序系统都有一张单独的表。精确地讲，系统为每个运行的进程维护一张单独的文件描述符表。当进程打开一个文件时，系统把一个指向此文件内部数据结构的指针写入文件描述符表，并把该表的索引值返回给调用者 。应用程序只需记住这个描述符，并在以后操作该文件时使用它。操作系统把该描述符作为索引访问进程描述符表，通过指针找到保存该文件所有的信息的数据结构。</p>
 
 <pre><code>  针对套接字的系统数据结构：
 </code></pre>
 
 <p>1）、套接字API里有个函数socket，它就是用来创建一个套接字。套接字设计的总体思路是，单个系统调用就可以创建任何套接字，因为套接字是相当笼统的。一旦套接字创建后，应用程序还需要调用其他函数来指定具体细节。例如调用socket将创建一个新的描述符条目：</p>
+
+<p><img src="/media/socket_4.jpg" alt="alt text" title="Title4" /></p>
 
 <p>2）、虽然套接字的内部数据结构包含很多字段，但是系统创建套接字后，大多数字字段没有填写。应用程序创建套接字后在该套接字可以使用之前，必须调用其他的过程来填充这些字段。
 3、文件描述符和文件指针的区别：</p>
@@ -265,6 +261,8 @@
 <li>基本的SOCKET接口函数
 在生活中，A要电话给B，A拨号，B听到电话铃声后提起电话，这时A和B就建立起了连接，A和B就可以讲话了。等交流结束，挂断电话结束此次交谈。  打电话很简单解释了这工作原理：“open—write/read—close”模式。</li>
 </ol>
+
+<p><img src="/media/socket_5.jpg" alt="alt text" title="Title5" /></p>
 
 <p>服务器端先初始化Socket，然后与端口绑定(bind)，对端口进行监听(listen)，调用accept阻塞，等待客户端连接。在这时如果有个客户端初始化一个Socket，然后连接服务器(connect)，如果连接成功，这时客户端与服务器端的连接就建立了。客户端发送数据请求，服务器端接收请求并处理请求，然后把回应数据发送给客户端，客户端读取数据，最后关闭连接，一次交互结束。</p>
 
@@ -456,6 +454,8 @@ TCP协议通过三个报文段完成连接的建立，这个过程称为三次�
 一个完整的三次握手也就是： 请求&mdash;应答&mdash;再次确认。
 对应的函数接口：</p>
 
+<p><img src="/media/socket_6.png" alt="alt text" title="Title6" /></p>
+
 <p>从图中可以看出，当客户端调用connect时，触发了连接请求，向服务器发送了SYN J包，这时connect进入阻塞状态；服务器监听到连接请求，即收到SYN J包，调用accept函数接收请求向客户端发送SYN K ，ACK J+1，这时accept进入阻塞状态；客户端收到服务器的SYN K ，ACK J+1之后，这时connect返回，并对SYN K进行确认；服务器收到ACK K+1时，accept返回，至此三次握手完毕，连接建立。</p>
 
 <p>我们可以通过网络抓包的查看具体的流程：
@@ -526,6 +526,8 @@ IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, op
 建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭(half-close)造成的，如图：</li>
 </ol>
 
+<p><img src="/media/socket_7.jpg" alt="alt text" title="Title7" /></p>
+
 <p>由于TCP连接是全双工的，因此每个方向都必须单独进行关闭。这个原则是当一方完成它的数据发送任务后就能发送一个FIN来终止这个方向的连接。收到一个 FIN只意味着这一方向上没有数据流动，一个TCP连接在收到一个FIN后仍能发送数据。首先进行关闭的一方将执行主动关闭，而另一方执行被动关闭。</p>
 
 <p>（1）客户端A发送一个FIN，用来关闭客户A到服务器B的数据传送（报文段4）。</p>
@@ -536,6 +538,8 @@ IP localhost.39870 &gt; localhost.9502: Flags [P.], seq 1:8, ack 1, win 4099, op
 
 <p>（4）客户端A发回ACK报文确认，并将确认序号设置为收到序号加1（报文段7）。
 对应函数接口如图：</p>
+
+<p><img src="/media/socket_8.png" alt="alt text" title="Title8" /></p>
 
 <p>过程如下：</p>
 
@@ -726,15 +730,25 @@ int main(int argc, char** argv)
 
 <p>等待输入消息</p>
 
+<p><img src="/media/socket_9.jpg" alt="alt text" title="Title9" /></p>
+
 <p>发送一条消息，输入：c++</p>
+
+<p><img src="/media/socket_10.jpg" alt="alt text" title="Title10" /></p>
 
 <p>此时服务器端看到：</p>
 
+<p><img src="/media/socket_11.jpg" alt="alt text" title="Title11" /></p>
+
 <p>客户端收到消息：</p>
+
+<p><img src="/media/socket_12.jpg" alt="alt text" title="Title12" /></p>
 
 <p>其实可以不用client,可以使用telnet来测试：</p>
 
 <p>telnet 127.0.0.1 8000</p>
+
+<p><img src="/media/socket_13.jpg" alt="alt text" title="Title13" /></p>
 
 <p>注意：</p>
 
