@@ -189,7 +189,7 @@
         <article itemprop="articleBody" id="content">
            
 
-<p>#gdb 跟踪调试命令整理</p>
+<h1 id="gdb-跟踪调试命令整理:27ab83445e035e5774461847bd2aa236">gdb 跟踪调试命令整理</h1>
 
 <h1 id="gdb常用命令:27ab83445e035e5774461847bd2aa236">gdb常用命令：</h1>
 
@@ -222,16 +222,16 @@ gcc(g++) -ggdb3 -o 文件名 源文件.c(源文件.cpp)
 <pre><code>gdb 执行文件名(含调试信息)
 </code></pre>
 
-<p>#运行 GDB</p>
+<h1 id="运行-gdb:27ab83445e035e5774461847bd2aa236">运行 GDB</h1>
 
-<p>##运行 gdb</p>
+<h2 id="运行-gdb-1:27ab83445e035e5774461847bd2aa236">运行 gdb</h2>
 
 <pre><code>gdb &lt;program&gt; -- program也就是你的执行文件,一般在当然目录下.
 gdb &lt;program&gt; core -- 用 gdb 同时调试一个运行程序和 core 文件,core 是程序非法执行后 core dump 后产生的文件.
 gdb &lt;program&gt; &lt;PID&gt; -- 调试正在运行的程序. program 为需要调试的程序文件, PID 为当前正在运行的程序.或是先用 gdb &lt;program&gt; 关联上源代码进入 gdb,后用 attach 命令来挂接进程的 PID.并用 detach 来取消挂接的进程
 </code></pre>
 
-<p>##gdb 启动常用的参数</p>
+<h2 id="gdb-启动常用的参数:27ab83445e035e5774461847bd2aa236">gdb 启动常用的参数</h2>
 
 <pre><code>从指定文件中读取符号表
     -symbols &lt;file&gt;
@@ -248,7 +248,7 @@ gdb &lt;program&gt; &lt;PID&gt; -- 调试正在运行的程序. program 为需�
     --args arglist
 </code></pre>
 
-<p>##gdb 帮助文档</p>
+<h2 id="gdb-帮助文档:27ab83445e035e5774461847bd2aa236">gdb 帮助文档</h2>
 
 <pre><code>help -- 查看 gdb 的命令种类
 help &lt;CmdType&gt; -- 查看 CmdType 种类的 gdb 命令
@@ -257,25 +257,25 @@ info &lt;keyWord&gt; -- 查看关键字 keyWord 调试信息
 show &lt;keyWord&gt; -- 查看关键字 keyWord gdb 本身设置信息
 </code></pre>
 
-<p>##gdb 中运行 unix 的 shell 程序</p>
+<h2 id="gdb-中运行-unix-的-shell-程序:27ab83445e035e5774461847bd2aa236">gdb 中运行 unix 的 shell 程序</h2>
 
 <pre><code>shell &lt;command string&gt; -- 调用 unix 的 shell 来执行 &lt;command string&gt;,环境变量 shell 中定义的 unix 的 shell 将会被用来执行 &lt;command string&gt;,如果 shell 没有定义,那就使用 unix 的标准 shell：/bin/sh.(在 windows 中使用 command.com 或 cmd.exe)
 make &lt;make-args&gt; -- 等价于 “shell make &lt;make-args&gt;”
 </code></pre>
 
-<p>##历史记录</p>
+<h2 id="历史记录:27ab83445e035e5774461847bd2aa236">历史记录</h2>
 
 <pre><code>当你用 gdb 的 print 查看程序运行时的数据时,你每一个 print 都会被 gdb 记录下来.gdb 会以 $1, $2, $3 ...这样的方式为你每一个 print 命令编上号.于是,你可以使用这个编号访问以前的表达式,如 $1.这个功能所带来的好处是,如果你先前输入了一个比较长的表达式,如果你还想查看这个表达式的值,你可以使用历史记录来访问,省去了重复输入.
 </code></pre>
 
-<p>##启动程序</p>
+<h2 id="启动程序:27ab83445e035e5774461847bd2aa236">启动程序</h2>
 
 <pre><code>run &lt;arg ...&gt; -- 启动程序,&lt;arg ...&gt; 为程序运行时候需要输入的参数.也可用 set args 命令去设置运行参数.简写为 r
 </code></pre>
 
-<p>#GDB 环境设置</p>
+<h1 id="gdb-环境设置:27ab83445e035e5774461847bd2aa236">GDB 环境设置</h1>
 
-<p>##gdb 设置</p>
+<h2 id="gdb-设置:27ab83445e035e5774461847bd2aa236">gdb 设置</h2>
 
 <pre><code>设置显示选项
     地址
@@ -334,9 +334,9 @@ make &lt;make-args&gt; -- 等价于 “shell make &lt;make-args&gt;”
         set step-mode [on | off] -- step-mode 模式,于是,在进行单步跟踪时,程序不会因为没有debug信息而不停住.这个参数有很利于查看机器码. 
 </code></pre>
 
-<p>#GDB 源码查看</p>
+<h1 id="gdb-源码查看:27ab83445e035e5774461847bd2aa236">GDB 源码查看</h1>
 
-<p>##显示源代码</p>
+<h2 id="显示源代码:27ab83445e035e5774461847bd2aa236">显示源代码</h2>
 
 <pre><code>list &lt;linenum&gt; -- 显示程序第 linenum 行的周围的源程序.
 list &lt;function&gt; -- 显示函数名为 function 的函数的源程序.
@@ -348,20 +348,20 @@ list - -- 显示当前行前面的源程序.
 list &lt;first&gt;, &lt;last&gt; -- 显示从 first 行到 last 行之间的源代码.若无 first 则显示从当前行到 last 之间的源代码.
 </code></pre>
 
-<p>##设置和获得显示源码的行数</p>
+<h2 id="设置和获得显示源码的行数:27ab83445e035e5774461847bd2aa236">设置和获得显示源码的行数</h2>
 
 <pre><code>set listsize &lt;count&gt; -- 设置一次显示源代码的行数.
 show listsize -- 查看当前listsize的设置.
 </code></pre>
 
-<p>##搜索源代码</p>
+<h2 id="搜索源代码:27ab83445e035e5774461847bd2aa236">搜索源代码</h2>
 
 <pre><code>forward-search &lt;regexp&gt; -- 向后面搜索.正则表达式为 regexp 的关键字
 search &lt;regexp&gt; -- 向后面搜索.正则表达式为 regexp 的关键字
 reverse-search &lt;regexp&gt; -- 向前面搜索.正则表达式为 regexp 的关键字
 </code></pre>
 
-<p>##源代码的内存</p>
+<h2 id="源代码的内存:27ab83445e035e5774461847bd2aa236">源代码的内存</h2>
 
 <pre><code>info line &lt;linenum&gt; -- 查看行号为 linenum 源代码在内存中的地址.
 info line &lt;function&gt; -- 查看函数在源代码在内存中的地址.
@@ -369,14 +369,14 @@ info line &lt;filename:linenum&gt; -- 查看 filename 文件的第 linenum 行�
 info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数在源代码在内存中的地址.
 </code></pre>
 
-<p>##查看汇编代码</p>
+<h2 id="查看汇编代码:27ab83445e035e5774461847bd2aa236">查看汇编代码</h2>
 
 <pre><code>disassemble -- 查看源程序的当前执行时的机器码,这个命令会把目前内存中的指令 dump 出来.
 </code></pre>
 
-<p>#GDB 停止点设置及维护</p>
+<h1 id="gdb-停止点设置及维护:27ab83445e035e5774461847bd2aa236">GDB 停止点设置及维护</h1>
 
-<p>##断点(BreakPoint)</p>
+<h2 id="断点-breakpoint:27ab83445e035e5774461847bd2aa236">断点(BreakPoint)</h2>
 
 <pre><code>设置断点:(threadno 指定了线程的 ID,注意,这个 ID 是 gdb 分配的,可以通过 &quot;info threads&quot; 命令来查看正在运行程序中的线程信息)
     break thread &lt;threadno&gt; -- break命令没有参数时,表示在下一条指令处停住.
@@ -394,7 +394,7 @@ info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数
     info break [n]
 </code></pre>
 
-<p>##观察点(WatchPoint) &ndash; 观察点一般来观察某个表达式(变量也是一种表达式)的值是否有变化了,如果有变化,马上停住程序.</p>
+<h2 id="观察点-watchpoint-观察点一般来观察某个表达式-变量也是一种表达式-的值是否有变化了-如果有变化-马上停住程序:27ab83445e035e5774461847bd2aa236">观察点(WatchPoint) &ndash; 观察点一般来观察某个表达式(变量也是一种表达式)的值是否有变化了,如果有变化,马上停住程序.</h2>
 
 <pre><code>设在观察点
     watch &lt;expr&gt; -- 为表达式(变量)expr设置一个观察点.一量表达式值有变化时,马上停住程序.
@@ -404,7 +404,7 @@ info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数
     info watchpoints -- 列出当前所设置了的所有观察点.
 </code></pre>
 
-<p>##捕捉点(CatchPoint) &ndash; 设置捕捉点来补捉程序运行时的一些事件.如:载入共享库(动态链接库)或是 C++ 的异常《/p&gt;</p>
+<h2 id="捕捉点-catchpoint-设置捕捉点来补捉程序运行时的一些事件-如-载入共享库-动态链接库-或是-c-的异常-p:27ab83445e035e5774461847bd2aa236">捕捉点(CatchPoint) &ndash; 设置捕捉点来补捉程序运行时的一些事件.如:载入共享库(动态链接库)或是 C++ 的异常《/p&gt;</h2>
 
 <pre><code>设置捕捉点
     catch &lt;event&gt; -- 当event发生时,停住程序.event可以是下面的内容：
@@ -418,7 +418,7 @@ info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数
     tcatch &lt;event&gt; -- 只设置一次捕捉点,当程序停住以后,应点被自动删除.
 </code></pre>
 
-<p>##维护停止点</p>
+<h2 id="维护停止点:27ab83445e035e5774461847bd2aa236">维护停止点</h2>
 
 <pre><code>清除停止点
     clear -- 所有的已定义的停止点.
@@ -454,9 +454,9 @@ info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数
     end
 </code></pre>
 
-<p>#信号(Signals)</p>
+<h1 id="信号-signals:27ab83445e035e5774461847bd2aa236">信号(Signals)</h1>
 
-<p>##添加信号处理</p>
+<h2 id="添加信号处理:27ab83445e035e5774461847bd2aa236">添加信号处理</h2>
 
 <pre><code>handle &lt;signal&gt; &lt;keywords...&gt;
 在 gdb 中定义一个信号处理.信号 &lt;signal&gt; 可以以 SIG 开头或不以 SIG 开头,可以用定义一个要处理信号的范围(如：SIGIO-SIGKILL,表示处理从 SIGIO 信号到 SIGKILL 的信号,其中包括 SIGIO, SIGIOT, SIGKILL 三个信号),也可以使用关键字 all 来标明要处理所有的信号.一旦被调试的程序接收到信号,运行程序马上会被 gdb 停住,以供调试.其 &lt;keywords&gt; 可以是以下几种关键字的一个或多个.若没有 keywords 则查看奇信号的处理状态
@@ -470,34 +470,35 @@ info line &lt;filename:function&gt; -- 查看 filename 文件的 function 函数
     1gnore -- 当被调试的程序收到信号时,gdb 不会让被调试程序来处理这个信号.
 </code></pre>
 
-<p>##查看处理信号</p>
+<h2 id="查看处理信号:27ab83445e035e5774461847bd2aa236">查看处理信号</h2>
 
 <pre><code>info signals -- 查看有哪些信号在被 gdb 检测中.
 info handle -- 查看有哪些信号在被 gdb 检测中.
 </code></pre>
 
-<p>#GDB 程序调试</p>
+<h1 id="gdb-程序调试:27ab83445e035e5774461847bd2aa236">GDB 程序调试</h1>
 
-<p>##恢复执行</p>
+<h2 id="恢复执行:27ab83445e035e5774461847bd2aa236">恢复执行</h2>
 
 <pre><code>continue [ignore-count] -- ignore-count 表示忽略其后的断点次数.恢复程序运行,直到程序结束,或是下一个断点到来.缩写 c
 fg [ignore-count] -- ignore-count 表示忽略其后的断点次数.恢复程序运行,直到程序结束,或是下一个断点到来.缩写 c
 </code></pre>
 
-<p>##单步调试</p>
+<h2 id="单步调试:27ab83445e035e5774461847bd2aa236">单步调试</h2>
 
 <pre><code>step &lt;count&gt; -- 单步跟踪,如果有函数调用,它会进入该函数.count 表示执行后面 count 条语句,不加则默认为 1.
 next &lt;count&gt; -- 同样单步跟踪,如果有函数调用,他不会进入该函数.count 表示执行后面 count 条语句,不加则默认为 1.
 </code></pre>
 
-<p>##跟踪机器指令
-       与之一样有相同功能的命令是 “display/i $pc” ,当运行完这个命令后,单步跟踪会在打出程序代码的同时打出机器指令(也就是汇编代码)</p>
+<h2 id="跟踪机器指令:27ab83445e035e5774461847bd2aa236">跟踪机器指令</h2>
 
-<pre><code>stepi 或 si -- 单步跟踪一条机器指令,简写 si
+<pre><code>   与之一样有相同功能的命令是 “display/i $pc” ,当运行完这个命令后,单步跟踪会在打出程序代码的同时打出机器指令(也就是汇编代码)
+
+stepi 或 si -- 单步跟踪一条机器指令,简写 si
 nexti 或 ni -- 单步跟踪一条机器指令,简写 ni
 </code></pre>
 
-<p>##函数调试</p>
+<h2 id="函数调试:27ab83445e035e5774461847bd2aa236">函数调试</h2>
 
 <pre><code>finish -- 运行程序,直到当前函数完成返回.并打印函数返回时的堆栈地址和返回值及参数值等信息.
 return &lt;expression&gt; -- 使函数以 expression 表达式返回出去,忽略还没有执行的语句.若无返回 void 出去
@@ -505,19 +506,19 @@ call &lt;expr&gt; -- 表达式中可以一是函数,以此达到强制调用函�
 print 与 printf 也可以做到类似的功能和 call 的不同是,如果函数返回 void,call 则不显示,print 则显示函数返回值,并把该值存入历史数据中.
 </code></pre>
 
-<p>##循环体调试</p>
+<h2 id="循环体调试:27ab83445e035e5774461847bd2aa236">循环体调试</h2>
 
 <pre><code>until -- 可以运行程序直到退出循环体.简写 u
 </code></pre>
 
-<p>##修改变量值</p>
+<h2 id="修改变量值:27ab83445e035e5774461847bd2aa236">修改变量值</h2>
 
 <pre><code>print varname=var -- 修改被调试程序运行时的变量值
 set var varname=value -- 修改被调试程序运行时的变变量
 whatis varname -- 查看变量的类型
 </code></pre>
 
-<p>##跳转执行</p>
+<h2 id="跳转执行:27ab83445e035e5774461847bd2aa236">跳转执行</h2>
 
 <pre><code>jump &lt;linespec&gt; -- 指定下一条语句的运行点.&lt;linespce&gt; 可以是文件的行号,可以是 file:line 格式,可以是 +num 这种偏移量格式.表式着下一条运行语句从哪里开始.
 jump &lt;address&gt; -- 跳转到指定的程序内存地址运行.&lt;address&gt; 是代码行的内存地址.
@@ -526,14 +527,14 @@ jump &lt;address&gt; -- 跳转到指定的程序内存地址运行.&lt;address&g
     jump 命令只是改变了指令寄存器中的值.于是可以使用 “set $pc” 来更改跳转执行的地址.如： set $pc = 0x485
 </code></pre>
 
-<p>##产生信号量</p>
+<h2 id="产生信号量:27ab83445e035e5774461847bd2aa236">产生信号量</h2>
 
 <pre><code>signal &lt;signal&gt; -- 产生一个 signal 信号.UNIX 的系统信号量通常从 1 到 15.所以 &lt;signal&gt; 取值也在这个范围.
 </code></pre>
 
-<p>#GDB 运行是数据</p>
+<h1 id="gdb-运行是数据:27ab83445e035e5774461847bd2aa236">GDB 运行是数据</h1>
 
-<p>##查看运行时数据</p>
+<h2 id="查看运行时数据:27ab83445e035e5774461847bd2aa236">查看运行时数据</h2>
 
 <pre><code>print /&lt;f&gt; &lt;expr&gt; -- 查看当前程序的运行数据.简写 p.
     &lt;expr&gt; 是表达式
@@ -556,7 +557,7 @@ jump &lt;address&gt; -- 跳转到指定的程序内存地址运行.&lt;address&g
 printf &quot;fmt&quot;,arg,... -- 打印格式化字符灿 fmt.
 </code></pre>
 
-<p>##查看内存</p>
+<h2 id="查看内存:27ab83445e035e5774461847bd2aa236">查看内存</h2>
 
 <pre><code>examine/&lt;n/f/u&gt; &lt;addr&gt; -- 来查看内存地址中的值.简写 x
     &lt;n/f/u&gt;
@@ -580,7 +581,7 @@ printf &quot;fmt&quot;,arg,... -- 打印格式化字符灿 fmt.
     &lt;addr&gt; 表示一个内存地址.
 </code></pre>
 
-<p>##自动显示</p>
+<h2 id="自动显示:27ab83445e035e5774461847bd2aa236">自动显示</h2>
 
 <pre><code>设置自动显示
     display/&lt;fmt&gt; &lt;expr&gt; -- 自动显示 expr 表达式
@@ -596,7 +597,7 @@ printf &quot;fmt&quot;,arg,... -- 打印格式化字符灿 fmt.
     enable display &lt;range&gt; -- 启动自动显示
 </code></pre>
 
-<p>##查看栈信息</p>
+<h2 id="查看栈信息:27ab83445e035e5774461847bd2aa236">查看栈信息</h2>
 
 <pre><code>backtrace &lt;n&gt; -- 擦看函数栈信息,简写 bt
     n 若是正数,只打印栈顶上 n 层的栈信息,
@@ -609,7 +610,7 @@ info locals -- 打印出当前函数中所有局部变量及其值.
 info catch -- 打印出当前的函数中的异常处理信息.
 </code></pre>
 
-<p>##切换函数栈位置</p>
+<h2 id="切换函数栈位置:27ab83445e035e5774461847bd2aa236">切换函数栈位置</h2>
 
 <pre><code>frame &lt;n&gt; -- 切换到第 n 层函数栈位置,简写 f.
 p &lt;n&gt; -- 表示上面移动 n 层,可以不打 n,表示向上移动一层.
@@ -619,22 +620,22 @@ up-silently &lt;n&gt; -- 类似 up 命令.不打印出栈层信息.
 down-silently &lt;n&gt; -- 类似 down 命令.不打印出栈层信息.
 </code></pre>
 
-<p>##查看寄存器</p>
+<h2 id="查看寄存器:27ab83445e035e5774461847bd2aa236">查看寄存器</h2>
 
 <pre><code>info registers -- 查看寄存器的情况.(除了浮点寄存器)
 info all-registers -- 查看所有寄存器的情况.(包括浮点寄存器)
 info registers &lt;regname&gt; -- 查看所指定的寄存器的情况.
 </code></pre>
 
-<p>##线程查看与切换线程</p>
+<h2 id="线程查看与切换线程:27ab83445e035e5774461847bd2aa236">线程查看与切换线程</h2>
 
 <pre><code>info threads -- 查看当前线程
 thread &lt;threadno&gt; -- 切换到 threadno 的线程,简写 t
 </code></pre>
 
-<p>#自定义命令</p>
+<h1 id="自定义命令:27ab83445e035e5774461847bd2aa236">自定义命令</h1>
 
-<p>##定义一个命令</p>
+<h2 id="定义一个命令:27ab83445e035e5774461847bd2aa236">定义一个命令</h2>
 
 <pre><code>格式
 define comdName
@@ -652,14 +653,14 @@ while cond_expr
 end
 </code></pre>
 
-<p>##定义一个命令的文档信息（在 help cmdName 的时候显示）</p>
+<h2 id="定义一个命令的文档信息-在-help-cmdname-的时候显示:27ab83445e035e5774461847bd2aa236">定义一个命令的文档信息（在 help cmdName 的时候显示）</h2>
 
 <pre><code>document cmdName
       ...
 end
 </code></pre>
 
-<p>##查看自定命令</p>
+<h2 id="查看自定命令:27ab83445e035e5774461847bd2aa236">查看自定命令</h2>
 
 <pre><code>help user-define -- 查看所有用户自定义的命令
 show user cmdName -- 查看用户定义的 cmdName 的命令.
