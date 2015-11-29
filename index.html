@@ -155,7 +155,23 @@
       
         <article class="post">
     <header>
-      <h2><a href="http://sun-friderick.github.io/post/2015-11-29">gdb调试中文教程 </a> </h2>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-31">用gdb调试程序笔记: 以段错误(Segmental fault) </a> </h2>
+      <div class="post-meta">Tue, Dec 1, 2015 </div>
+    </header>
+    <article itemprop="articleBody" id="content">
+    	用gdb调试程序笔记: 以段错误(Segmental fault)为例[转] 1.背景介绍 2.程序中常见的bug分类 3.程序调试器(如gdb)有什么用 4.段错误(Segmental fault)介绍 5.gdb调试入门 一、背景介绍 这个笔记主要介绍开源的程序调试器(gdb)的入门知识，目的是使unix/linux环境的编程新手能够快速学会使用gdb调试程序的方法，同时也是对我使用gdb的一个经验总结。 本文假设你能使用简单的unix/linux命令并能用gcc(GNU C Compiler， GNU C 语言编译器)编译程序，当然有编程经验更好。：） 为帮助你理解和操作，我将使用我遇到过的真实事例来演示使用gdb调试有缺陷(bug)的程序过程，你看过这篇笔记后能自己动手练一下最好。 二、程序中常见的缺陷(bug)分类 程序(编译型程序，perl、python，php等脚本程序除外)中常见的bug通常分为两类： 语法错误和逻辑错误，或者编译时错误和运行是错误。 语法错误(编译时错误)是我们在编写源代码时没有按照相关的语言规范(如ANSI C标准)导致编译时出错，编译失败。这种错误的检查和调试一般是比较简单和直接的：因为编译器(如gcc)通常会明确告诉你错误的原因和大致的范围(注意不一定是准确的错误行)。例如下面的一个简单demo.c程序的第8行缺失了一个分号，gcc指示第10行前少了一个分号。这就是一个典型的语法错误。 geekard@geekard:~/test$ cat -n demo.c 1 #include 2 3 int 4 main(){ 5 6 int n; 7 8 printf(&ldquo;the n is:%c&rdquo;, n) 9 10 return 0; 11 } geekard@geekard:~/test$ gcc demo.c -o demo demo.c: In function ‘main’:demo.c:10: error: expected ‘;’ before ‘return’ 添加了分号再编译一次，这下没有出现问题，运行程序的结果如下： geekard@geekard:~/test$ ./demo the n is:6680564 另外注意这个程序中的变量n，我定义其为整型变量但并没有对其初始化赋值，这就是一个逻辑错误：编译器不会指示这个错误，只有在实际运行或测试时才能发现。 这个小程序只是一个故意的编造，但在实际编程中无论你多高明，经验多丰富，难免会在此处犯些小错误(想想吧：当你需要编写或维护一个成千上万行的代码，这种小概率事件就是确定事件了，：）)，而通常这些错误又是那么的浅显而易于消除，但是手工“除虫”（debug），往往是效率低下且让人厌烦的，本文将就&rdquo;段错误&rdquo;这个内存访问越界的错误谈谈如何使用gdb快速定位这些&rdquo;段错误&rdquo;的语句。 三、程序调试器(如gdb)有什么用？(参考自gdb的在线帮助手册, 可用命令：man gdb， 或 info gdb查看) 程序调试器(如gdb)的主要目的是让你能够查看正在执行的程序其内部特性(如执行流程、变量值、函数调用、堆栈等)，也可以程序崩溃时刻或以前都发生了什么。 Gdb对程序的调试能力主要体现在以下四个方面(当然不止这些): .
+	</article>
+    <footer>
+        <a href='http://sun-friderick.github.io/post/2015-11-31'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+      
+    
+      
+        <article class="post">
+    <header>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-29">gdb调试 </a> </h2>
       <div class="post-meta">Sun, Nov 29, 2015 </div>
     </header>
     <article itemprop="articleBody" id="content">
@@ -214,22 +230,6 @@
       <div class="post-meta">Sat, Jan 31, 2015 </div>
     </header>
     <article itemprop="articleBody" id="content">
-    	gdb对于多线程程序的调试有如下的支持： 线程产生通知：在产生新的线程时, gdb会给出提示信息 (gdb) r Starting program: /root/thread [New Thread 1073951360 (LWP 12900)] [New Thread 1082342592 (LWP 12907)]&mdash;以下三个为新产生的线程 [New Thread 1090731072 (LWP 12908)] [New Thread 1099119552 (LWP 12909)] 查看线程：使用info threads可以查看运行的线程。 (gdb) info threads 4 Thread 1099119552 (LWP 12940) 0xffffe002 in ?? () 3 Thread 1090731072 (LWP 12939) 0xffffe002 in ?? () 2 Thread 1082342592 (LWP 12938) 0xffffe002 in ?? () * 1 Thread 1073951360 (LWP 12931) main (argc=1, argv=0xbfffda04) at thread.c:21 (gdb) 注意，行首的蓝色文字为gdb分配的线程号，对线程进行切换时，使用该该号码，而不是上文标出的绿色数字。 另外，行首的红色星号标识了当前活动的线程 切换线程：使用 thread THREADNUMBER 进行切换，THREADNUMBER 为上文提到的线程号。下例显示将活动线程从 1 切换至 4。 (gdb) info threads 4 Thread 1099119552 (LWP 12940) 0xffffe002 in ??
-	</article>
-    <footer>
-        <a href='http://sun-friderick.github.io/post/2015-01-31'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-      
-    
-      
-        <article class="post">
-    <header>
-      <h2><a href="http://sun-friderick.github.io/post/2015-01-31">Hugo静态网站生成器中文教程 </a> </h2>
-      <div class="post-meta">Sat, Jan 31, 2015 </div>
-    </header>
-    <article itemprop="articleBody" id="content">
     	<h1 id="前言:d605f9890f3528aea462ac7515ece633">前言</h1>
 
 <p><a href="http://gohugo.io">Hugo</a>是什么？官方文档是这样介绍它的：</p>
@@ -245,6 +245,22 @@
 	</article>
     <footer>
         <a href='http://sun-friderick.github.io/post/2015-01-31'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+      
+    
+      
+        <article class="post">
+    <header>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-31">gdb多线程调试 </a> </h2>
+      <div class="post-meta">Sat, Jan 31, 2015 </div>
+    </header>
+    <article itemprop="articleBody" id="content">
+    	gdb对于多线程程序的调试有如下的支持： 线程产生通知：在产生新的线程时, gdb会给出提示信息 (gdb) r Starting program: /root/thread [New Thread 1073951360 (LWP 12900)] [New Thread 1082342592 (LWP 12907)]&mdash;以下三个为新产生的线程 [New Thread 1090731072 (LWP 12908)] [New Thread 1099119552 (LWP 12909)] 查看线程：使用info threads可以查看运行的线程。 (gdb) info threads 4 Thread 1099119552 (LWP 12940) 0xffffe002 in ?? () 3 Thread 1090731072 (LWP 12939) 0xffffe002 in ?? () 2 Thread 1082342592 (LWP 12938) 0xffffe002 in ?? () * 1 Thread 1073951360 (LWP 12931) main (argc=1, argv=0xbfffda04) at thread.c:21 (gdb) 注意，行首的蓝色文字为gdb分配的线程号，对线程进行切换时，使用该该号码，而不是上文标出的绿色数字。 另外，行首的红色星号标识了当前活动的线程 切换线程：使用 thread THREADNUMBER 进行切换，THREADNUMBER 为上文提到的线程号。下例显示将活动线程从 1 切换至 4。 (gdb) info threads 4 Thread 1099119552 (LWP 12940) 0xffffe002 in ??
+	</article>
+    <footer>
+        <a href='http://sun-friderick.github.io/post/2015-11-31'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
@@ -274,22 +290,6 @@
     </header>
     <article itemprop="articleBody" id="content">
     	#一、多线程调试 ###1. 多线程调试,最重要的几个命令: info threads 查看当前进程的线程。 GDB会为每个线程分配一个ID, 后面操作线程的时候会用到这个ID. 前面有*的是当前调试的线程. thread 切换调试的线程为指定ID的线程。 break file.c:100 thread all 在file.c文件第100行处为所有经过这里的线程设置断点。 set scheduler-locking off|on|step 在使用step或者continue命令调试当前被调试线程的时候，其他线程也是同时执行的, 怎么只让被调试程序执行呢？ 通过这个命令就可以实现这个需求。 off 不锁定任何线程，也就是所有线程都执行，这是默认值。 on 只有当前被调试程序会执行。 step 在单步的时候，除了next过一个函数的情况 (熟悉情况的人可能知道，这其实是一个设置断点然后continue的行为)以外， 只有当前线程会执行。 thread apply ID1 ID2 command 让一个或者多个线程执行GDB命令command thread apply all command 让所有被调试线程执行GDB命令command。 ###2. 使用示例: 线程产生通知：在产生新的线程时, gdb会给出提示信息 &gt;(gdb) r Starting program: /root/thread [New Thread 1073951360 (LWP 12900)] [New Thread 1082342592 (LWP 12907)]&mdash;以下三个为新产生的线程 [New Thread 1090731072 (LWP 12908)] [New Thread 1099119552 (LWP 12909)] 查看线程：使用info threads可以查看运行的线程。 &gt;(gdb) info threads 4 Thread 1099119552 (LWP 12940) 0xffffe002 in ??
-	</article>
-    <footer>
-        <a href='http://sun-friderick.github.io/post/2015-01-31'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-      
-    
-      
-        <article class="post">
-    <header>
-      <h2><a href="http://sun-friderick.github.io/post/2015-01-31">用gdb调试程序笔记: 以段错误(Segmental fault) </a> </h2>
-      <div class="post-meta">Sat, Jan 31, 2015 </div>
-    </header>
-    <article itemprop="articleBody" id="content">
-    	用gdb调试程序笔记: 以段错误(Segmental fault)为例[转] 1.背景介绍 2.程序中常见的bug分类 3.程序调试器(如gdb)有什么用 4.段错误(Segmental fault)介绍 5.gdb调试入门 一、背景介绍 这个笔记主要介绍开源的程序调试器(gdb)的入门知识，目的是使unix/linux环境的编程新手能够快速学会使用gdb调试程序的方法，同时也是对我使用gdb的一个经验总结。 本文假设你能使用简单的unix/linux命令并能用gcc(GNU C Compiler， GNU C 语言编译器)编译程序，当然有编程经验更好。：） 为帮助你理解和操作，我将使用我遇到过的真实事例来演示使用gdb调试有缺陷(bug)的程序过程，你看过这篇笔记后能自己动手练一下最好。 二、程序中常见的缺陷(bug)分类 程序(编译型程序，perl、python，php等脚本程序除外)中常见的bug通常分为两类： 语法错误和逻辑错误，或者编译时错误和运行是错误。 语法错误(编译时错误)是我们在编写源代码时没有按照相关的语言规范(如ANSI C标准)导致编译时出错，编译失败。这种错误的检查和调试一般是比较简单和直接的：因为编译器(如gcc)通常会明确告诉你错误的原因和大致的范围(注意不一定是准确的错误行)。例如下面的一个简单demo.c程序的第8行缺失了一个分号，gcc指示第10行前少了一个分号。这就是一个典型的语法错误。 geekard@geekard:~/test$ cat -n demo.c 1 #include 2 3 int 4 main(){ 5 6 int n; 7 8 printf(&ldquo;the n is:%c&rdquo;, n) 9 10 return 0; 11 } geekard@geekard:~/test$ gcc demo.c -o demo demo.c: In function ‘main’:demo.c:10: error: expected ‘;’ before ‘return’ 添加了分号再编译一次，这下没有出现问题，运行程序的结果如下： geekard@geekard:~/test$ ./demo the n is:6680564 另外注意这个程序中的变量n，我定义其为整型变量但并没有对其初始化赋值，这就是一个逻辑错误：编译器不会指示这个错误，只有在实际运行或测试时才能发现。 这个小程序只是一个故意的编造，但在实际编程中无论你多高明，经验多丰富，难免会在此处犯些小错误(想想吧：当你需要编写或维护一个成千上万行的代码，这种小概率事件就是确定事件了，：）)，而通常这些错误又是那么的浅显而易于消除，但是手工“除虫”（debug），往往是效率低下且让人厌烦的，本文将就&rdquo;段错误&rdquo;这个内存访问越界的错误谈谈如何使用gdb快速定位这些&rdquo;段错误&rdquo;的语句。 三、程序调试器(如gdb)有什么用？(参考自gdb的在线帮助手册, 可用命令：man gdb， 或 info gdb查看) 程序调试器(如gdb)的主要目的是让你能够查看正在执行的程序其内部特性(如执行流程、变量值、函数调用、堆栈等)，也可以程序崩溃时刻或以前都发生了什么。 Gdb对程序的调试能力主要体现在以下四个方面(当然不止这些): .
 	</article>
     <footer>
         <a href='http://sun-friderick.github.io/post/2015-01-31'><nobr>Read more →</nobr></a>
