@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="keywords" content="">
+
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:description" content=""/>
+<meta property="og:title" content="Linux的socket编程 : frederick.sun"/>
+<meta property="og:site_name" content="nanshu wang blog"/>
+<meta property="og:image" content="" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="" />
+<meta property="og:image:height" content="" />
+<meta property="og:url" content="http://sun-friderick.github.io/tags/linuxe79a84sockete7bc96e7a88b/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-11-29"/>
+<meta property="article:modified_time" content="2015-11-29"/>
+
+
+
+
+
+
+    <base href="http://sun-friderick.github.io/">
+    <title> Linux的socket编程 - frederick.sun </title>
+    <link rel="canonical" href="http://sun-friderick.github.io/tags/linuxe79a84sockete7bc96e7a88b/">
+    <link href="http://sun-friderick.github.io/tags/linux%E7%9A%84socket%E7%BC%96%E7%A8%8B/index.xml" rel="alternate" type="application/rss+xml" title="Linux的socket编程" />
+
+    <link href='http://fonts.useso.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/css/style.css">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a79535ca63291dc820e3ecefa615aad1";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+<body lang="en">
+<header id="header">
+	<nav id="nav">
+	<div id="title"><a href="/">Frederick Sun</a></div>
+    <div><a href=mailto: mrsun.echo@gmail.com target="_blank" class="mailto"> </span> <span class="icon-mail"></span>eric</a></div>
+	</nav>
+    <nav id="nav">
+    	        <ul id="mainnav">
+            <li>
+                <a href="/bar-work/">
+                <span class="icon"> <i aria-hidden="true" class="icon-console"></i></span> 
+                <span> 工作 </span>
+            </a>
+            </li>
+            <li>
+            <a href="/bar-technology/">
+                <span class="icon"> <i aria-hidden="true" class="icon-stats"></i></span>
+                <span> 技术 </span>
+            </a>
+            </li>
+            <li>
+            <a href="/bar-favor/">
+                <span class="icon"> <i aria-hidden="true" class="icon-leaf"></i></span>
+                <span> 爱好 </span>
+            </a>
+            </li>
+            
+            <li>
+            <a href="/bar-living/">
+                <span class="icon"> <i aria-hidden="true" class="icon-quill"></i></span>
+                <span> 生活 </span>
+            </a>
+            </li>
+            
+            <li>
+            <a href="/tags/">
+                <span class="icon"> <i aria-hidden="true" class="icon-pencil"></i></span>
+                <span> Tags </span>
+            </a>
+            </li>
+            
+            <li>
+            <a href="/about">
+                <span class="icon"> <i aria-hidden="true" class="icon-heart"></i></span>
+                <span> 关于 </span>
+            </a>
+            </li>
+        </ul>
+
+    </nav>
+    <nav id="nav">
+       	        <ul id="social">
+            
+            <li id="share">
+                <span class="title"> 友链 </span>
+                <div class="dropdown share">
+                    <ul class="social">
+                      <li> <a href="http://xgezhang.com" target="_blank" title="xge技术博客" class="twitter">xge</a> </li>
+                      <li> <a href="http://spf13.com" target="_blank" title="spf13 is Steve Francis" class="facebook">spf13</a> </li>
+                      <li> <a href="http://libaier.net" target="_blank" title="Libaier" class="rss">Libaier</a> </li>
+                      <li> <a href="http://read.douban.com/column/195295/" target="_blank" title="100个故事" class="douban">一百个故事</a></li>
+                      <li> <a href="http://zhangwenli.com/blog/" target="_blank" title="羡辙杂俎" class="yangzhe">羡辙杂俎</a></li>
+	      <li> <a href="http://nanshu.wang/" target="_blank" title="Hugo博客" class="hugo">Hugo博客</a></li>
+                    </ul>
+                <span class="icon icon-bubbles"> </span> <span class="subcount"></span> </div>
+            </li>
+                
+            <li id="follow">
+                <span class="title"> 驻留地 </span>
+                <div class="dropdown follow">
+                    <ul class="social">
+                    
+                        <li> <a href="http://weibo.com/2235647167/profile/" target="_blank" title="微博" class="weibo">微博</a> </li>
+                        <li> <a href="http://www.doc88.com/123_echo_" target="_blank" title="道客巴巴" class="doc88">道客巴巴</a> </li>
+                        <li> <a href="http://www.zhihu.com/people/eric-sun-11" target="_blank" title="知乎" class="zhihu">知乎</a> </li>
+                        <li> <a href="http://github.com/sun-friderick/" target="_blank" title="GitHub" class="github">GitHub</a> </li>                         
+                        <li> <a href="http://www.cnblogs.com/sun-frederick/" target="_blank" title="博客园" class="cnblogs"> 博客园</a></li>
+                        <li> <a href="http://instagram.com/ainedrag22" target="_blank" title="Instagram" class="instagram">Instagram</a> </li>
+                        
+                    </ul>
+                <span class="icon icon-rocket"> </span> <span class="subcount"></span> </div>
+            </li>
+            
+            
+        </ul>
+
+	</nav>
+</header>
+
+
+<section id="main">
+  <div>
+   <h1 id="title">Linux的socket编程</h1>
+    
+        <article class="post">
+    <header>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-29-10"> Linux的SOCKET编程详解  </a> </h2>
+      <div class="post-meta">Sun, Nov 29, 2015 </div>
+    </header>
+    <article itemprop="articleBody" id="content">
+    	网络中进程之间如何通信 进 程通信的概念最初来源于单机系统。由于每个进程都在自己的地址范围内运行，为保证两个相互通信的进 程之间既互不干扰又协调一致工作，操作系统为进程通信提供了相应设施，如 UNIX BSD有：管道（pipe）、命名管道（named pipe）软中断信号（signal） UNIX system V有：消息（message）、共享存储区（shared memory）和信号量（semaphore)等. 他们都仅限于用在本机进程之间通信。网间进程通信要解决的是不同主机进程间的相互通信问题（可把同机进程通信看作是其中的特例）。为此，首先要解决的是网间进程标识问题。同一主机上，不同进程可用进程号（process ID）唯一标识。但在网络环境下，各主机独立分配的进程号不能唯一标识该进程。例如，主机A赋于某进程号5，在B机中也可以存在5号进程，因此，“5号进程”这句话就没有意义了。 其次，操作系统支持的网络协议众多，不同协议的工作方式不同，地址格式也不同。因此，网间进程通信还要解决多重协议的识别问题。 其实TCP/IP协议族已经帮我们解决了这个问题，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）。这样利用三元组（ip地址，协议，端口）就可以标识网络的进程了，网络中的进程通信就可以利用这个标志与其它进程进行交互。 使用TCP/IP协议的应用程序通常采用应用编程接口：UNIX BSD的套接字（socket）和UNIX System V的TLI（已经被淘汰），来实现网络进程之间的通信。就目前而言，几乎所有的应用程序都是采用socket，而现在又是网络时代，网络中进程通信是无处不在，这就是我为什么说“一切皆socket”。 什么是TCP/IP、UDP TCP/IP（Transmission Control Protocol/Internet Protocol）即传输控制协议/网间协议，是一个工业标准的协议集，它是为广域网（WANs）设计的。 TCP/IP协议存在于OS中，网络服务通过OS提供，在OS中增加支持TCP/IP的系统调用——Berkeley套接字，如Socket，Connect，Send，Recv等 UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是属于TCP/IP协议族中的一种。如图： TCP/IP协议族包括运输层、网络层、链路层，而socket所在位置如图，Socket是应用层与TCP/IP协议族通信的中间软件抽象层。 Socket是什么 1、 socket套接字： socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。Socket就是该模式的一个实现， socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭）. 说白了Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。 注意：其实socket也没有层的概念，它只是一个facade设计模式的应用，让编程变的更简单。是一个软件抽象层。在网络编程中，我们大量用的都是通过socket实现的。 2、套接字描述符 其实就是一个整数，我们最熟悉的句柄是0、1、2三个，0是标准输入，1是标准输出，2是标准错误输出。0、1、2是整数表示的，对应的FILE *结构的表示就是stdin、stdout、stderr 套接字API最初是作为UNIX操作系统的一部分而开发的，所以套接字API与系统的其他I/O设备集成在一起。特别是，当应用程序要为因特网通信而创建一个套接字（socket）时，操作系统就返回一个小整数作为描述符（descriptor）来标识这个套接字。然后，应用程序以该描述符作为传递参数，通过调用函数来完成某种操作（例如通过网络传送数据或接收输入的数据）。 在许多操作系统中，套接字描述符和其他I/O描述符是集成在一起的，所以应用程序可以对文件进行套接字I/O或I/O读/写操作。 当应用程序要创建一个套接字时，操作系统就返回一个小整数作为描述符，应用程序则使用这个描述符来引用该套接字需要I/O请求的应用程序请求操作系统打开一个文件。操作系统就创建一个文件描述符提供给应用程序访问文件。从应用程序的角度看，文件描述符是一个整数，应用程序可以用它来读写文件。下图显示，操作系统如何把文件描述符实现为一个指针数组，这些指针指向内部数据结构。 对于每个程序系统都有一张单独的表。精确地讲，系统为每个运行的进程维护一张单独的文件描述符表。当进程打开一个文件时，系统把一个指向此文件内部数据结构的指针写入文件描述符表，并把该表的索引值返回给调用者 。应用程序只需记住这个描述符，并在以后操作该文件时使用它。操作系统把该描述符作为索引访问进程描述符表，通过指针找到保存该文件所有的信息的数据结构。 针对套接字的系统数据结构： 1）、套接字API里有个函数socket，它就是用来创建一个套接字。套接字设计的总体思路是，单个系统调用就可以创建任何套接字，因为套接字是相当笼统的。一旦套接字创建后，应用程序还需要调用其他函数来指定具体细节。例如调用socket将创建一个新的描述符条目： 2）、虽然套接字的内部数据结构包含很多字段，但是系统创建套接字后，大多数字字段没有填写。应用程序创建套接字后在该套接字可以使用之前，必须调用其他的过程来填充这些字段。 3、文件描述符和文件指针的区别： 文件描述符：在linux系统中打开文件就会获得文件描述符，它是个很小的正整数。每个进程在PCB（Process Control Block）中保存着一份文件描述符表，文件描述符就是这个表的索引，每个表项都有一个指向已打开文件的指针。 文件指针：C语言中使用文件指针做为I/O的句柄。文件指针指向进程用户区中的一个被称为FILE结构的数据结构。FILE结构包括一个缓冲区和一个文件描述符。而文件描述符是文件描述符表的一个索引，因此从某种意义上说文件指针就是句柄的句柄（在Windows系统上，文件描述符被称作文件句柄）。 详细内容请看linux文件系统：http://blog.csdn.net/hguisu/article/details/6122513#t7 基本的SOCKET接口函数 在生活中，A要电话给B，A拨号，B听到电话铃声后提起电话，这时A和B就建立起了连接，A和B就可以讲话了。等交流结束，挂断电话结束此次交谈。 打电话很简单解释了这工作原理：“open—write/read—close”模式。 服务器端先初始化Socket，然后与端口绑定(bind)，对端口进行监听(listen)，调用accept阻塞，等待客户端连接。在这时如果有个客户端初始化一个Socket，然后连接服务器(connect)，如果连接成功，这时客户端与服务器端的连接就建立了。客户端发送数据请求，服务器端接收请求并处理请求，然后把回应数据发送给客户端，客户端读取数据，最后关闭连接，一次交互结束。 这些接口的实现都是内核来完成。具体如何实现，可以看看linux的内核 4.1、socket()函数 int socket(int protofamily, int type, int protocol);//返回sockfd sockfd是描述符。 socket函数对应于普通文件的打开操作。普通文件的打开操作返回一个文件描述字，而socket()用于创建一个socket描述符（socket descriptor），它唯一标识一个socket。这个socket描述字跟文件描述字一样，后续的操作都有用到它，把它作为参数，通过它来进行一些读写操作。 正如可以给fopen的传入不同参数值，以打开不同的文件。创建socket的时候，也可以指定不同的参数创建不同的socket描述符，socket函数的三个参数分别为： protofamily：即协议域，又称为协议族（family）。常用的协议族有，AF_INET(IPV4)、AF_INET6(IPV6)、AF_LOCAL（或称AF_UNIX，Unix域socket）、AF_ROUTE等等。协议族决定了socket的地址类型，在通信中必须采用对应的地址，如AF_INET决定了要用ipv4地址（32位的）与端口号（16位的）的组合、AF_UNIX决定了要用一个绝对路径名作为地址。 type：指定socket类型。常用的socket类型有，SOCK_STREAM、SOCK_DGRAM、SOCK_RAW、SOCK_PACKET、SOCK_SEQPACKET等等（socket的类型有哪些？）。 protocol：故名思意，就是指定协议。常用的协议有，IPPROTO_TCP、IPPTOTO_UDP、IPPROTO_SCTP、IPPROTO_TIPC等，它们分别对应TCP传输协议、UDP传输协议、STCP传输协议、TIPC传输协议（这个协议我将会单独开篇讨论！）。 注意：并不是上面的type和protocol可以随意组合的，如SOCK_STREAM不可以跟IPPROTO_UDP组合。当protocol为0时，会自动选择type类型对应的默认协议。 当我们调用socket创建一个socket时，返回的socket描述字它存在于协议族（address family，AF_XXX）空间中，但没有一个具体的地址。如果想要给它赋值一个地址，就必须调用bind()函数，否则就当调用connect()、listen()时系统会自动随机分配一个端口。 4.2、bind()函数 正如上面所说bind()函数把一个地址族中的特定地址赋给socket。例如对应AF_INET、AF_INET6就是把一个ipv4或ipv6地址和端口号组合赋给socket。 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen); 函数的三个参数分别为： sockfd：即socket描述字，它是通过socket()函数创建了，唯一标识一个socket。bind()函数就是将给这个描述字绑定一个名字。 addr：一个const struct sockaddr *指针，指向要绑定给sockfd的协议地址。这个地址结构根据地址创建socket时的地址协议族的不同而不同，如ipv4对应的是： struct sockaddr_in { sa_family_t sin_family; /* address family: AF_INET */ in_port_t sin_port; /* port in network byte order */ struct in_addr sin_addr; /* internet address */ }; /* Internet address.
+	</article>
+    <footer>
+        <a href='http://sun-friderick.github.io/post/2015-11-29-10'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+    
+  </div>
+</section>
+
+<aside id="meta"> </aside>
+
+<footer>
+  <div>
+    <p>
+    &copy; 2015 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Frederick Sun.</span></span>
+        Powered by <a href="http://hugo.spf13.com">Hugo</a>.
+        Theme by <a href="http://spf13.com">Steve Francia</a>.
+    </p>
+  </div>
+</footer>
+<script type="text/javascript">
+(function(){var j=function(a,b){return window.getComputedStyle?getComputedStyle(a).getPropertyValue(b):a.currentStyle[b]};var k=function(a,b,c){if(a.addEventListener)a.addEventListener(b,c,false);else a.attachEvent('on'+b,c)};var l=function(a,b){for(key in b)if(b.hasOwnProperty(key))a[key]=b[key];return a};window.fitText=function(d,e,f){var g=l({'minFontSize':-1/0,'maxFontSize':1/0},f);var h=function(a){var b=e||1;var c=function(){a.style.fontSize=Math.max(Math.min(a.clientWidth/(b*10),parseFloat(g.maxFontSize)),parseFloat(g.minFontSize))+'px'};c();k(window,'resize',c)};if(d.length)for(var i=0;i<d.length;i++)h(d[i]);else h(d);return d}})();
+fitText(document.getElementById('title'), 1)
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<style> 
+    BODY {
+        min-height:800px;
+    }
+    #goTopBtn {
+        POSITION: fixed; TEXT-ALIGN: center; LINE-HEIGHT: 50px; WIDTH: 50px; BOTTOM: 35px; HEIGHT: 50px; FONT-SIZE: 12px; CURSOR: pointer; RIGHT: 0px; _position: absolute; _right: auto;
+    }
+</style>
+<script type="text/javascript">
+    function goTopEx() { 
+        var obj = document.getElementById("goTopBtn"); 
+        function getScrollTop() { 
+            return document.documentElement.scrollTop + document.body.scrollTop; 
+        } 
+        function setScrollTop(value) { 
+            if (document.documentElement.scrollTop) { 
+                document.documentElement.scrollTop = value; 
+            } else { 
+                document.body.scrollTop = value; 
+            } 
+        } 
+        window.onscroll = function() { 
+            getScrollTop() > 0 ? obj.style.display = "": obj.style.display = "none"; 
+        } 
+        obj.onclick = function() { 
+            var goTop = setInterval(scrollMove, 10); 
+            function scrollMove() { 
+                setScrollTop(getScrollTop() / 1.1); 
+            if (getScrollTop() < 1) 
+                clearInterval(goTop); 
+            } 
+        } 
+    } 
+</script>
+<div style="display: none" id="goTopBtn"><img src='/media/top.gif' /></div>
+<script type="text/javascript">goTopEx();</script>
+
+
+</body>
+</html>
+
