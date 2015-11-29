@@ -11,10 +11,10 @@
     
     <item>
       <title>gdb调试</title>
-      <link>http://sun-friderick.github.io/post/2015-11-29</link>
+      <link>http://sun-friderick.github.io/post/2015-11-29-7</link>
       <pubDate>Sun, 29 Nov 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-29</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-7</guid>
       <description>
 
 &lt;p&gt;#gdb 跟踪调试命令整理&lt;/p&gt;
@@ -500,10 +500,10 @@ set-user-call-depth &amp;lt;limit&amp;gt;-- 设置用户自定义命令的递归
     
     <item>
       <title>内存泄露</title>
-      <link>http://sun-friderick.github.io/post/2015-11-29</link>
+      <link>http://sun-friderick.github.io/post/2015-11-29-4</link>
       <pubDate>Sun, 29 Nov 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-29</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-4</guid>
       <description>&lt;p&gt;PCIe应用程序调试时，发现程序出现内存泄露，经过自己的摸索，以及向软件同学请教，最终解决了此问题。&lt;/p&gt;
 
 &lt;ol&gt;
@@ -980,10 +980,10 @@ starting debugger
     
     <item>
       <title>gdb多线程调试</title>
-      <link>http://sun-friderick.github.io/post/2015-11-31</link>
-      <pubDate>Sat, 31 Jan 2015 00:30:03 CST</pubDate>
+      <link>http://sun-friderick.github.io/post/2015-11-29-5</link>
+      <pubDate>Thu, 29 Jan 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-31</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-5</guid>
       <description>&lt;p&gt;gdb对于多线程程序的调试有如下的支持：
 　　
 　　线程产生通知：在产生新的线程时, gdb会给出提示信息

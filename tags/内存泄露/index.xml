@@ -11,10 +11,10 @@
     
     <item>
       <title>内存泄露</title>
-      <link>http://sun-friderick.github.io/post/2015-11-29</link>
+      <link>http://sun-friderick.github.io/post/2015-11-29-4</link>
       <pubDate>Sun, 29 Nov 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-29</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-4</guid>
       <description>&lt;p&gt;PCIe应用程序调试时，发现程序出现内存泄露，经过自己的摸索，以及向软件同学请教，最终解决了此问题。&lt;/p&gt;
 
 &lt;ol&gt;

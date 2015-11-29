@@ -7,14 +7,14 @@
     <language>en-us</language>
     <author>Frederick Sun</author>
     <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
-    <updated>Tue, 01 Dec 2015 00:30:03 CST</updated>
+    <updated>Sun, 29 Nov 2015 00:30:03 CST</updated>
     
     <item>
       <title>用gdb调试程序笔记: 以段错误(Segmental fault)</title>
-      <link>http://sun-friderick.github.io/post/2015-11-31</link>
-      <pubDate>Tue, 01 Dec 2015 00:30:03 CST</pubDate>
+      <link>http://sun-friderick.github.io/post/2015-11-29-3</link>
+      <pubDate>Sun, 29 Nov 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-31</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-3</guid>
       <description>&lt;p&gt;用gdb调试程序笔记: 以段错误(Segmental fault)为例[转]&lt;/p&gt;
 
 &lt;p&gt;1.背景介绍

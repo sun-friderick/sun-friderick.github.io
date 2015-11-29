@@ -7,14 +7,14 @@
     <language>en-us</language>
     <author>Frederick Sun</author>
     <copyright>Copyright (c) 2015, Frederick Sun; all rights reserved.</copyright>
-    <updated>Sat, 31 Jan 2015 00:30:03 CST</updated>
+    <updated>Thu, 29 Jan 2015 00:30:03 CST</updated>
     
     <item>
       <title>gdb多线程调试</title>
-      <link>http://sun-friderick.github.io/post/2015-11-31</link>
-      <pubDate>Sat, 31 Jan 2015 00:30:03 CST</pubDate>
+      <link>http://sun-friderick.github.io/post/2015-11-29-5</link>
+      <pubDate>Thu, 29 Jan 2015 00:30:03 CST</pubDate>
       <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2015-11-31</guid>
+      <guid>http://sun-friderick.github.io/post/2015-11-29-5</guid>
       <description>&lt;p&gt;gdb对于多线程程序的调试有如下的支持：
 　　
 　　线程产生通知：在产生新的线程时, gdb会给出提示信息
