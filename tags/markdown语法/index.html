@@ -15,13 +15,13 @@
  
 <meta property="og:type" content="article"/>
 <meta property="og:description" content=""/>
-<meta property="og:title" content="博客 : frederick.sun"/>
+<meta property="og:title" content="Markdown语法 : frederick.sun"/>
 <meta property="og:site_name" content="nanshu wang blog"/>
 <meta property="og:image" content="" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="" />
 <meta property="og:image:height" content="" />
-<meta property="og:url" content="http://sun-friderick.github.io/tags/e58d9ae5aea2/">
+<meta property="og:url" content="http://sun-friderick.github.io/tags/markdowne8afade6b395/">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-12-01"/>
 <meta property="article:modified_time" content="2015-12-01"/>
@@ -32,9 +32,9 @@
 
 
     <base href="http://sun-friderick.github.io/">
-    <title> 博客 - frederick.sun </title>
-    <link rel="canonical" href="http://sun-friderick.github.io/tags/e58d9ae5aea2/">
-    <link href="http://sun-friderick.github.io/tags/%E5%8D%9A%E5%AE%A2/index.xml" rel="alternate" type="application/rss+xml" title="博客" />
+    <title> Markdown语法 - frederick.sun </title>
+    <link rel="canonical" href="http://sun-friderick.github.io/tags/markdowne8afade6b395/">
+    <link href="http://sun-friderick.github.io/tags/markdown%E8%AF%AD%E6%B3%95/index.xml" rel="alternate" type="application/rss+xml" title="Markdown语法" />
 
     <link href='http://fonts.useso.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/static/css/style.css">
@@ -145,43 +145,18 @@
 
 <section id="main">
   <div>
-   <h1 id="title">博客</h1>
+   <h1 id="title">Markdown语法</h1>
     
         <article class="post">
     <header>
-      <h2><a href="http://sun-friderick.github.io/post/2015-11-31">用gdb调试程序笔记: 以段错误(Segmental fault) </a> </h2>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-31">Markdown语法 </a> </h2>
       <div class="post-meta">Tue, Dec 1, 2015 </div>
     </header>
     <article itemprop="articleBody" id="content">
-    	用gdb调试程序笔记: 以段错误(Segmental fault)为例[转] 1.背景介绍 2.程序中常见的bug分类 3.程序调试器(如gdb)有什么用 4.段错误(Segmental fault)介绍 5.gdb调试入门 一、背景介绍 这个笔记主要介绍开源的程序调试器(gdb)的入门知识，目的是使unix/linux环境的编程新手能够快速学会使用gdb调试程序的方法，同时也是对我使用gdb的一个经验总结。 本文假设你能使用简单的unix/linux命令并能用gcc(GNU C Compiler， GNU C 语言编译器)编译程序，当然有编程经验更好。：） 为帮助你理解和操作，我将使用我遇到过的真实事例来演示使用gdb调试有缺陷(bug)的程序过程，你看过这篇笔记后能自己动手练一下最好。 二、程序中常见的缺陷(bug)分类 程序(编译型程序，perl、python，php等脚本程序除外)中常见的bug通常分为两类： 语法错误和逻辑错误，或者编译时错误和运行是错误。 语法错误(编译时错误)是我们在编写源代码时没有按照相关的语言规范(如ANSI C标准)导致编译时出错，编译失败。这种错误的检查和调试一般是比较简单和直接的：因为编译器(如gcc)通常会明确告诉你错误的原因和大致的范围(注意不一定是准确的错误行)。例如下面的一个简单demo.c程序的第8行缺失了一个分号，gcc指示第10行前少了一个分号。这就是一个典型的语法错误。 geekard@geekard:~/test$ cat -n demo.c 1 #include 2 3 int 4 main(){ 5 6 int n; 7 8 printf(&ldquo;the n is:%c&rdquo;, n) 9 10 return 0; 11 } geekard@geekard:~/test$ gcc demo.c -o demo demo.c: In function ‘main’:demo.c:10: error: expected ‘;’ before ‘return’ 添加了分号再编译一次，这下没有出现问题，运行程序的结果如下： geekard@geekard:~/test$ ./demo the n is:6680564 另外注意这个程序中的变量n，我定义其为整型变量但并没有对其初始化赋值，这就是一个逻辑错误：编译器不会指示这个错误，只有在实际运行或测试时才能发现。 这个小程序只是一个故意的编造，但在实际编程中无论你多高明，经验多丰富，难免会在此处犯些小错误(想想吧：当你需要编写或维护一个成千上万行的代码，这种小概率事件就是确定事件了，：）)，而通常这些错误又是那么的浅显而易于消除，但是手工“除虫”（debug），往往是效率低下且让人厌烦的，本文将就&rdquo;段错误&rdquo;这个内存访问越界的错误谈谈如何使用gdb快速定位这些&rdquo;段错误&rdquo;的语句。 三、程序调试器(如gdb)有什么用？(参考自gdb的在线帮助手册, 可用命令：man gdb， 或 info gdb查看) 程序调试器(如gdb)的主要目的是让你能够查看正在执行的程序其内部特性(如执行流程、变量值、函数调用、堆栈等)，也可以程序崩溃时刻或以前都发生了什么。 Gdb对程序的调试能力主要体现在以下四个方面(当然不止这些): .
+    	Markdown语法 #1、标题： 两种标题的语法，Setext 和 atx 形式（共有六级）： 第一种：Setext 形式是用底线的形式，通过在文字下方添加“=”和“-”，他们分别表示一级标题和二级标题。 一级标题 二级标题 第二种：Atx 形式，在文字开头加上 “#”，通过“#”数量表示几级标题。（一共只有1~6级标题，1级标题字体最大） 一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 #2、列表： 有序列表：使用数字后面跟上句号。（还要有空格） 1. 有序一 2. 有序二 3. 有序三 注意：在“1.”与文本之间有空格； 无序列表：在文字开头添加(, +, and -)实现无序列表。但是要注意在(, +, and -)和文字之间需要添加空格。（建议：一个文档中只是用一种无序列表的表示方式） - 无序一 - 无序二 - 无序三 无序一 无序二 无序三 Red Green Blue 注意：在“-”或“*”与文本之间有空格； #3、引用： 区块引言可以有级别（例如：引言内的引言），只要根据级别加上不同数量的 &gt; &gt; 引用 &gt;&gt; 引用 &gt;&gt;&gt;&gt; 引用 注意： 符号“&gt;”与文本之间需要有空格； #4、字体强调： 星号（*）和底线（_）作为标记强调字词的符号 斜体：将需要设置为斜体的文字两端使用1个“ * ”或者“ _ ”夹起来 这是斜体字 这也是斜体字 粗体：将需要设置为斜体的文字两端使用2个“ * ”或者“ _ ”夹起来 这是粗体字 这也是粗体字 注意： 在“*”或“**”与文本之间是没有空格的； #5、代码：两种方式： 第一种：简单文字出现一个代码框，使用“”字符。（不是单引号而是左上角的ESC下面~中的） 行内代码： 这里是行内代码int a = 123456;`; 独立代码段： #include &lt;stdio.h&gt; int main(int argc, char** argv) { int a = 12345; int i = 0； for(i = 10; i &gt;= 0; i--) a = a + i; if(a &gt;= 20) printf(&quot;a= [%d]\n&quot;, a); return 0; } 第二种：大片文字需要实现代码框。使用Tab或四个空格。 #include &lt;stdio.h&gt; int main(int argc, char** argv) { int a = 12345; int i = 0； for(i = 10; i &gt;= 0; i--) a = a + i; if(a &gt;= 20) printf(&quot;a= [%d]\n&quot;, a); return 0; } #6、链接（Links）： 有两种方式，实现链接，分别为内联方式和引用参考方式，链接的文字都是用 [方括号] 来标记。 内联方式： This is an inline link.
 	</article>
     <footer>
         <a href='http://sun-friderick.github.io/post/2015-11-31'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-    
-        <article class="post">
-    <header>
-      <h2><a href="http://sun-friderick.github.io/post/2015-01-31">Hugo静态网站生成器中文教程 </a> </h2>
-      <div class="post-meta">Sat, Jan 31, 2015 </div>
-    </header>
-    <article itemprop="articleBody" id="content">
-    	<h1 id="前言:d605f9890f3528aea462ac7515ece633">前言</h1>
-
-<p><a href="http://gohugo.io">Hugo</a>是什么？官方文档是这样介绍它的：</p>
-
-<blockquote>
-<p>Hugo is a general-purpose website framework. Technically speaking, Hugo is a static site generator.</p>
-</blockquote>
-
-<p>Hugo是一种通用的网站框架。严格来说，Hugo应该被称作静态网站生成器。</p>
-
-<p>静态网站生成器从字面上来理解，就是将你的内容生成静态网站。所谓“静态”的含义其实反映在网站页面的生成的时间。一般的web服务器（WordPress, Ghost, Drupal等等）在收到页面请求时，需要调用数据库生成页面（也就是HTML代码），再返回给用户请求。而静态网站则不需要在收到请求后生成页面，而是在整个网站建立起之前就将所有的页面全部生成完成，页面一经生成便称为静态文件，访问时直接返回现成的静态页面，不需要数据库的参与。</p>
-
-	</article>
-    <footer>
-        <a href='http://sun-friderick.github.io/post/2015-01-31'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
