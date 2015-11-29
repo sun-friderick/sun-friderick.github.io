@@ -15,7 +15,7 @@
  
 <meta property="og:type" content="article"/>
 <meta property="og:description" content=""/>
-<meta property="og:title" content="Hugo静态网站生成器中文教程 : frederick.sun"/>
+<meta property="og:title" content="用gdb调试程序笔记: 以段错误(Segmental fault) : frederick.sun"/>
 <meta property="og:site_name" content="nanshu wang blog"/>
 <meta property="og:image" content="" />
 <meta property="og:image:type" content="image/jpeg" />
@@ -39,7 +39,7 @@
 
 
     <base href="http://sun-friderick.github.io/">
-    <title> Hugo静态网站生成器中文教程 - frederick.sun </title>
+    <title> 用gdb调试程序笔记: 以段错误(Segmental fault) - frederick.sun </title>
     <link rel="canonical" href="http://sun-friderick.github.io/post/2015-01-31">
     
 
@@ -152,7 +152,7 @@
 
 
 <section id="main">
-  <h1 itemprop="name" >Hugo静态网站生成器中文教程</h1>
+  <h1 itemprop="name" >用gdb调试程序笔记: 以段错误(Segmental fault)</h1>
   
 
 <aside id="meta">
@@ -180,394 +180,327 @@
 
 </aside>
 
-<meta itemprop="wordCount" content="571">
+<meta itemprop="wordCount" content="1019">
 <meta itemprop="datePublished" content="2015-01-31">
 <meta itemprop="url" content="http://sun-friderick.github.io/post/2015-01-31">
 
 
   <div>
         <article itemprop="articleBody" id="content">
-           
+           <p>用gdb调试程序笔记: 以段错误(Segmental fault)为例[转]</p>
 
-<h1 id="前言:d605f9890f3528aea462ac7515ece633">前言</h1>
+<p>1.背景介绍
+2.程序中常见的bug分类
+3.程序调试器(如gdb)有什么用
+4.段错误(Segmental fault)介绍
+5.gdb调试入门</p>
 
-<p><a href="http://gohugo.io">Hugo</a>是什么？官方文档是这样介绍它的：</p>
+<p>一、背景介绍
+这个笔记主要介绍开源的程序调试器(gdb)的入门知识，目的是使unix/linux环境的编程新手能够快速学会使用gdb调试程序的方法，同时也是对我使用gdb的一个经验总结。
+本文假设你能使用简单的unix/linux命令并能用gcc(GNU C Compiler， GNU C 语言编译器)编译程序，当然有编程经验更好。：）
+为帮助你理解和操作，我将使用我遇到过的真实事例来演示使用gdb调试有缺陷(bug)的程序过程，你看过这篇笔记后能自己动手练一下最好。</p>
 
-<blockquote>
-<p>Hugo is a general-purpose website framework. Technically speaking, Hugo is a static site generator.</p>
-</blockquote>
+<p>二、程序中常见的缺陷(bug)分类
+程序(编译型程序，perl、python，php等脚本程序除外)中常见的bug通常分为两类： 语法错误和逻辑错误，或者编译时错误和运行是错误。
+语法错误(编译时错误)是我们在编写源代码时没有按照相关的语言规范(如ANSI C标准)导致编译时出错，编译失败。这种错误的检查和调试一般是比较简单和直接的：因为编译器(如gcc)通常会明确告诉你错误的原因和大致的范围(注意不一定是准确的错误行)。例如下面的一个简单demo.c程序的第8行缺失了一个分号，gcc指示第10行前少了一个分号。这就是一个典型的语法错误。
+geekard@geekard:~/test$ cat -n demo.c
+     1    #include<stdio.h>
+     2<br />
+     3    int
+     4    main(){
+     5<br />
+     6        int n;
+     7<br />
+     8        printf(&ldquo;the n is:%c&rdquo;, n)
+     9<br />
+    10        return 0;
+    11    }
+geekard@geekard:~/test$ gcc demo.c -o demo
+demo.c: In function ‘main’:demo.c:10:
+error: expected ‘;’ before ‘return’
+添加了分号再编译一次，这下没有出现问题，运行程序的结果如下：
+geekard@geekard:~/test$ ./demo
+the n is:6680564
+另外注意这个程序中的变量n，我定义其为整型变量但并没有对其初始化赋值，这就是一个逻辑错误：编译器不会指示这个错误，只有在实际运行或测试时才能发现。
+这个小程序只是一个故意的编造，但在实际编程中无论你多高明，经验多丰富，难免会在此处犯些小错误(想想吧：当你需要编写或维护一个成千上万行的代码，这种小概率事件就是确定事件了，：）)，而通常这些错误又是那么的浅显而易于消除，但是手工“除虫”（debug），往往是效率低下且让人厌烦的，本文将就&rdquo;段错误&rdquo;这个内存访问越界的错误谈谈如何使用gdb快速定位这些&rdquo;段错误&rdquo;的语句。</p>
 
-<p>Hugo是一种通用的网站框架。严格来说，Hugo应该被称作静态网站生成器。</p>
+<p>三、程序调试器(如gdb)有什么用？(参考自gdb的在线帮助手册, 可用命令：man gdb， 或 info gdb查看)</p>
 
-<p>静态网站生成器从字面上来理解，就是将你的内容生成静态网站。所谓“静态”的含义其实反映在网站页面的生成的时间。一般的web服务器（WordPress, Ghost, Drupal等等）在收到页面请求时，需要调用数据库生成页面（也就是HTML代码），再返回给用户请求。而静态网站则不需要在收到请求后生成页面，而是在整个网站建立起之前就将所有的页面全部生成完成，页面一经生成便称为静态文件，访问时直接返回现成的静态页面，不需要数据库的参与。</p>
+<p>程序调试器(如gdb)的主要目的是让你能够查看正在执行的程序其内部特性(如执行流程、变量值、函数调用、堆栈等)，也可以程序崩溃时刻或以前都发生了什么。
+Gdb对程序的调试能力主要体现在以下四个方面(当然不止这些):<br />
+. 启动你的程序，可以带任何影响其功能(或称行为)的参数。<br />
+. 能够使你的程序在指定条件下在指定的地方(断点)停止运行。<br />
+. 当你的程序在断点处停止时，你可以查看已执行的结果(如变量的值，函数之间的调用情况，执行到那一行代码，下一步该执行哪行代码)<br />
+. 改变你的程序中，你可以实验这种改变所带来的影响(如bug消除了，或者情况变得更糟糕)</p>
 
-<p>采用静态网站的维护也相当简单，实际上你根本不需要什么维护，完全不用考虑复杂的运行时间，依赖和数据库的问题。再有也不用担心安全性的问题，没有数据库，网站注入什么的也无从下手。</p>
+<p>使用gdb，你可以调试C，C++，以及Modula-2语言编写的程序。</p>
 
-<p>静态网站最大好处就是访问快速，不用每次重新生成页面。当然，一旦网站有任何更改，静态网站生成器需要重新生成所有的与更改相关的页面。然而对于小型的个人网站，项目主页等等，网站规模很小，重新生成整个网站也是非常快的。Hugo在速度方面做得非常好，Dan Hersam在他这个<a href="https://www.udemy.com/build-static-sites-in-seconds-with-hugo/">Hugo教程</a>里提到，5000篇文章的博客，Hugo生成整个网站只花了6秒，而很多其他的静态网站生成器则需要几分钟的时间。我的博客目前文章只有几十篇，用Hugo生成整个网站只需要0.1秒。官方文档提供的数据是每篇页面的生成时间不到1ms。</p>
+<p>四、段错误(Segmental fault)介绍
+在用C/C++语言写程序的时侯，内存管理的绝大部分工作都是需要我们来做的。实际上，内存管理是一个比较繁琐的工作，所以像java和c#等语言采用了内存自动回收机制，避免了内存泄漏。如果程序试图往内存地址0处写东西时，内核就会向其发送段错误信号，如果程序没有捕获该信号，默认的操作时内核终止该程序的运行，例如我写的一个myls程序就遭遇了这种情况：
+luck@geekard:~/codes/12.21$ ./myls -ld .
+longlist 1, typelist 0, dirlist 1, filename .
+Segmentation fault
+luck@geekard:~/codes/12.21$</p>
 
-<p>我认为对于个人博客来说，应该将时间花在内容上而不是各种折腾网站。Hugo会将Markdown格式的内容和设置好模版一起，生成漂亮干净的页面。挑选折腾好一个喜爱的模版，在Sublime Text里用Markdown写博客，再敲一行命令生成同步到服务器就OK了。整个体验是不是非常优雅简单还有点geek的味道呢？</p>
+<p>常见的段错误原因如下：
+1）往受到系统保护的内存地址写数据有些内存是内核占用的或者是其他程序正在使用，为了保证系统正常工作，所以会受到系统的保护，而不能任意访问
+.2）内存越界(数组越界，变量类型不一致等)
+下面我以上面的myls程序出现的错误为例介绍用gdb进行调试的方法和过程。</p>
 
-<p>Hugo是用<a href="http://golang.org/">Go语言</a>写的，为什么使用Go，作者<a href="http://spf13.com">Steve Francia</a>的原话是：</p>
+<p>五、gdb调试入门</p>
 
-<blockquote>
-<p>I looked at existing static site generators like Jekyll, Middleman and nanoc. All had complicated dependencies to install and took far longer to render my blog with hundreds of posts than I felt was acceptable. I wanted a framework to be able to get rapid feedback while making changes to the templates, and the 5+-minute render times was just too slow. In general, they were also very blog minded and didn’t have the ability to have different content types and flexible URLs.</p>
+<p>5.1 调试前的准备
+我们首先要启动linux内核提供核心转储(core dump)机制：当程序中出现内存操作错误时，会发生崩溃并产生核心文件（core文件）。使用GDB可以对产生的核心文件进行分析，找出程序是在什么时候崩溃的和在崩溃之前程序都做了些什么。
+首先，你的Segmentation Fault错误必须要能重现（废话…）。
+然后，依参照下面的步骤来操作：
+1）无论你是用Makefile来编译，还是直接在命令行手工输入命令来编译，都应该加上 -g 选项。如：
+luck@geekard:~/codes/12.21$ ls
+myls-0.0.c  myls-1.0.c  myls-2.0.c
+luck@geekard:~/codes/12.21$ gcc -g -o myls myls-0.0.c
+luck@geekard:~/codes/12.21$ ls
+myls  myls-0.0.c  myls-1.0.c  myls-2.0.c
+加了-g选项后，gcc就会在生成的可执行文件(这里-o myls表示输出(output)的可执行文件名时myls)里添加一些调试符号(debugging symbols)，有了这些调试符号后就可以在稍后用gdb调试时列出执行的程序的C源代码了。-g选项增大了文件体积，一般只是在刚开发出的程序调试时使用，当确定无误编译出实际使用的可执行文件时就不需要-g选项了。
+2）一般来说，在默认情况下，在程序崩溃时，core文件是不生成的（很多Linux发行版在默认时禁止生成核心文件）。所以，你必须修改这个默认选项，在命令行执行：
+ulimit -c unlimited     //unlimited 表示不限制生成的core文件的大小。
+3）运行你的程序，不管用什么方法，使之重现Segmentation Fault错误。
+luck@geekard:~/codes/12.21$ ./myls -ld .
+longlist 1, typelist 0, dirlist 1, filename .
+Segmentation fault (core dumped)
+4）这时，你会发现在你程序同一目录下，生成了一个文件名为 core的文件，即核心文件。
+luck@geekard:~/codes/12.21$ ls
+core  myls  myls-0.0.c  myls-1.0.c  myls-2.0.cluck@geekard:~/codes/12.21$
+5）用GDB调试它,在命令行执行：
+luck@geekard:~/codes/12.21$ gdb ./myls   或者先启动gdb然后在gdb命令提示符中输入这两个文件：</p>
 
-<p>I wanted to develop a fast and full-featured website framework without dependencies. The Go language seemed to have all of the features I needed in a language. I began developing Hugo in Go and fell in love with the language. I hope you will enjoy using (and contributing to) Hugo as much as I have writing it.</p>
-</blockquote>
+<p>luck@geekard:~/codes/12.21$ gdb  //不带参数启动gdb调试程序
+GNU gdb (GDB) 7.2-ubuntu
+Copyright &copy; 2010 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <a href="http://gnu.org/licenses/gpl.html">http://gnu.org/licenses/gpl.html</a>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type &ldquo;show copying&rdquo;
+and &ldquo;show warranty&rdquo; for details.
+This GDB was configured as &ldquo;i686-linux-gnu&rdquo;.
+For bug reporting instructions, please see:
+<a href="http://www.gnu.org/software/gdb/bugs/">http://www.gnu.org/software/gdb/bugs/</a>.
+(gdb) file ./myls                    //输入file命令和你的可执行文件名和路径，这里为当前目录下的myls文件
+Reading symbols from /home/luck/codes/12.21/myls&hellip;done.
+(gdb) run -ld ./                       //带参数(这里为 -ld ./)运行r(run)程序，这和在bash命令行上执行：./myls -ld ./效果时一致的。
+Starting program: /home/luck/codes/12.21/myls -ld ./
+longlist 1, typelist 0, dirlist 1, filename ./            //myls程序的输出</p>
 
-<p>总结他的一下大意：</p>
+<p>Program received signal SIGSEGV, Segmentation fault.       //出错后退出
+0x0016e78f in vfprintf () from /lib/libc.so.6
+(gdb)
+从这里我们还发现进程是由于收到了SIGSEGV信号而结束的。通过进一步的查阅文档(man 7 signal)，我们知道SIGSEGV默认handler的动作是打印”段错误&rdquo;的出错信息，并产生Core文件。
+查看一下我的当前目录，果然有core文件。</p>
 
-<ul>
-<li>吐槽脸：Jekyll以及那一堆静态网站生成器安装麻烦（依赖多），速度又慢，内容类型单一，url死板</li>
-<li>挽袖子状：Go挺萌的符合我对语言的一切幻想，就用它重写一个吧</li>
-</ul>
+<p>luck@geekard:~/codes/12.21$ ls
+core  myls  myls-0.0.c  myls-1.0.c  myls-2.0.c</p>
 
-<p>我为啥用Hugo？除了以上提到的原因，很重要的一点是<a href="http://gohugo.io">Hugo主页</a>很漂亮，看了一圈静态网站生成器的主页，一眼就被Hugo的美到了，首页的照片里的那个格子小本子应该是<a href="http://www.paperthinks.com">Paperthinks</a>，我正好也在用，有种刚好看到自己桌面的感觉。</p>
+<p>下面我们就用刚才生成的分段错误产生的核心转储文件（core）再次调试程序。接着上一步的(gdb) 提示符，输入以下命令：</p>
 
-<h1 id="安装:d605f9890f3528aea462ac7515ece633">安装</h1>
+<p>(gdb) core core       //输入core命令和分段错误产生的核心转储文件，这里为当前目录下的core文件
+A program is being debugged already.  Kill it? (y or n) y   //按y，重新调试
+[New Thread 24884]
+warning: Can&rsquo;t read pathname for load map: Input/output error.
+Reading symbols from /lib/libc.so.6&hellip;(no debugging symbols found)&hellip;done.
+Loaded symbols for /lib/libc.so.6
+Reading symbols from /lib/ld-linux.so.2&hellip;(no debugging symbols found)&hellip;done.
+Loaded symbols for /lib/ld-linux.so.2</p>
 
-<p>如果说速度快是Hugo的第一大优点，那么安装简单应该就是Hugo的第二大优点。对于Mac用户，没有brew的话先安装brew，在命令行里敲：</p>
+<p>Core was generated by `./myls -ld .&lsquo;.              //core文件记录了发生错误的程序执行的命令行参数
+Program terminated with signal 11, Segmentation fault.
+#0  0x002bb78f in vfprintf () from /lib/libc.so.6  //core文件记录了发生错误时程序的退出状态
+(gdb)</p>
 
-<pre><code>$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<p>从标号为0的行我们并不能看出程序到底在哪出错,所以下一步需要确定发生错误前程序中函数之间的调用关系
+(gdb) backtrace    //显示程序的堆栈信息
+#0  0x0014f78f in vfprintf () from /lib/libc.so.6
+#1  0x0016f4dc in vsprintf () from /lib/libc.so.6
+#2  0x00157b4b in sprintf () from /lib/libc.so.6
+#3  0x08048c56 in finalprt (file=0x8a9b02b &ldquo;..&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:261
+#4  0x080487c3 in detailList (file=0xbfab684d &ldquo;.&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:132
+#5  0x08048712 in main (argc=3, argv=0xbfab4804) at myls-0.0.c:89
+(gdb)</p>
+
+<p>可以看出myls程序的函数调用关系为：
+main() &mdash;&gt; detailList() &mdash;&gt; finalprt
+然后在标号为0-2的行进入了系统的C库函数，所以产生错误的可能在标号3、4、5指明的函数中。
+我们先看一下最后调用finalprt()函数时可能发生错误的代码行：</p>
+
+<p>(gdb) frame 3    //上面以#开头的行称为帧(frame)，这里指定查看第3帧
+#3  0x08048c56 in finalprt (file=0x8a9b02b &ldquo;..&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:261
+261                    sprintf(str, &ldquo;%c%d    %d,%d  %d  %d  %s&rdquo;, filetype, permission, uid, gid, size, mdate, file);</p>
+
+<p>可以看到在调用sprintf()函数时可能发生了分段错误(由非法引用内存引起)，而sprintf()的原型为： int sprintf(char *str, const char *format, &hellip;);
+最有可能引起错误的地方是其第一个参数：char *str,一个指向字符串数组的指针，我们先把疑点放在这，接下来看一下函数之间相互调用时传递的参数值和函数的内部变量值：
+(gdb) backtrace  full  //full参数表示完全显示函数之间相互调用时传递的参数值和函数的内部变量值
+#0  0x0014f78f in vfprintf () from /lib/libc.so.6
+No symbol table info available.
+#1  0x0016f4dc in vsprintf () from /lib/libc.so.6
+No symbol table info available.
+#2  0x00157b4b in sprintf () from /lib/libc.so.6
+No symbol table info available.
+#3  0x08048c56 in finalprt (file=0x8a9b02b &ldquo;..&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:261
+        str = 0x4d11faec <Address 0x4d11faec out of bounds>
+        flag = 65
+#4  0x080487c3 in detailList (file=0xbfab684d &ldquo;.&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:132
+        ptr = 0x8048e44 &ldquo;longlist %d, typelist %d, dirlist %d, filename %s\n&rdquo;
+        dirp = 0x8a9b008
+        direntp = 0x8a9b020
+#5  0x08048712 in main (argc=3, argv=0xbfab4804) at myls-0.0.c:89
+        file = 0xbfab684d &ldquo;.&rdquo;
+        ptr = 0x8048d30 &ldquo;U\211\345WVS\350O&rdquo;
+        i = 3
+        j = 3
+        longlist = 1
+        dirlist = 1
+        typelist = 0
+请注意序号3中的内部变量str的值 <Address 0x4d11faec out of bounds>，这表示发生了数组越界，难怪发生了段错误！
+现在我们找到原因了：finalprt()中的第261行调用函数sprintf()时向其传递的第一个参数str发生里越界存取，于是内核终止程序的运行。</p>
+
+<p>下面我们要验证这个判断：在261处设置一个断点，程序运行到断点后单步执行，观察是否会发生错误。</p>
+
+<p>(gdb) stop                    //停止当前调试
+(gdb) break 261              //在第261行设置一个断点
+Breakpoint 1 at 0x8048bf1: file myls-0.0.c, line 261.
+(gdb) run  -ld ./           //带参数运行程序(myls)
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y   //当然yes</p>
+
+<p>Starting program: /home/luck/codes/12.21/myls -ld ./
+longlist 1, typelist 0, dirlist 1, filename ./</p>
+
+<p>Breakpoint 1, finalprt (file=0x804c02b &ldquo;..&rdquo;, dirlist=1, typelist=0, longlist=1)   //可以看到程序在第261行停止
+    at myls-0.0.c:261
+261                    sprintf(str, &ldquo;%c%d    %d,%d  %d  %d  %s&rdquo;, filetype, permission, uid, gid, size, mdate, file);</p>
+
+<p>(gdb) where                                //显示目前函数之间的调用情况与breaktrace命令功能相似
+#0  finalprt (file=0x804c02b &ldquo;..&rdquo;, dirlist=1, typelist=0, longlist=1)
+    at myls-0.0.c:261
+#1  0x080487c3 in detailList (file=0xbffff830 &ldquo;./&rdquo;, dirlist=1, typelist=0,
+    longlist=1) at myls-0.0.c:132
+#2  0x08048712 in main (argc=3, argv=0xbffff6e4) at myls-0.0.c:89
+(gdb) printf &ldquo;%d\n&rdquo;,filetype             //打印处函数中的变量filetype的值
+100
+(gdb) list                                //列出断点处前后的相关代码
+256    //            if(filetype == &rsquo;d&rsquo;)
+257                    sprintf(str, &ldquo;%s\n&rdquo;, file);
+258                break;
+259            case 0101:
+260    //            if(filetype == &rsquo;d&rsquo;)
+261                    sprintf(str, &ldquo;%c%d    %d,%d  %d  %d  %s&rdquo;, filetype, permission, uid, gid, size, mdate, file);
+262                break;
+263            case 0110:
+264    //            if(filetype == &rsquo;d&rsquo;)
+265                    sprintf(str, &ldquo;%s%c&rdquo;, file, filetype);
+(gdb) n                      //然后单步执行代码,立即发生了错误</p>
+
+<p>Program received signal SIGSEGV, Segmentation fault.
+0x0016e78f in vfprintf () from /lib/libc.so.6</p>
+
+<p>可见在线调试验证了我们的假设，的确时261行的sprintf语句有问题,下面我们看一下261所在的函数finalprt()中变量str的类型
+(gdb) list finalprt    //列出函数finalprt()入口附近的源代码
+225        *mdate_s = fstat.st_mtime;
+226        return 0;
+227    }
+228<br />
+229    /<em>this function prints all the information</em>/
+230    static char *finalprt(char *file, int dirlist, int typelist, int longlist){
+231<br />
+232        char *str;
+233        int flag = 0000;
+234<br />
+(gdb)
+注意第232行的变量定义:str被错误的定义个指向char的指针，而sprintf()的第一个参数要求为一字符型数组的首地址,所以sprintf()调用时会发生内存越界的错误。</p>
+
+<p>接着考虑下去，以前用windows系统下的ie的时侯，有时打开某些网页，会出现“运行时错误”，这个时侯如果恰好你的机器上又装有windows的编译器的话，他会弹出来一个对话框，问你是否进行调试，如果你选择是，编译器将被打开，并进入调试状态，开始调试。
+Linux下如何做到这些呢？
+我们可以在要调试的程序中定义一个分段错误信号(SIGSEGV)的处理函数(handler),在该函数中中调用gdb，这样当段错误发生时程序就会自动启动gdb进行调试，一个简单的示例代码如下:</p>
+
+<p>/**
+*段错误时启动调试
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <string.h></p>
+
+<p>void
+dump(int signo){</p>
+
+<pre><code>    char buf[1024];
+    char cmd[1024];
+    FILE *fh;
+
+    snprintf(buf, sizeof(buf), &quot;/proc/%d/cmdline&quot;, getpid());  //取得进程的命令行文件地址
+    if(!(fh = fopen(buf, &quot;r&quot;)))    //打开该文件
+            exit(0);
+    if(!fgets(buf, sizeof(buf), fh)) //将其内容读到buf数组中
+            exit(0);
+    fclose(fh);
+    if(buf[strlen(buf) - 1] == '\n') //删除独到的字符串中最后的还行符并保证字符串以空字符结尾
+            buf[strlen(buf) - 1] = '\0';
+    snprintf(cmd, sizeof(cmd), &quot;gdb %s %d&quot;, buf, getpid());  //合并命令行参数
+    system(cmd);               //执行cmd字符窜 代表的命令
+
+    exit(0);
 </code></pre>
 
-<p>然后再敲一行安装Hugo:</p>
+<p>}</p>
 
-<pre><code>$ brew new Hugo
+<p>void
+dummy_function (void){       //测试函数</p>
+
+<pre><code>    unsigned char *ptr = 0x00;
+    *ptr = 0x00;        //向内存中0x00地址写数据，产生段错误
 </code></pre>
 
-<p>当然你也可以在<a href="https://github.com/spf13/hugo/releases">这里</a>直接下载对应系统的binary文件，解压就行了。</p>
+<p>}</p>
 
-<h1 id="了解hugo:d605f9890f3528aea462ac7515ece633">了解Hugo</h1>
+<p>int
+main (void)
+{
+        signal(SIGSEGV, &amp;dump);  //捕获信号SIGSEGV，当接收到内核发送的SIGSEGV信号时调用处理函数dump()
+        dummy_function ();</p>
 
-<p>首先建立自己的网站，mysite是网站的路径</p>
-
-<pre><code>$ hugo new site mysite
+<pre><code>    return 0;
 </code></pre>
 
-<p>然后进入该路径</p>
-
-<pre><code>$ cd mysite
-</code></pre>
-
-<p>在该目录下你可以看到以下几个目录和<code>config.toml</code>文件</p>
-
-<pre><code> ▸ archetypes/ 
- ▸ content/
- ▸ layouts/
- ▸ static/
-   config.toml
-</code></pre>
-
-<p><code>config.toml</code>是网站的配置文件，包括<code>baseurl</code>, <code>title</code>, <code>copyright</code>等等网站参数。</p>
-
-<p>这几个文件夹的作用分别是：</p>
-
-<ul>
-<li>archetypes：包括内容类型，在创建新内容时自动生成内容的配置</li>
-<li>content：包括网站内容，全部使用markdown格式</li>
-<li>layouts：包括了网站的模版，决定内容如何呈现</li>
-<li>static：包括了css, js, fonts, media等，决定网站的外观</li>
-</ul>
-
-<p>Hugo提供了一些完整的主题可以使用，下载这些主题：</p>
-
-<pre><code>$ git clone --recursive https://github.com/spf13/hugoThemes themes
-</code></pre>
-
-<p>此时现成的主题存放在<code>themes/</code>文件夹中。</p>
-
-<p>现在我们先熟悉一下Hugo，创建新页面：</p>
-
-<pre><code>$ hugo new about.md
-</code></pre>
-
-<p>进入<code>content/</code>文件夹可以看到，此时多了一个markdown格式的文件<code>about.md</code>，打开文件可以看到时间和文件名等信息已经自动加到文件开头，包括创建时间，页面名，是否为草稿等。</p>
-
-<pre><code>---
-+++
-date = &quot;2015-02-01T18:19:54+08:00&quot;
-draft = true
-title = &quot;about&quot;
-
-+++
-
-# 关于我
-- 2010  HR@RUC
-- 2014  CS@ICT, CAS
-</code></pre>
-
-<p>我在页面中加入了一些内容，然后运行Hugo:</p>
-
-<pre><code>$ hugo server -t hyde --buildDrafts
-</code></pre>
-
-<p><code>-t</code>参数的意思是使用hyde主题渲染我们的页面，注意到<code>about.md</code>目前是作为草稿，即<code>draft</code>参数设置为<code>true</code>，运行Hugo时要加上<code>--buildDrafts</code>参数才会生成被标记为草稿的页面。
-在浏览器输入localhost:1313，就可以看到我们刚刚创建的页面。</p>
-
-
-<figure >
-    
-        <img src="/media/hugo-server-1.png" alt="hugo-server-1" />
-    
-    
-</figure>
-
-
-
-<p>注意观察当前目录下多了一个文件夹<code>public/</code>，这里面是Hugo生成的整个静态网站，如果使用Github pages来作为博客的Host，你只需要将<code>public/</code>里的文件上传就可以，这相当于是Hugo的输出。</p>
-
-<h1 id="主题选择:d605f9890f3528aea462ac7515ece633">主题选择</h1>
-
-<p>进入<code>themes/hyde</code>文件夹，可以看到熟悉的文件夹名，和主题相关的文件主要是在<code>layouts/</code>和<code>static/</code>这两个文件内，选择好一个主题后，可以将<code>themes/</code>中的文件夹直接复制到<code>mysite/</code>目录下，覆盖原来的<code>layouts/</code>, <code>static/</code>文件夹，此时直接使用\$Hugo server就可以看到主题效果，修改主题也可以直接修改其中的css, js, html等文件。</p>
-
-<p>我的博客模版是在Hugo作者spf13的<a href="http://spf13.com">博客</a>基础上修改的。第一步，先去他的博客网站源码<a href="https://github.com/spf13/spf13.com">主页</a>把整个项目clone下来</p>
-
-<pre><code>$ git clone git@github.com:spf13/spf13.com.git
-</code></pre>
-
-<p>把项目中的<code>static/</code>和<code>layouts/</code>文件复制到自己网站的目录下替换原来的文件夹。再次运行Hugo:</p>
-
-<pre><code>$ hugo server --buildDrafts -w
-</code></pre>
-
-<p>这次没有选择主题，如果选择了主题会将当前的主题覆盖掉。参数<code>-w</code>意味监视watch，此时如果修改了网站内的信息，会直接显示在浏览器的页面上，不需要重新运行\$hugo server，方便我们进行修改。这是采用了spf13主题的页面：</p>
-
-
-<figure >
-    
-        <img src="/media/hugo-server-2.png" alt="hugo-server-2" />
-    
-    
-</figure>
-
-
-
-<p>我们尝试在他的主题基础上修改，找到<code>/layouts/partials/subheader.html</code>文件:</p>
-
-<pre><code class="language-html">&lt;header id=&quot;header&quot;&gt;
-    &lt;figure&gt;
-      &lt;a href=&quot;/&quot; border=0 id=&quot;logolink&quot;&gt;&lt;div class=&quot;icon-spf13-3&quot; id=&quot;logo&quot;&gt; &lt;/div&gt;&lt;/a&gt;
-    &lt;/figure&gt;
-    &lt;div id=&quot;byline&quot;&gt;by Steve Francia&lt;/div&gt;
-    &lt;nav id=&quot;nav&quot;&gt;
-    {{ partial &quot;nav.html&quot; . }}
-    {{ partial &quot;social.html&quot; . }}
-    &lt;/nav&gt;
-&lt;/header&gt;
-</code></pre>
-
-<p>将by Steve Francia换成by myname，再次回到浏览器，可以看到左边侧栏已经发生变化了，你可以根据自己的需要修改对应的文件，当然得懂一点css, html。</p>
-
-
-<figure >
-    
-        <img src="/media/hugo-server-change.png" alt="hugo-server-change" />
-    
-    
-</figure>
-
-
-
-<h1 id="评论功能:d605f9890f3528aea462ac7515ece633">评论功能</h1>
-
-<p>个人博客当然不能没有评论，Hugo默认支持<a href="https://disqus.com/">Disqus</a>的评论，需要在模版中添加以下代码：</p>
-
-<pre><code>{{ template &quot;_internal/disqus.html&quot; . }}
-</code></pre>
-
-<p>spf13在<code>/layouts/partials/disqus.html</code>中已经添加好了。</p>
-
-<p>只需要去Disqus注册一个账号，然后在<code>config.toml</code>里加上：</p>
-
-<pre><code>disqusShortname = &quot;yourdisqusShortname&quot;
-</code></pre>
-
-<p>注意<code>-w</code>参数是不能监测<code>config.toml</code>里参数变化的，因此需要重新运行Hugo，进入localhost:1313/about，可以看到评论功能。</p>
-
-
-<figure >
-    
-        <img src="/media/comments.png" alt="comments" />
-    
-    
-</figure>
-
-
-
-<h1 id="代码高亮:d605f9890f3528aea462ac7515ece633">代码高亮</h1>
-
-<p>作为码农，代码高亮对于写博客来说当然必不可少。有两种方法：第一种是在生成页面时就生成好代码高亮过的页面；第二种是使用js，用户加载页面时浏览器再进行渲染。</p>
-
-<p>第一种方法需要使用<a href="http://pygments.org/">Pygments</a>，一个python写的工具。</p>
-
-<p>安装Pygments：</p>
-
-<pre><code class="language-shell">$ pip install Pygments
-</code></pre>
-
-<p>没有pip的先下载 <a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a> ，然后安装pip：</p>
-
-<pre><code class="language-shell">$ python get-pip.py
-</code></pre>
-
-<p>Pygments的调用采用shortcodes实现，spf13里也写好了，在<code>/layouts/shortcode/highlight.html</code>里</p>
-
-<pre><code>{{ $lang := index .Params 0 }}
-{{ highlight .Inner $lang }}
-</code></pre>
-
-<p>要使代码高亮，在你的代码外面加上：</p>
-
-<pre><code>{{ % highlight python %}}
-your code here.
-{{ % /highlight %}}
-</code></pre>
-
-<p>这里为了避免以上两行被识别为代码高亮的标识，在<code>{{</code>和<code>%</code>之间多加了一个空格，实际使用的时候需要把空格去掉。</p>
-
-<p>第二种方法比较简单，在<code>layouts/partials/header_includes.html</code>中加上：</p>
-
-<pre><code>&lt;script src=&quot;https://yandex.st/highlightjs/8.0/highlight.min.js&quot;&gt;&lt;/script&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://yandex.st/highlightjs/8.0/styles/default.min.css&quot;&gt;
-&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
-</code></pre>
-
-<p>这里使用了<a href="http://yandex.ru/">Yandex</a>的<a href="http://highlightjs.org/">Highlight.js</a>。</p>
-
-<p>其他的可以实现代码高亮的js库还有：</p>
-
-<ul>
-<li><a href="http://highlightjs.org/">Highlight.js</a></li>
-<li><a href="http://craig.is/making/rainbows">Rainbow</a></li>
-<li><a href="http://alexgorbatchev.com/SyntaxHighlighter/">Syntax Highlighter</a></li>
-<li><a href="https://code.google.com/p/google-code-prettify/">Google Prettify</a></li>
-</ul>
-
-<h1 id="插入图片:d605f9890f3528aea462ac7515ece633">插入图片</h1>
-
-<p>图片文件放在<code>static/media</code>文件中，插入图片：</p>
-
-<pre><code>{{ % img src=&quot;/media/example.jpg&quot; alt=&quot;example&quot; %}}
-</code></pre>
-
-<p>注意这里的<code>{{</code>和<code>%</code>之间也加上了空格，避免这行代码起作用，实际使用也需要把空格去掉。</p>
-
-<h1 id="使用mathjax:d605f9890f3528aea462ac7515ece633">使用Mathjax</h1>
-
-<p>在需要渲染公式的页面加入以下代码，比如<code>layouts/_default/single.html</code>文件，这个文件是对于所有post进行页面生成的模版，如果你希望所有页面都对公式渲染的话，可以加入<code>layouts/partials/footer.html</code>文件里，保证所有生成的页面都有这几行代码。</p>
-
-<pre><code class="language-html">&lt;script type=&quot;text/javascript&quot;
-  src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
-&lt;/script&gt;
-</code></pre>
-
-<p>Mathjax和Markdown会有冲突问题，<a href="http://doswa.com/2011/07/20/mathjax-in-markdown.html">这里</a>提供了解决方案。</p>
-
-<h1 id="用github-pages作为网站的host:d605f9890f3528aea462ac7515ece633">用github pages作为网站的Host</h1>
-
-<p>Github pages分为两种：一种是项目主页，每个项目都可以有一个；另一种是用户主页，一个用户只能有一个。</p>
-
-<p>因为用户主页只能有一个，所以建议使用项目主页托管，不过我这里采用了用户主页，反正我也只用一个博客，使用个人主页作为Host也相对更简单一点。</p>
-
-<p>我们需要创建两个单独的repo，一个用于放Hugo的输入文件，即除了<code>public/</code>文件夹之外的所有文件，另一个放我们生成的静态网站，也就是<code>public/</code>的内容。</p>
-
-<p>步骤如下：</p>
-
-<ol>
-<li>在Github上创建repo <code>&lt;your-project&gt;-hugo</code>，托管Hugo的输入文件。</li>
-<li>创建repo <code>&lt;username&gt;.github.io</code>，用于托管<code>public/</code>文件夹，注意这里的repo名字一定要用自己的用户名，才会被当作是个人主页。</li>
-<li>clone your-project
-<code>
-$ git clone &lt;&lt;your-project&gt;-hugo-url&gt;
-</code></li>
-<li>进入your-project 目录
-<code>
-$ cd &lt;your-project&gt;-hugo
-</code></li>
-<li>删掉public目录（这个目录每次运行Hugo都会再次生成，不用担心）
-<code>
-$ rm -rf public
-</code></li>
-<li>把public/目录添加为submodule 与<username>.github.io同步
-<code>
-$ git submodule add git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
-</code></li>
-<li>添加.gitignore文件，文件中写<code>public/</code>，在同步<code>&lt;your-project&gt;-hugo</code>时会忽略public文件夹</li>
-<li>下面是写好的一个script <code>deploy.sh</code>，拷贝过去直接就能用，记得chmod +x deploy.sh加上运行权限。</li>
-</ol>
-
-<pre><code class="language-bash">#!/bin/bash
-echo -e &quot;\033[0;32mDeploying updates to GitHub...\033[0m&quot;
-
-msg=&quot;rebuilding site `date`&quot;
-if [ $# -eq 1 ]
-  then msg=&quot;$1&quot;
-fi
-
-# Push Hugo content 
-git add -A
-git commit -m &quot;$msg&quot;
-git push origin master
-
-
-# Build the project. 
-hugo # if using a theme, replace by `hugo -t &lt;yourtheme&gt;`
-
-# Go To Public folder
-cd public
-# Add changes to git.
-git add -A
-
-# Commit changes.
-
-git commit -m &quot;$msg&quot;
-
-# Push source and build repos.
-git push origin master
-
-# Come Back
-cd ..
-
-</code></pre>
-
-<p>等一小会儿（10分钟左右），你就能在<a href="http://username.github.io/">http://username.github.io/</a> 这个页面看到你的网站了！每次更新网站或者写了新文章，只需要运行./deploy.sh 发布就搞定了，简单吧？</p>
-
-<p>Github pages还支持域名绑定，三个步骤：</p>
-
-<ol>
-<li>在<code>&lt;username&gt;.github.io</code> repo的跟目录下添加<code>CNAME</code>文件，文件里写上你的域名，不用加http://的开头。</li>
-<li>记下<a href="http://username.github.io/">http://username.github.io/</a> 的ip地址。
-<code>
-$ ping username.github.io
-</code></li>
-<li>在你的域名管理中加上两条A记录，分别是www和@，记录指向<a href="http://username.github.io/">http://username.github.io/</a> 的ip地址，也需要等一小会儿生效。</li>
-</ol>
-
-<h1 id="更改字体服务商:d605f9890f3528aea462ac7515ece633">更改字体服务商</h1>
-
-<p>我的博客模版里用的字体是从googleapis里获取的，国内访问会下载失败，把字体库改成360的。
-找到<code>layouts/partials/head_includes.html</code>文件：</p>
-
-<pre><code class="language-html">&lt;link href='http://fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'&gt;
-</code></pre>
-
-<p>将其中的googleapis替换为useso就行了。</p>
-
-<p>教程会根据我的博客遇到的问题继续更新。</p>
-
-<h1 id="增加网站分析:d605f9890f3528aea462ac7515ece633">增加网站分析</h1>
-
-<p>使用网站分析可以帮助我们更好地了解博客的读者和流量来源，我使用了<a href="http://tongji.baidu.com">百度统计</a>和<a href="http://www.google.cn/webmasters/">谷歌统计</a>，注册帐号后只需要按照提示在模板中加入相应的script代码就可以了。</p>
-
-<h1 id="参考:d605f9890f3528aea462ac7515ece633">参考</h1>
-
-<ol>
-<li><a href="http://gohugo.io/overview/introduction/">Hugo docs</a></li>
-<li><a href="http://ipn.li/kernelpanic/3/">《内核恐慌》静态网站生成器</a></li>
-<li><a href="https://www.udemy.com/build-static-sites-in-seconds-with-hugo/">Build Static Sites in Seconds with Hugo</a></li>
-<li><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/">Setting up a custom domain with GitHub Pages</a></li>
-</ol>
+<p>}
+编译运行效果如下:
+luck@geekard test $ gcc -g -rdynamic f.c
+luck@geekard test $ ./a.out
+GNU gdb 6.5
+Copyright &copy; 2006 Free Software Foundation, Inc.
+。。。。省略。。。。
+0xffffe410 in __kernel_vsyscall ()
+(gdb) bt
+#0  0xffffe410 in __kernel_vsyscall ()
+#1  0xb7ee4b53 in waitpid () from /lib/libc.so.6
+#2  0xb7e925c9 in strtold_l () from /lib/libc.so.6
+#3  0x08048830 in dump (signo=11) at f.c:22<br />
+#4  <signal handler called>
+#5  0x0804884c in dummy_function () at f.c:31
+#6  0x08048886 in main () at f.c:38
+第3个frame指示发生错误的行为f.c中的22行，即为*ptr = 0x00;行。</p>
+
+<p>好了，以上就是这篇笔记的主要内容，下面总结一下gdb的主要命令：</p>
+
+<p>ulimit -c unlimited                                                //打开内核的核心转储机制
+gcc -g -o outPutName sourceCodeName.c  //编译时加-g选项，使生成的可执行文件中包含调试信息
+gdb outPutName core                                       //启动gdb，可以咋命令行上指定要调试程序
+or:  gdb  file  outPutName                                //也可以在gdb命令提示符中输入要调试的程序名<br />
+core  core                                                           //指定程序执行错误时内核生成的转储文件
+list  [function]|[row-number]                            //查看源代码，可以跟函数名或行号
+break [function]|[row-number]                        //设置断点，可以跟函数名或行号
+clear [function]|[row-number]                         //清除断点，可以跟函数名或行号或断点号
+r     [paramiters]                                                /</p>
 
         </article>
   </div>
@@ -579,7 +512,7 @@ $ ping username.github.io
 <script type="text/javascript">
     var disqus_shortname = 'frederick-sun';
     var disqus_identifier = 'http:\/\/sun-friderick.github.io\/post\/2015-01-31';
-    var disqus_title = 'Hugo静态网站生成器中文教程';
+    var disqus_title = '用gdb调试程序笔记: 以段错误(Segmental fault)';
     var disqus_url = 'http:\/\/sun-friderick.github.io\/post\/2015-01-31';
 
     (function() {

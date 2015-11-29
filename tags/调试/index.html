@@ -15,16 +15,16 @@
  
 <meta property="og:type" content="article"/>
 <meta property="og:description" content=""/>
-<meta property="og:title" content="404 Page not found : frederick.sun"/>
+<meta property="og:title" content="调试 : frederick.sun"/>
 <meta property="og:site_name" content="nanshu wang blog"/>
 <meta property="og:image" content="" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="" />
 <meta property="og:image:height" content="" />
-<meta property="og:url" content="http://sun-friderick.github.io/404/">
+<meta property="og:url" content="http://sun-friderick.github.io/tags/e8b083e8af95/">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2015-12-01"/>
-<meta property="article:modified_time" content="2015-12-01"/>
+<meta property="article:published_time" content="2015-11-29"/>
+<meta property="article:modified_time" content="2015-11-29"/>
 
 
 
@@ -32,9 +32,9 @@
 
 
     <base href="http://sun-friderick.github.io/">
-    <title> 404 Page not found - frederick.sun </title>
-    <link rel="canonical" href="http://sun-friderick.github.io/404/">
-    <link href="http://sun-friderick.github.io/index.xml" rel="alternate" type="application/rss+xml" title="404 Page not found" />
+    <title> 调试 - frederick.sun </title>
+    <link rel="canonical" href="http://sun-friderick.github.io/tags/e8b083e8af95/">
+    <link href="http://sun-friderick.github.io/tags/%E8%B0%83%E8%AF%95/index.xml" rel="alternate" type="application/rss+xml" title="调试" />
 
     <link href='http://fonts.useso.com/css?family=Fjalla+One|Open+Sans:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/static/css/style.css">
@@ -53,6 +53,7 @@
 
 </head>
 
+<body lang="en">
 <header id="header">
 	<nav id="nav">
 	<div id="title"><a href="/">Frederick Sun</a></div>
@@ -144,9 +145,40 @@
 
 <section id="main">
   <div>
-   <h1 id="title">404 Page not found</h1>
+   <h1 id="title">调试</h1>
+    
+        <article class="post">
+    <header>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-29">gdb调试中文教程 </a> </h2>
+      <div class="post-meta">Sun, Nov 29, 2015 </div>
+    </header>
+    <article itemprop="articleBody" id="content">
+    	#gdb 跟踪调试命令整理 gdb常用命令： | 命令 | 描述 | Cool | | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |:&mdash;&mdash;&mdash;&mdash;-:| | backtrace（或bt） | 查看各级函数调用及参数，运行时的堆栈 | | finish | 连续运行到当前函数返回为止，然后停下来等待命令 | | frame（或f）帧编号 | 选择栈帧 | | info（或i） locals | 查看当前栈帧局部变量的值 | | list（或l） | 列出源代码，接着上次的位置往下列，每次列10行 | | list 行号 | 列出从第几行开始的源代码 | | list 函数名 | 列出某个函数的源代码 | | next（或n） | 单步调试，执行下一行语句 | | print（或p） | 打印表达式的值，通过表达式可以修改变量的值或者调用函数 | | quit（或q） | 退出gdb调试环境 | | set var | 修改变量的值 | | start | 开始执行程序，停在main函数第一行语句前面等待命令 | | step（或s） | 执行下一行语句，如果有函数调用则进入到函数中 | #GDB 调试 要进行调试程序首先要生成一个含有调试信息的执行程序命令如下: gcc(g++) -g -o 文件名 源文件.c(源文件.cpp) gcc(g++) -ggdb3 -o 文件名 源文件.c(源文件.cpp) 此时便会生成一个含有调试信息的可执行文件,然后便可以用 gdb 去调试这个程序了,进入调试程序命令,但是如果用 gdb 去调试一个未包含调试信息的可执行文件则会发生错误 gdb 执行文件名(含调试信息) #运行 GDB ##运行 gdb gdb &lt;program&gt; -- program也就是你的执行文件,一般在当然目录下.
+	</article>
+    <footer>
+        <a href='http://sun-friderick.github.io/post/2015-11-29'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+    
+        <article class="post">
+    <header>
+      <h2><a href="http://sun-friderick.github.io/post/2015-11-29">gdb调试中文教程 </a> </h2>
+      <div class="post-meta">Sun, Nov 29, 2015 </div>
+    </header>
+    <article itemprop="articleBody" id="content">
+    	PCIe应用程序调试时，发现程序出现内存泄露，经过自己的摸索，以及向软件同学请教，最终解决了此问题。 现象描述 应用程序开发环境为VC++,运用其debug功能进行单步调试时，程序总是报出内存泄露的错误，报告内容如下所示： Detected memory leaks! Dumping objects -&gt; strcore.cpp(118) : {143} normal block at 0x009A3E60, 53 bytes long. Data: &lt; ( ( F:\p&gt; 01 00 00 00 28 00 00 00 28 00 00 00 46 3A 5C 70 Object dump complete. The thread 0x9BC has exited with code 0 (0x0). The program 'F:\program\SP5301\SP5301GUI\Debug\SP5301GUI.exe' has exited with code 0 (0x0). 经过网上查阅相关资料，得知报告中相关参数含义如下： 118：内存泄露的位置在strcore.cpp中第118行 143：内存分配编号。 内存可能是在多次分配之后才出现泄露。 normal block：块类型为普通型。 0x009A3E60：内存位置。 53 bytes long：块大小为53字节。 第四行显示前 16 字节的内容为“&lt; ( (F:\p&gt; 01 00 00 00 28 00 00 00 28 00 00 00 46 3A 5C 70”。 第五行显示内存泄露的线程，以及返回值。 调试过程 虽然报告中显示内存泄露的位置在strcore.cpp中第118行。但是，此文件不在我的工程文件中。那么它应该是在程序运行时被调用过。而且它可能被多次调用。到底是哪次调用时出现的内存泄露，我们不得而知。为了解决内存泄露问题，准确定位内存泄露的位置是关键。 首先进入单步调试，然后打开VC++菜单中view-&gt;debug windows-&gt;Memory。通过报告中给出的内存地址0x009A3E60，查看该地址存储的内容为&rdquo;F:\program\SP5301\s6_tfg484_pcie\testdata.txt&rdquo;。结合程序内容，我猜测此字符串应该为我定义的字符串指针filepath。打开watch窗口，查看filepath的值，发现果然与上面看到的一致。于是定位了内存泄露的位置为filepath变量。 此字符串指针最初是在一个类里面定义的。最后赋给它的值是一个文件的路径。怀疑是该指针最后没有成功释放才导致的内存泄露。于是，我将filepath从类里面移出来，放在函数里面作为局部变量来定义。最终解决了内存泄露问题。 归纳总结 发生内存错误是件非常麻烦的事情。编译器不能自动发现这些错误，通常是在程序运行时才能捕捉到。而这些错误大多没有明显的症状，时隐时现，增加了改错的难度。 常见的内存错误及其对策如下： (1) 内存分配未成功，却使用了它。 编程新手常犯这种错误，因为他们没有意识到内存分配会不成功。常用解决办法是，在使用内存之前检查指针是否为NULL。如果指针p是函数的参数，那么在函数的入口处用assert(p!=NULL)进行检查。如果是用malloc或new来申请内存，应该用if(p==NULL) 或if(p!=NULL)进行防错处理。 (2) 内存分配虽然成功，但是尚未初始化就引用它。 犯这种错误主要有两个起因：一是没有初始化的观念；二是误以为内存的缺省初值全为零，导致引用初值错误（例如数组）。 内存的缺省初值究竟是什么并没有统一的标准，尽管有些时候为零值，我们宁可信其无不可信其有。所以无论用何种方式创建数组，都别忘了赋初值，即便是赋零值也不可省略，不要嫌麻烦。 (3) 内存分配成功并且已经初始化，但操作越过了内存的边界。 例如在使用数组时经常发生下标“多1”或者“少1”的操作。特别是在for循环语句中，循环次数很容易搞错，导致数组操作越界。 (4) 忘记了释放内存，造成内存泄露。 含有这种错误的函数每被调用一次就丢失一块内存。刚开始时系统的内存充足，你看不到错误。终有一次程序突然死掉，系统出现提示：内存耗尽。 动态内存的申请与释放必须配对，程序中malloc与free的使用次数一定要相同，否则肯定有错误（new/delete同理）。 (5) 释放了内存却继续使用它。 有三种情况： A.
+	</article>
+    <footer>
+        <a href='http://sun-friderick.github.io/post/2015-11-29'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+    
   </div>
 </section>
+
+<aside id="meta"> </aside>
 
 <footer>
   <div>
@@ -223,3 +255,4 @@ fitText(document.getElementById('title'), 1)
 
 </body>
 </html>
+
