@@ -10,6 +10,227 @@
     <updated>Tue, 01 Dec 2015 00:30:03 CST</updated>
     
     <item>
+      <title>Hugo静态网站生成器中文教程</title>
+      <link>http://sun-friderick.github.io/post/2015-11-31</link>
+      <pubDate>Tue, 01 Dec 2015 00:30:03 CST</pubDate>
+      <author>Frederick Sun</author>
+      <guid>http://sun-friderick.github.io/post/2015-11-31</guid>
+      <description>
+
+&lt;p&gt;Markdown语法&lt;/p&gt;
+
+&lt;p&gt;#1、标题：
+两种标题的语法，Setext 和 atx 形式（共有六级）：
+第一种：Setext 形式是用底线的形式，通过在文字下方添加“=”和“-”，他们分别表示一级标题和二级标题。&lt;/p&gt;
+
+&lt;h1 id=&#34;一级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;一级标题&lt;/h1&gt;
+
+&lt;h2 id=&#34;二级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;二级标题&lt;/h2&gt;
+
+&lt;p&gt;第二种：Atx 形式，在文字开头加上 “#”，通过“#”数量表示几级标题。（一共只有1~6级标题，1级标题字体最大）&lt;/p&gt;
+
+&lt;h1 id=&#34;一级标题-1:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;一级标题&lt;/h1&gt;
+
+&lt;h2 id=&#34;二级标题-1:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;二级标题&lt;/h2&gt;
+
+&lt;h3 id=&#34;三级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;三级标题&lt;/h3&gt;
+
+&lt;h4 id=&#34;四级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;四级标题&lt;/h4&gt;
+
+&lt;h5 id=&#34;五级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;五级标题&lt;/h5&gt;
+
+&lt;h6 id=&#34;六级标题:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;六级标题&lt;/h6&gt;
+
+&lt;p&gt;#2、列表：&lt;br /&gt;
+有序列表：使用数字后面跟上句号。（还要有空格）&lt;br /&gt;
+   1. 有序一&lt;br /&gt;
+   2. 有序二&lt;br /&gt;
+   3. 有序三&lt;/p&gt;
+
+&lt;p&gt;注意：在“1.”与文本之间有空格；&lt;/p&gt;
+
+&lt;p&gt;无序列表：在文字开头添加(&lt;em&gt;, +, and -)实现无序列表。但是要注意在(&lt;/em&gt;, +, and -)和文字之间需要添加空格。（建议：一个文档中只是用一种无序列表的表示方式）&lt;br /&gt;
+   - 无序一&lt;br /&gt;
+   - 无序二&lt;br /&gt;
+   - 无序三&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;无序一&lt;/li&gt;
+&lt;li&gt;无序二&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;无序三&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Red&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Green&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Blue&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意：在“-”或“*”与文本之间有空格；&lt;/p&gt;
+
+&lt;p&gt;#3、引用：&lt;br /&gt;
+区块引言可以有级别（例如：引言内的引言），只要根据级别加上不同数量的 &amp;gt;&lt;br /&gt;
+&amp;gt; 引用&lt;br /&gt;
+&amp;gt;&amp;gt; 引用&lt;br /&gt;
+&amp;gt;&amp;gt;&amp;gt;&amp;gt; 引用&lt;/p&gt;
+
+&lt;p&gt;注意： 符号“&amp;gt;”与文本之间需要有空格；&lt;/p&gt;
+
+&lt;p&gt;#4、字体强调：&lt;br /&gt;
+星号（*）和底线（_）作为标记强调字词的符号&lt;br /&gt;
+斜体：将需要设置为斜体的文字两端使用1个“ * ”或者“ _ ”夹起来&lt;br /&gt;
+   &lt;em&gt;这是斜体字&lt;/em&gt;&lt;br /&gt;
+   &lt;em&gt;这也是斜体字&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;粗体：将需要设置为斜体的文字两端使用2个“ * ”或者“ _ ”夹起来&lt;br /&gt;
+   &lt;strong&gt;这是粗体字&lt;/strong&gt;&lt;br /&gt;
+   &lt;strong&gt;这也是粗体字&lt;/strong&gt;&lt;br /&gt;
+注意： 在“*”或“**”与文本之间是没有空格的；&lt;/p&gt;
+
+&lt;p&gt;#5、代码：两种方式：
+第一种：简单文字出现一个代码框，使用“&lt;code&gt;”字符。（&lt;/code&gt;不是单引号而是左上角的ESC下面~中的&lt;code&gt;）  
+行内代码：  
+   这里是行内代码&lt;/code&gt;int a = 123456;`;&lt;br /&gt;
+独立代码段：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;   #include &amp;lt;stdio.h&amp;gt;
+   
+   int main(int argc, char** argv)
+   {
+       int a = 12345;
+       int i = 0；
+       for(i = 10; i &amp;gt;= 0; i--)
+           a = a + i;
+           
+       if(a &amp;gt;= 20)
+           printf(&amp;quot;a= [%d]\n&amp;quot;, a);
+           
+        return 0;
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第二种：大片文字需要实现代码框。使用Tab或四个空格。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+
+int main(int argc, char** argv)
+{
+   int a = 12345;
+   int i = 0；
+   for(i = 10; i &amp;gt;= 0; i--)
+       a = a + i;
+
+   if(a &amp;gt;= 20)
+       printf(&amp;quot;a= [%d]\n&amp;quot;, a);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;#6、链接（Links）：
+有两种方式，实现链接，分别为内联方式和引用参考方式，链接的文字都是用 [方括号] 来标记。&lt;br /&gt;
+内联方式：&lt;br /&gt;
+   This is an &lt;a href=&#34;http://example.com/&#34;&gt;inline link&lt;/a&gt;.&lt;br /&gt;
+   &lt;a href=&#34;http://example.net/&#34;&gt;This link&lt;/a&gt; has no title attribute.&lt;/p&gt;
+
+&lt;p&gt;I get 10 times more traffic from &lt;a href=&#34;http://google.com/&#34; title=&#34;Google&#34;&gt;Google&lt;/a&gt; than from &lt;a href=&#34;http://search.yahoo.com/&#34; title=&#34;Yahoo Search&#34;&gt;Yahoo&lt;/a&gt; or &lt;a href=&#34;http://search.msn.com/&#34; title=&#34;MSN Search&#34;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;引用参考方式：&lt;br /&gt;
+   I get 10 times more traffic from &lt;a href=&#34;http://google.com/&#34; title=&#34;Google&#34;&gt;Google&lt;/a&gt; than from &lt;a href=&#34;http://search.yahoo.com/&#34; title=&#34;Yahoo Search&#34;&gt;Yahoo&lt;/a&gt; or &lt;a href=&#34;http://search.msn.com/&#34; title=&#34;MSN Search&#34;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;#7、图片（Images）：
+图片的处理方式和链接的处理方式，非常的类似，允许两种样式： 行内和引用参考。&lt;br /&gt;
+内联方式：&lt;br /&gt;
+&lt;img src=&#34;http://mouapp.com/Mou_128.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;br /&gt;
+或者&lt;br /&gt;
+&lt;img src=&#34;http://mouapp.com/Mou_128.png&#34; alt=&#34;alt text&#34; title=&#34;Title&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;引用参考方式：&lt;br /&gt;
+&lt;img src=&#34;http://mouapp.com/Mou_128.png&#34; alt=&#34;alt text&#34; title=&#34;Title&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#8、脚注（footnote）：&lt;br /&gt;
+hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:a49d799e3251d126dc2b508cdc41aa88:hello&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:a49d799e3251d126dc2b508cdc41aa88:hello&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;#9、表格：&lt;br /&gt;
+| Tables        | Are           | Cool  |&lt;br /&gt;
+| &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-:| &amp;mdash;&amp;ndash;:|&lt;br /&gt;
+| col 3 is      | right-aligned | $1600 |&lt;br /&gt;
+| col 2 is      | centered      |   $12 |&lt;br /&gt;
+| zebra stripes | are neat      |    $1 |&lt;/p&gt;
+
+&lt;p&gt;#10、分割线：&lt;br /&gt;
+可以在一行中用三个或以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号中间插入空白。也在空白行下方添加三条“-”横线时。（前面讲过在文字下方添加“-”，实现的2级标题）；&lt;br /&gt;
+使用“*”号：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;使用“-”号：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;使用下划线“_”：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;#11、LaTex公式：&lt;br /&gt;
+行内公式：&lt;br /&gt;
+   这里是行内公式 $ y = x + 1 $ ;&lt;br /&gt;
+独立公式段：
+  $$ a^2 + b^2 = c^2 $$&lt;/p&gt;
+
+&lt;p&gt;#12、转义字符&lt;br /&gt;
+支持在下面这些符号前面加上反斜杠来帮助插入普通的符号：&lt;/p&gt;
+
+&lt;p&gt;\   反斜杠&lt;br /&gt;
+`   反引号&lt;br /&gt;
+*   星号&lt;br /&gt;
+_   底线&lt;br /&gt;
+{}  大括号&lt;br /&gt;
+[]  方括号&lt;br /&gt;
+()  括号&lt;/p&gt;
+
+&lt;h1 id=&#34;井字号:a49d799e3251d126dc2b508cdc41aa88&#34;&gt;井字号&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;加号&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;减号&lt;br /&gt;
+.   英文句点&lt;br /&gt;
+!   惊叹号&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mermaid&#34;&gt;graph TD;
+        A--&amp;gt;B;
+        A--&amp;gt;C;
+        B--&amp;gt;D;
+        C--&amp;gt;E;
+        D--&amp;gt;E;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:a49d799e3251d126dc2b508cdc41aa88:hello&#34;&gt;hi的意思；
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:a49d799e3251d126dc2b508cdc41aa88:hello&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>用GDB调试程序</title>
       <link>http://sun-friderick.github.io/post/2015-11-31</link>
       <pubDate>Tue, 01 Dec 2015 00:30:03 CST</pubDate>
@@ -3987,71 +4208,6 @@ x/s 以字符串输出&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Whole是需要两人在一起的，别固执也别强求。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Count Down</title>
-      <link>http://sun-friderick.github.io/post/2013-12-31</link>
-      <pubDate>Tue, 31 Dec 2013 00:00:00 UTC</pubDate>
-      <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2013-12-31</guid>
-      <description>&lt;p&gt;直到昨晚东方突然问我“你记得去年的最后一天我们在干什么吗？”，我才发现一年的时间在记忆里的印象是如此短暂。2012年最后一天，是我大学第一次参加班级活动，在教室里玩游戏，随后去聚餐吃饭。那天是默存同学在经历了电脑包被偷之后，从遥远的哥本哈根机场飞回北京的日子。去吃晚餐的路上我还清楚地记得我们说到了MDF和Alan show。下午的游戏我们还得到了一套很豪华的三国杀，吃过饭便和几个同学一起去知四玩三国杀到凌晨，在明亮的图书馆前愈显黑暗的路上，讲着恐怖的悬疑推理故事。&lt;/p&gt;
-
-&lt;p&gt;和一群小伙伴hang out的情节总是清晰，我甚至记得那天谁点了芒果绵绵冰，谁拍了一张大合照说新年快乐，谁后来走了又来了，谁坐在我的旁边我的对面。但如果不是东方的那一句话，我可能永远不会再回忆起那天的细节。在这个快毕业的关头想起这些无忧无虑的瞬间总是有些伤感，就像昨天去澡堂的路上对璇琦说以后毕业了我们肯定会慢慢不联系，我是那种从来不主动的人，所以你一定要主动联系我啊。璇琦却很无奈地回答我，可我也是那种从来不主动人啊……人际关系是一件很奇妙却也很自然的一件事，多亏朋友圈和点赞，好久不联系的朋友最近又恢复了互动，也经常能大洋彼岸的朋友说上几句话聊以安慰。&lt;/p&gt;
-
-&lt;p&gt;自己曾经说过，享受独处，不享受孤独。然而许久的独处会慢慢变成孤独，不知道是不是因为大四毕业这些词语让我们整天神经紧张，还是因为最终在意料之外自己settle down下来不用为未来发愁的空虚，我越来越感到自己是一个孤岛，就像无法搜索找到的长微博图片，虽然存在，却主动了断了一切连接。Epic里说，我们就像是一颗大树上的树叶，互相独立，却又息息相关。所以，好像时刻能够Proactive一点都不是坏事，对于自己和别人都不是坏事，要是毕业之后像我和璇琦估计的那样都不主动的话，不是就太可悲了吗，别人在等待你的行动时，就不要犹犹豫豫畏手畏脚了。至少心理学的实证研究告诉我们，Proactive的人在各种时机都更有绩效……&lt;/p&gt;
-
-&lt;p&gt;2013年的意义是开始做自己，慢慢开始独立思考，独立决策。这里的思考和决策的动力大部分来自于毕业的压力，但很庆幸的是没有在这个过程中失去自我。这一年也开始理解，要去接受自认为无意义的事物，要去接受不合理，接受却不要妥协。&lt;/p&gt;
-
-&lt;p&gt;一年前的我不会知道现在心中的无奈和妥协是什么，也不知道一年后的年末最后一天，我那时的Mindset又是怎样。不管是正还是负，都值得小小期待一下。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;做完导师给的任务&lt;/li&gt;
-&lt;li&gt;去香港澳门&lt;/li&gt;
-&lt;li&gt;加油看Networking&lt;/li&gt;
-&lt;li&gt;学习jekyll和github&lt;/li&gt;
-&lt;li&gt;学习ruby&lt;/li&gt;
-&lt;li&gt;保持刷techcrunch和quora的习惯&lt;/li&gt;
-&lt;li&gt;坚持sit ups&lt;/li&gt;
-&lt;li&gt;读完手头剩下的书&lt;/li&gt;
-&lt;li&gt;学习如何放松却依然有生产力&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>国家图书馆</title>
-      <link>http://sun-friderick.github.io/post/2013-03-31</link>
-      <pubDate>Sun, 31 Mar 2013 00:00:00 UTC</pubDate>
-      <author>Frederick Sun</author>
-      <guid>http://sun-friderick.github.io/post/2013-03-31</guid>
-      <description>&lt;p&gt;前段时间删除了一个记录自己负面情绪的博客，原因大概是当时写下那些文字的人让自己感觉无比陌生且恐惧。但其实在删除那个博客的后几天，里面记录的熟悉的讨厌某个人的感觉又重新出现了。唉，不管我是有多么不愿意面对自己阴暗的一面，就算删掉了所有的证据，那种感觉也会悄悄在心里滋生。所以，如果吐槽星真的存在的话，我想我可能还是有30%的意愿移居到那里去的。&lt;/p&gt;
-
-&lt;p&gt;昨天是上个月里生活最丰富的一天。上午考完托福，除了口语答的异常紧张外，其他的部分也没有什么感觉。去年这个时候，一脸沮丧得从考场出来，搭上从大钟寺到明光桥的公交，在心中幻想了无数次扯头发抓狂的情形。现在想起来当时一副世界末日的心情就觉得很好笑，果然所有事情在时间的面前都显得好无力。这次考完托福之后，坐上地铁去了表哥家各种取经。下午讲了些关于没事的话拿ubuntu来干什么的事情，表哥让我弄一个小型的搜索引擎出来，后来我想了想，其实这可以是一个很好的点子，把与人大咨询有关的站点整合到一起，能够大大提高搜索效率，比如人大官网、bt站、贴吧、各学院网站、人人日志、百度问题&amp;hellip;，可以很大程度上提高搜索相关度和搜索质量的。晚上和表哥还有表嫂一起吃饭，其实觉得“嫂子”这个称呼会把人叫得显老，所以现在也还是叫姐姐。姐姐真是CS女的理想型，现在是我未来的奋斗目标&amp;hellip;吃完饭之后回到寝室，又被寝室姑娘拖去看电影，15分钟之内狂奔到电影院，买到了最后两张票，撞见了一个大八卦，回来的路上喝到了梦寐以求的格瓦斯。&lt;/p&gt;
-
-&lt;p&gt;昨天的疲劳以至于今天睡过了头，错过了和同学约好去国图的时间。国图比想象中还要霸气，中间一圈圈的座位好赞……其实学校图书馆占不到座位的话，国图的选择真的是大好。期间又何同学聊到，最近大家都是各种不安的情绪，本来坚定想走的道路又变得各种不坚定等等。前几天自己也是陷入了慌乱，给爸爸打了很长的电话，用自己也理不清的思路讲了各种可能性和错过的机会。其实大人们对于我们烦恼的理解应该是，想不通是正常的，反正还年轻，多试试就拨开乌云了。可能这才真的是现在生活状态的迷人之处么？不管怎么样，还是希望各种大姨妈大姨夫快快走掉得好。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;C176目前是停滞状态，现在可以邮件联系某个师姐，但后恢复网站的更新&lt;/li&gt;
-&lt;li&gt;把之前翻译的一篇关于苏格拉底的文章改了发到译言上去&lt;/li&gt;
-&lt;li&gt;做操作系统的实验作业&lt;/li&gt;
-&lt;li&gt;做计网第三章作业&lt;/li&gt;
-&lt;li&gt;开始准备期中考试&lt;/li&gt;
-&lt;li&gt;查关于proactive人格的中文文献&lt;/li&gt;
-&lt;li&gt;有空的时候想想怎么做那个小型的搜索引擎&lt;/li&gt;
-&lt;li&gt;有空的时候玩玩javascript&lt;/li&gt;
-&lt;li&gt;可以允许看一本书，暂定《基督山伯爵》&lt;/li&gt;
-&lt;li&gt;开始复习高数，考研英语&lt;/li&gt;
-&lt;li&gt;关注下中科院夏令营的消息&lt;/li&gt;
-&lt;li&gt;关注下暑期实习的消息&lt;/li&gt;
-&lt;li&gt;生日礼物开始准备了&lt;/li&gt;
-&lt;li&gt;PS：写完近期计划就感觉自己好忙的……以及保佑托福有个心理好过的分数&amp;gt;&amp;lt; !!!&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
